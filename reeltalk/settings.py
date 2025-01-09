@@ -15,7 +15,7 @@ import os
 import sys
 import dj_database_url
 
-if os.path.exists(os.path.join(Path(__file__).resolve().parent.parent, 'env.py')):
+if os.path.isfile('env.py'):
     import env
 
 
@@ -30,18 +30,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
                 '127.0.0.1',
                 'localhost',
                 '.herokuapp.com',
-                '.codeanyapp.com',
-]
-
-CSRF_TRUSTED_ORIGINS = [ 
-                        "https://*.codeinstitute-ide.net/",
-                        "https://*.herokuapp.com",
+                'codeinstitute-ide.net',
 ]
 
 # Application definition
@@ -57,12 +52,18 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-
+    'crispy_forms',
+    'crispy_bootstrap5',
+    'django_summernote',
 ]
 
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+# Additional settings for crispy forms
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -94,6 +95,8 @@ TEMPLATES = [
     },
 ]
 
+ROOT_URLCONF = 'reeltalk.urls'
+
 WSGI_APPLICATION = 'reeltalk.wsgi.application'
 
 # Database
@@ -108,6 +111,10 @@ WSGI_APPLICATION = 'reeltalk.wsgi.application'
 
 DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
 
+CSRF_TRUSTED_ORIGINS = [ 
+                        "https://*.codeinstitute-ide.net/",
+                        "https://*.herokuapp.com",
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
