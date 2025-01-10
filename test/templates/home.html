@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+{% block content %}
+    <h2>Welcome to ReelTalk</h2>
+    <p>Discover and discuss your favorite movies!</p>
+    
+    <h2>Search Movies</h2>
+    <form method="get" action="{% url 'search_movies' %}">
+        <input type="text" name="q" placeholder="Search movies...">
+        <button type="submit">Search</button>
+    </form>
+    <ul>
+        {% for movie in movies %}
+            <li><a href="{% url 'movie_detail' movie.id %}">{{ movie.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
