@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ movie.title }}</h1>
+<p>{{ movie.overview }}</p>
+<p>Release Date: {{ movie.release_date }}</p>
+<p>Director: {{ movie.director }}</p>
+<p>Main Actors: {{ movie.main_actors }}</p>
+<p>Vote Average: {{ movie.vote_average }}</p>
+<p>Vote Count: {{ movie.vote_count }}</p>
+<p>Popularity: {{ movie.popularity }}</p>
+<img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }} poster">
+<a href="{% url 'movie_list' %}">Back to Movies</a>
+{% endblock %}

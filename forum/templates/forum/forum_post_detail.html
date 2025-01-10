@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ post.title }}</h1>
+<p>{{ post.content }}</p>
+<p>Posted by {{ post.author }} on {{ post.created_at }}</p>
+<p>Last updated on {{ post.updated_at }}</p>
+<p>Upvotes: {{ post.total_upvotes }}</p>
+<p>Downvotes: {{ post.total_downvotes }}</p>
+<a href="{% url 'upvote_post' post.id %}">Upvote</a>
+<a href="{% url 'downvote_post' post.id %}">Downvote</a>
+<a href="{% url 'forum_post_list' %}">Back to Forum Posts</a>
+{% endblock %}
