@@ -237,14 +237,14 @@ _Steps:_
 
 ### Use Case 11 -  User Logs Out
 ### Actor: Logged-in User 
-Description: A user wants to stay updated with the latest movie news. 
+Description: A user wants logout of the application
 <br>
 <br>
 _Steps:_
 
 - The user sees the "Logout" option in the navigation bar when logged in.
 
-- The user clicks the "Logout" option to initiate the logout process.
+- The user clicks the "Logout" button to initiate the logout process.
 
 - The user is redirected to the homepage or login page after logging out.
 
