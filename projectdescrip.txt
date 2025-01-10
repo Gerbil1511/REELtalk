@@ -23,7 +23,7 @@ accountability.
 
 3. User Authentication:
 The application uses Django Allauth for user authentication, allowing users to sign up, log in, 
-and manage their accounts.
+and logout.
 Users must be logged in to create, edit, or delete forum posts.
 
 
@@ -75,3 +75,49 @@ Overall, "ReelTalk" provides a comprehensive and engaging platform for movie ent
 explore movie information and participate in community discussions. The application ensures a 
 smooth user experience with features like user authentication, post management, and integration 
 with the TMDb API.
+
+
+
+
+FROM COPILOT:
+# User Case for ReelTalk
+
+## Overview
+ReelTalk is a movie-centric full-stack web application designed for movie enthusiasts. It combines the excitement of 
+discovering new films with the interactive experience of a community forum. Users can explore detailed movie 
+information, participate in discussions, and stay updated with the latest movie news.
+
+## Key Features
+
+1. **Movie Database Integration**:
+   - Integration with The Movie Database (TMDb) API.
+   - Users can search for movies, view detailed information, and stay updated with the latest movie news.
+
+2. **Community Forum**:
+   - Users can create and manage discussions about movies.
+   - Only the author of a post can edit or delete their posts.
+
+3. **User Authentication**:
+   - Uses Django Allauth for user authentication.
+   - Users must be logged in to create, edit, or delete forum posts.
+
+## User Experience
+
+1. **Home Page**:
+   - Displays a list of movies fetched from the TMDb API.
+   - Users can search for movies using the search bar.
+
+2. **Movie Detail Page**:
+   - Clicking on a movie title takes the user to the movie detail page, which displays detailed 
+   information about the movie.
+   - Users can see a list of forum posts related to the movie and participate in discussions.
+
+3. **Forum**:
+   - The forum page displays a list of all forum posts.
+   - Users can click on a post to view its details, including the author, content, and comments.
+   - Logged-in users can create new posts, edit their existing posts, and delete their posts.
+
+4. **Post Creation and Management**:
+   - Users can create new forum posts by filling out a form with the post title and content.
+   - Only the author of a post can edit or delete it. If a user tries to edit or delete a 
+   post they do not own, they will see an error message.
