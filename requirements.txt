@@ -6,6 +6,7 @@ Django==5.1.4
 django-allauth==65.3.1
 django-crispy-forms==2.3
 django-summernote==0.8.20.0
+Faker==33.3.1
 gunicorn==23.0.0
 psycopg2==2.9.10
 python-decouple==3.8

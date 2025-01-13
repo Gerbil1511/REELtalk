@@ -27,7 +27,7 @@ Ensure that the movie_detail view function accepts the slug parameter.
 
 ##
 
-3 . NameError: name 'movie_id' is not defined [13/Jan/2025 11:06:25] "GET /movies/movie/the-matrix/ HTTP/1.1" 500 72757
+3. NameError: name 'movie_id' is not defined [13/Jan/2025 11:06:25] "GET /movies/movie/the-matrix/ HTTP/1.1" 500 72757
 
 Fix: indicates that the movie_detail view is trying to use movie_id instead of slug. The URL pattern is passing the slug parameter, so the view should use slug to look up the movie.
 
@@ -39,4 +39,22 @@ Ensure the movie_detail view correctly passes movie.tmdb_id to the fetch_movie_d
 Verify that the utils.py file correctly handles the movie_id parameter.
 
 ##
+
+4. No forum post is showing for a searched movie on the "movie_detail" page even though a post was added directly to the searched movie in the admin panel. the forum post is correctly linked to the movie in the admin panel, but the link is not being correctly recognized in the movie_detail view or template.
+
+Fix: 
+Model:
+Ensure the ForumPost model has a foreign key relationship to the Movie model with related_name='forum_posts'.
+
+View:
+Ensure the movie_detail view fetches the related forum posts and passes them to the template.
+
+Template:
+Ensure the movie_detail.html template correctly iterates over and displays the related forum posts.
+
+Data:
+Ensure there are forum posts related to the movie in the database.
+
+Verify URL Configuration:
+Ensure that the URL pattern for forum_post_detail is correctly defined in urls.py.
 

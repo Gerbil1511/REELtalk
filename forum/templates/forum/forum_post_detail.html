@@ -5,8 +5,6 @@
 <p>{{ post.content }}</p>
 <p>Posted by {{ post.author }} on {{ post.created_at }}</p>
 <p>Last updated on {{ post.updated_at }}</p>
-<a href="{% url 'upvote_post' post_id=post.id %}">Upvote</a>
-<a href="{% url 'downvote_post' post_id=post.id %}">Downvote</a>
 <a href="{% url 'forum_post_list' %}">Back to Forum Posts</a>
 
 {% if request.user == post.author %}

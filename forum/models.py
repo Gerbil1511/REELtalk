@@ -5,7 +5,7 @@ from movies.models import Movie
 # Create your models here.
 
 class ForumPost(models.Model):
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='forum_posts')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     content = models.TextField()
@@ -14,14 +14,14 @@ class ForumPost(models.Model):
     upvotes = models.ManyToManyField(User, related_name='forum_post_upvotes', blank=True)
     downvotes = models.ManyToManyField(User, related_name='forum_post_downvotes', blank=True)
 
-    class Meta:
-        ordering = ['-created_at']  # Order by creation date, newest first
+class Meta:
+    ordering = ['-created_at']  # Order by creation date, newest first
         
-    def __str__(self):
-        return self.title
+def __str__(self):
+    return self.title
 
-    def total_upvotes(self):
-        return self.upvotes.count()
+def total_upvotes(self):
+    return self.upvotes.count()
 
-    def total_downvotes(self):
-        return self.downvotes.count()
+def total_downvotes(self):
+    return self.downvotes.count()

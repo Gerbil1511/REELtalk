@@ -50,4 +50,5 @@ def home(request):
 def movie_detail(request, slug):  # Ensure this function accepts the slug parameter
     movie = get_object_or_404(Movie, slug=slug)  # Use slug to get the movie
     movie_details = fetch_movie_details(movie.tmdb_id)
+    forum_posts = movie.forum_posts.all()  # Fetch related forum posts
     return render(request, 'movies/movie_detail.html', {'movie': movie, 'movie_details': movie_details})

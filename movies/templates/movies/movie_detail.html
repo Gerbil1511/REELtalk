@@ -11,12 +11,18 @@
 
 <h2>Forum Posts</h2>
 <ul>
-    {% for post in movie.forumpost_set.all %}
+    {% for post in forum_posts %}
     <li>
         <a href="{% url 'forum_post_detail' post_id=post.id %}">{{ post.title }}</a>
         <p>{{ post.author }}</p>
         <p>{{ post.created_at }}</p>
+        <p>Upvotes: {{ post.total_upvotes }}</p>
+        <p>Downvotes: {{ post.total_downvotes }}</p>
+        <a href="{% url 'upvote_post' post_id=post.id %}">Upvote</a>
+        <a href="{% url 'downvote_post' post_id=post.id %}">Downvote</a>
     </li>
+    {% empty %}
+    <li>No forum posts available for this movie.</li>
     {% endfor %}
 </ul>
 {% endblock %}
