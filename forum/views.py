@@ -5,7 +5,7 @@ from .forms import ForumPostForm
 
 
 def forum_post_list(request):
-    posts = ForumPost.objects.all()
+    posts = ForumPost.objects.all().order_by('-created_at')
     return render(request, 'forum/forum_post_list.html', {'posts': posts})
 
 

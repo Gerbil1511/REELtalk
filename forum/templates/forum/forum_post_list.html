@@ -6,6 +6,7 @@
     {% for post in posts %}
         <li>
             <a href="{% url 'forum_post_detail' post_id=post.id %}">{{ post.title }}</a>
+            <p>Movie: <a href="{% url 'movie_detail' tmdb_id=post.movie.tmdb_id %}">{{ post.movie.title }}</a></p>
             by {{ post.author }} on {{ post.created_at }}
             <p>Upvotes: {{ post.total_upvotes }}</p>
             <p>Downvotes: {{ post.total_downvotes }}</p>

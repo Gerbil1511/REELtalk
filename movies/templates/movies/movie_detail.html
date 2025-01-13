@@ -5,8 +5,11 @@
 <p>Release Date: {{ movie.release_date }}</p>
 <p>Vote Average: {{ movie.vote_average }}</p>
 <p>Vote Count: {{ movie.vote_count }}</p>
-<p>Movie Popularity: {{ movie.popularity }}</p>
-<p>Genre IDs: {{ movie.genre_ids }}</p>
+<p>Genres:
+    {% for genre in movie.genres.all %}
+        {{ genre.name }}{% if not forloop.last %}, {% endif %}
+    {% endfor %}</p>
+<p>Overview: {{ movie.overview }}</p>
 <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
 
 <h2>Forum Posts</h2>

@@ -58,3 +58,35 @@ Ensure there are forum posts related to the movie in the database.
 Verify URL Configuration:
 Ensure that the URL pattern for forum_post_detail is correctly defined in urls.py.
 
+
+##
+
+5. django.db.utils.IntegrityError: duplicate key value violates unique constraint "movies_movie_slug_key" DETAIL: Key (slug)=(wicked) already exists.
+
+Fix: 
+Update the Model:
+Remove the slug field and the related logic from the Movie model.
+
+Apply Migrations:
+Create and apply the migrations to update the database schema.
+
+Update the Views:
+Ensure that the views no longer reference the slug field and use the tmdb_id instead.
+
+Update the URL Configuration:
+Update the URL configuration to use the tmdb_id instead of the slug.
+
+Update the Templates:
+Ensure that the templates use the tmdb_id instead of the slug when generating URLs.
+
+##
+
+6. SystemCheckError: System check identified some issues: ERRORS: <class 'movies.admin.MovieAdmin'>: (admin.E108) The value of 'list_display[4]' refers to 'popularity', which is not a callable or attribute of 'MovieAdmin', or an attribute, method, or field on 'movies.Movie'.
+
+Fix: Update the MovieAdmin Class:
+Remove the popularity field from the list_display attribute in the MovieAdmin class.
+
+##
+
+7. No data is being fetched from the API in Genres, the result is "movies.Genre.None" and the Overview is blank
+

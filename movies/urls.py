@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('movie/<slug:slug>/', views.movie_detail, name='movie_detail'), # Ensure this line captures the slug
+    path('movie/<int:tmdb_id>/', views.movie_detail, name='movie_detail'), 
 ]
