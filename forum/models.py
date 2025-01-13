@@ -14,14 +14,14 @@ class ForumPost(models.Model):
     upvotes = models.ManyToManyField(User, related_name='forum_post_upvotes', blank=True)
     downvotes = models.ManyToManyField(User, related_name='forum_post_downvotes', blank=True)
 
-class Meta:
-    ordering = ['-created_at']  # Order by creation date, newest first
+    class Meta:
+        ordering = ['-created_at']  # Order by creation date, newest first
         
-def __str__(self):
-    return self.title
+    def __str__(self):
+        return self.title
 
-def total_upvotes(self):
-    return self.upvotes.count()
+    def total_upvotes(self):
+        return self.upvotes.count()
 
-def total_downvotes(self):
-    return self.downvotes.count()
+    def total_downvotes(self):
+        return self.downvotes.count()
