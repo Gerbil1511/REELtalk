@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Movies</h1>
+<form method="get" action="{% url 'home' %}">
+    <input type="text" name="q" placeholder="Search for movies...">
+    <button type="submit">Search</button>
+</form>
+<ul>
+    {% for movie in movies %}
+    <li>
+        <a href="{% url 'movie_detail' slug=movie.slug %}">{{ movie.title }}</a>
+        <p>{{ movie.release_date }}</p>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

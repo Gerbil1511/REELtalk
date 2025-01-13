@@ -2,13 +2,21 @@
 
 {% block content %}
 <h1>{{ movie.title }}</h1>
-<p>{{ movie.overview }}</p>
 <p>Release Date: {{ movie.release_date }}</p>
-<p>Director: {{ movie.director }}</p>
-<p>Main Actors: {{ movie.main_actors }}</p>
 <p>Vote Average: {{ movie.vote_average }}</p>
 <p>Vote Count: {{ movie.vote_count }}</p>
-<p>Popularity: {{ movie.popularity }}</p>
-<img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }} poster">
-<a href="{% url 'movie_list' %}">Back to Movies</a>
+<p>Movie Popularity: {{ movie.popularity }}</p>
+<p>Genre IDs: {{ movie.genre_ids }}</p>
+<img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+
+<h2>Forum Posts</h2>
+<ul>
+    {% for post in movie.forumpost_set.all %}
+    <li>
+        <a href="{% url 'forum_post_detail' post_id=post.id %}">{{ post.title }}</a>
+        <p>{{ post.author }}</p>
+        <p>{{ post.created_at }}</p>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}

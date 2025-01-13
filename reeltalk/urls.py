@@ -16,11 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from movies import views as movie_views  # Import the home view from the movies app
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('forum/', include('forum.urls')),  # Include the forum app URLs
-    path('movies/', include('movies.urls')),  # Include the movies app URLs
-    path('summernote/', include('django_summernote.urls')),  # Include the django_summernote URLs
+    path('forum/', include('forum.urls')),
+    path('movies/', include('movies.urls')),
+    path('summernote/', include('django_summernote.urls')),
+    path('', movie_views.home, name='home'),  # Add this line to handle the root URL
 ]

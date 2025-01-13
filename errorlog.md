@@ -1,0 +1,42 @@
+## Error Log:
+
+1. django.db.utils.IntegrityError: duplicate key value violates unique constraint "movies_movie_slug_key" DETAIL: Key (slug)=(the-matrix) already exists.
+
+[13/Jan/2025 10:53:24] "GET /?q=the+matrix HTTP/1.1" 500 186133
+
+Fix: modify the save method in the Movie model to ensure that slugs are unique by appending a unique identifier if a duplicate slug is detected. Additionally, you can handle this in the view to check for existing slugs before creating a new movie...
+
+
+Model Changes:
+The save method in the Movie model now ensures that slugs are unique by appending a unique identifier if a duplicate slug is detected.
+
+View Changes:
+The home view now checks for existing slugs before creating a new movie and ensures that the slug is unique if the movie already exists.
+
+##
+
+2. TypeError: movie_detail() got an unexpected keyword argument 'slug' [13/Jan/2025 11:01:50] "GET /movies/movie/the-greatest-showman/ HTTP/1.1" 500 69504
+
+Fix: due to a mismatch between the URL pattern and the view function's parameters...
+
+Check the URL Pattern:
+Ensure that the URL pattern for the movie_detail view correctly captures the slug parameter.
+
+Check the View Function:
+Ensure that the movie_detail view function accepts the slug parameter.
+
+##
+
+3 . NameError: name 'movie_id' is not defined [13/Jan/2025 11:06:25] "GET /movies/movie/the-matrix/ HTTP/1.1" 500 72757
+
+Fix: indicates that the movie_detail view is trying to use movie_id instead of slug. The URL pattern is passing the slug parameter, so the view should use slug to look up the movie.
+
+Correct Parameter:
+The movie_detail view now correctly accepts the slug parameter and uses it to look up the movie: movie = get_object_or_404(Movie, slug=slug).
+
+Ensure the movie_detail view correctly passes movie.tmdb_id to the fetch_movie_details function.
+
+Verify that the utils.py file correctly handles the movie_id parameter.
+
+##
+
