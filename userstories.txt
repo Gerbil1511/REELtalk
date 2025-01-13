@@ -1,0 +1,141 @@
+User Story 1: User Registration
+As a user, I want to register an account so that I can access the app's features.
+
+Acceptance Criteria:
+
+The user can access the registration page from the homepage.
+
+The user can enter their username, email, and password.
+
+The user receives a confirmation email upon successful registration.
+
+The user is redirected to the login page after registration.
+
+Tasks:
+
+Create a registration form template.
+
+Integrate Django Allauth for user registration.
+
+Set up email confirmation for registration.
+
+Create tests to ensure registration works correctly.
+
+User Story 2: User Login
+As a user, I want to log in to my account so that I can access my profile and interact with the app.
+
+Acceptance Criteria:
+
+The user can access the login page from the homepage.
+
+The user can enter their email and password to log in.
+
+The user is redirected to the homepage or profile page upon successful login.
+
+An error message is displayed if the login credentials are incorrect.
+
+Tasks:
+
+Create a login form template.
+
+Integrate Django Allauth for user login.
+
+Implement error handling for incorrect login credentials.
+
+Create tests to ensure login functionality works correctly.
+
+User Story 3: Search for Movies
+As a user, I want to search for movies so that I can find information about my favorite films.
+
+Acceptance Criteria:
+
+The user can access the search bar from the homepage.
+
+The user can enter a movie title or other search criteria.
+
+The application displays a list of movies matching the search criteria.
+
+Each movie in the search results shows its title, release date, and poster.
+
+Tasks:
+
+Integrate the TMDb API for movie search.
+
+Create a search bar and form on the homepage.
+
+Display search results with movie details.
+
+Create tests to ensure the search functionality works correctly.
+
+User Story 4: View Movie Details
+As a user, I want to view detailed information about a movie so that I can learn more about it.
+
+Acceptance Criteria:
+
+The user can click on a movie title from the search results.
+
+The application displays the movie's title, overview, release date, poster, vote average, vote count, popularity, genres, director, and main actors.
+
+The user can navigate to related forum posts from the movie detail page.
+
+Tasks:
+
+Fetch detailed movie information from the TMDb API.
+
+Create a movie detail page template.
+
+Display movie details on the movie detail page.
+
+Link to related forum posts from the movie detail page.
+
+Create tests to ensure the movie detail functionality works correctly.
+
+User Story 5: Create Forum Post
+As a user, I want to create a new forum post about a movie so that I can discuss it with others.
+
+Acceptance Criteria:
+
+The user can access the "Create New Post" page from the movie detail page.
+
+The user can enter the post title and content.
+
+The application saves the post and displays it in the forum post list.
+
+The user is redirected to the forum post list after creating a post.
+
+Tasks:
+
+Create a form for creating a new forum post.
+
+Implement the backend logic to save forum posts.
+
+Create a template for the forum post list.
+
+Redirect the user to the forum post list after creating a post.
+
+Create tests to ensure the forum post creation functionality works correctly.
+
+User Story 6: Upvote/Downvote Forum Post
+As a user, I want to upvote or downvote a forum post so that I can express my opinion on its quality or relevance.
+
+Acceptance Criteria:
+
+The user can see upvote and downvote buttons on each forum post.
+
+The user can click the buttons to increase or decrease the vote count.
+
+The application updates the vote count in real-time.
+
+The updated vote count is displayed to all users viewing the post.
+
+Tasks:
+
+Add upvote and downvote buttons to the forum post template.
+
+Create backend logic to handle upvoting and downvoting.
+
+Implement AJAX calls to update the vote count in real-time.
+
+Display the updated vote count on the forum post page.
+
+Create tests to ensure the upvote/downvote functionality works correctly.
