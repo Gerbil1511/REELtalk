@@ -4,7 +4,7 @@ from django.core.paginator import Paginator
 from .models import Movie, Genre
 import requests
 from django.conf import settings
-from .utils import fetch_movie_details
+from .utils import fetch_movie_details, fetch_latest_news
 
 def home(request):
     query = request.GET.get('q')
@@ -30,9 +30,11 @@ def home(request):
                     # Associate genres with the movie
                     genre_ids = item['genre_ids']
                     for genre_id in genre_ids:
-                        genre = Genre.objects.get(tmdb_id=genre_id)
+                        genre, _ = Genre.objects.get_or_create(tmdb_id=genre_id)
                         movie.genres.add(genre)
                 movies.append(movie)
+        else:
+            messages.error(request, 'Failed to fetch movie data. Please try again later.')
     else:
         # Fetch top 20 latest movies from TMDb API
         response = requests.get(f'https://api.themoviedb.org/3/movie/now_playing?api_key={settings.TMDB_API_KEY}&language=en-US&page=1')
@@ -54,18 +56,29 @@ def home(request):
                     # Associate genres with the movie
                     genre_ids = item['genre_ids']
                     for genre_id in genre_ids:
-                        genre = Genre.objects.get(tmdb_id=genre_id)
+                        genre, _ = Genre.objects.get_or_create(tmdb_id=genre_id)
                         movie.genres.add(genre)
                 movies.append(movie)
         else:
             messages.error(request, 'Failed to fetch movie data. Please try again later.')
 
-    # Implement pagination
-    paginator = Paginator(movies, 10)  # Show 10 movies per page
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    # Fetch latest movie and entertainment news
+    latest_news = fetch_latest_news()
 
-    return render(request, 'home.html', {'page_obj': page_obj})
+    # Implement pagination for movies
+    movie_paginator = Paginator(movies, 10)  # Show 10 movies per page
+    movie_page_number = request.GET.get('page')
+    movie_page_obj = movie_paginator.get_page(movie_page_number)
+
+    # Implement pagination for news articles
+    news_paginator = Paginator(latest_news, 4)  # Show 4 news articles per page
+    news_page_number = request.GET.get('news_page')
+    news_page_obj = news_paginator.get_page(news_page_number)
+
+    return render(request, 'home.html', {
+        'movie_page_obj': movie_page_obj,
+        'news_page_obj': news_page_obj
+    })
 
 def movie_detail(request, tmdb_id):
     movie = get_object_or_404(Movie, tmdb_id=tmdb_id)

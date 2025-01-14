@@ -27,3 +27,12 @@ def fetch_movie_details(movie_id):
         return movie_data
     else:
         return None  # Handle this case in your view
+
+
+def fetch_latest_news(page_size=20):
+    api_key = settings.NEWS_API_KEY
+    url = f'https://newsapi.org/v2/top-headlines?category=entertainment&pageSize={page_size}&apiKey={api_key}'
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.json().get('articles', [])
+    return []
