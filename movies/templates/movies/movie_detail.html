@@ -8,7 +8,8 @@
 <p>Genres:
     {% for genre in movie.genres.all %}
         {{ genre.name }}{% if not forloop.last %}, {% endif %}
-    {% endfor %}</p>
+    {% endfor %}
+</p>
 <p>Overview: {{ movie.overview }}</p>
 <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
 

@@ -13,8 +13,8 @@ class Movie(models.Model):
     tmdb_id = models.IntegerField(unique=True)
     title = models.CharField(max_length=255)
     overview = models.TextField(blank=True)
-    release_date = models.DateField()
-    poster_path = models.CharField(max_length=255)
+    release_date = models.DateField(blank=True, null=True)  # Allow null values
+    poster_path = models.CharField(max_length=255, blank=True, null=True)  # Allow null values
     vote_average = models.FloatField()
     vote_count = models.IntegerField()
     genres = models.ManyToManyField(Genre, related_name="movies")

@@ -5,6 +5,9 @@ from .models import Movie, Genre
 import requests
 from django.conf import settings
 from .utils import fetch_movie_details, fetch_latest_news
+from datetime import datetime
+
+DEFAULT_POSTER_PATH = 'images/no_poster_for_movie.webp'  # Define the path to your default poster
 
 def home(request):
     query = request.GET.get('q')
@@ -15,13 +18,21 @@ def home(request):
         if response.status_code == 200:
             data = response.json()
             for item in data['results']:
+                release_date_str = item.get('release_date')
+                release_date = None
+                if release_date_str:
+                    try:
+                        release_date = datetime.strptime(release_date_str, '%Y-%m-%d').date()
+                    except ValueError:
+                        release_date = None
+
                 movie, created = Movie.objects.get_or_create(
                     tmdb_id=item['id'],
                     defaults={
                         'title': item['title'],
                         'overview': item['overview'],
-                        'release_date': item['release_date'],
-                        'poster_path': item['poster_path'],
+                        'release_date': release_date,  # Set to None if missing or invalid
+                        'poster_path': item.get('poster_path', DEFAULT_POSTER_PATH),  # Use default poster if missing
                         'vote_average': item['vote_average'],
                         'vote_count': item['vote_count']
                     }
@@ -41,13 +52,21 @@ def home(request):
         if response.status_code == 200:
             data = response.json()
             for item in data['results']:
+                release_date_str = item.get('release_date')
+                release_date = None
+                if release_date_str:
+                    try:
+                        release_date = datetime.strptime(release_date_str, '%Y-%m-%d').date()
+                    except ValueError:
+                        release_date = None
+
                 movie, created = Movie.objects.get_or_create(
                     tmdb_id=item['id'],
                     defaults={
                         'title': item['title'],
                         'overview': item['overview'],
-                        'release_date': item['release_date'],
-                        'poster_path': item['poster_path'],
+                        'release_date': release_date,  # Set to None if missing or invalid
+                        'poster_path': item.get('poster_path', DEFAULT_POSTER_PATH),  # Use default poster if missing
                         'vote_average': item['vote_average'],
                         'vote_count': item['vote_count']
                     }
