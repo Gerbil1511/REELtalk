@@ -25,3 +25,19 @@ class ForumPost(models.Model):
 
     def total_downvotes(self):
         return self.downvotes.count()
+    
+    def upvote(self, user):
+        if user == self.author:
+            return  # Prevent the author from upvoting their own post
+        if user in self.downvotes.all():
+            self.downvotes.remove(user)
+        if user not in self.upvotes.all():
+            self.upvotes.add(user)
+
+    def downvote(self, user):
+        if user == self.author:
+            return  # Prevent the author from downvoting their own post
+        if user in self.upvotes.all():
+            self.upvotes.remove(user)
+        if user not in self.downvotes.all():
+            self.downvotes.add(user)
