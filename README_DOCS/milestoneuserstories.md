@@ -1,40 +1,4 @@
-## Milestone 1: Project Setup and Basic Functionality
-Description: Set up the project structure, configure necessary settings, and implement basic functionality.
 
-### User Stories and Acceptance Criteria:
-
-Project Initialization:
-User Story: As a developer, I want to set up the Django project so that I have a structured starting point.
-Acceptance Criteria: The Django project is created, and necessary settings are configured.
-Tasks:
-Create a new Django project.
-Configure project settings (e.g., database, static files, installed apps).
-Set up a virtual environment and install required packages.
-Initialize a Git repository and create an initial commit.
-
-Database Setup:
-User Story: As a developer, I want to set up the database so that I can store and retrieve data.
-Acceptance Criteria: The database is configured, and initial migrations are applied.
-Tasks:
-Configure the database settings in settings.py.
-Create initial migrations using python [manage.py](http://_vscodecontentref_/0) makemigrations.
-Apply migrations using python [manage.py](http://_vscodecontentref_/1) migrate.
-
-Movie Model:
-User Story: As a developer, I want to create the Movie model so that I can store movie information.
-Acceptance Criteria: The Movie model is created with fields for title, TMDb ID, overview, release date, poster path, vote average, vote count, popularity, genre IDs, director, and main actors.
-Tasks:
-Define the Movie model in models.py.
-Add fields for title, TMDb ID, overview, release date, poster path, vote average, vote count, popularity, genre IDs, director, and main actors.
-Create and apply migrations for the Movie model.
-
-Admin Interface:
-User Story: As an admin, I want to manage movies through the Django admin interface so that I can easily add, edit, and delete movie records.
-Acceptance Criteria: The Movie model is registered in the admin interface.
-Tasks:
-Register the Movie model in admin.py.
-Customize the admin interface to display relevant fields.
-Test the admin interface to ensure movies can be added, edited, and deleted.
 
 
 ## Milestone 2: Movie Information Display
@@ -68,34 +32,24 @@ Add a search bar to the home page template.
 Update the home page view to handle search queries.
 Filter movies based on the search query and display the results.
 
-## Milestone 3: User Authentication
+
+
+## Milestone 2: User Authentication
 Description: Implement user authentication to allow users to sign up, log in, and manage their accounts.
 
-### User Stories and Acceptance Criteria:
+- **User Story 4**: As a user, I want to register, log in, and log out of the app so that I can access my account securely.
+  - **Acceptance Criteria**:
+    - Users can register for an account.
+    - Users can log in with their credentials.
+    - Users can log out securely.
+  - **Tasks**:
+    - Set up Django Allauth.
+    - Create registration, login, and logout views.
+    - Design user registration and login forms.
+    - Implement session management for user authentication.
+    - Add URL routing for the registration, login and logout pages.
+    - Test the registration, login and logout processes to ensure users can sign up, login and logout.
 
-User Registration:
-User Story: As a user, I want to sign up for an account so that I can participate in the forum.
-Acceptance Criteria: Users can register for an account using a registration form.
-Tasks:
-Install and configure Django Allauth.
-Create a registration form using Django Allauth.
-Add URL routing for the registration page.
-Test the registration process to ensure users can sign up.
-
-User Login:
-User Story: As a user, I want to log in to my account so that I can access restricted features.
-Acceptance Criteria: Users can log in to their accounts using a login form.
-Tasks:
-Create a login form using Django Allauth.
-Add URL routing for the login page.
-Test the login process to ensure users can log in.
-User Logout:
-
-User Story: As a user, I want to log out of my account so that I can end my session.
-Acceptance Criteria: Users can log out of their accounts.
-Tasks:
-Add URL routing for the logout page.
-Test the logout process to ensure users can log out.
 
 
 ## Milestone 4: Forum Functionality
