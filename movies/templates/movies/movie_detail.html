@@ -1,37 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{ movie.title }}</h1>
-<p>Release Date: {{ movie.release_date }}</p>
-<p>Vote Average: {{ movie.vote_average }}</p>
-<p>Vote Count: {{ movie.vote_count }}</p>
-<p>Genres:
-    {% for genre in movie.genres.all %}
-        {{ genre.name }}{% if not forloop.last %}, {% endif %}
-    {% endfor %}
-</p>
-<p>Overview: {{ movie.overview }}</p>
-<img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
-
-<h2>Forum Posts</h2>
-<ul>
-    {% for post in forum_posts %}
-    <li>
-        <a href="{% url 'forum_post_detail' post_id=post.id %}">{{ post.title }}</a>
-        <p>{{ post.author }}</p>
-        <p>{{ post.created_at }}</p>
-        <p>Upvotes: {{ post.total_upvotes }}</p>
-        <p>Downvotes: {{ post.total_downvotes }}</p>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            {% if movie.poster_path %}
+            <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}" class="img-fluid">
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <h1>{{ movie.title }}</h1>
+            <p><strong>Overview:</strong> {{ movie.overview }}</p>
+            <p><strong>Genres:</strong> {% for genre in movie.genres.all %}{{ genre.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+            <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
+            <p><strong>Vote Average:</strong> {{ movie.vote_average }}</p>
+            <p><strong>Vote Count:</strong> {{ movie.vote_count }}</p>
+            
+        </div>
+    </div>
+    <div class="mt-4">
         {% if user.is_authenticated %}
-        <a href="{% url 'upvote_post' post_id=post.id %}">Upvote</a>
-        <a href="{% url 'downvote_post' post_id=post.id %}">Downvote</a>
-    {% endif %}
-    </li>
-    {% empty %}
-    <li>No forum posts available for this movie.</li>
-    {% endfor %}
-</ul>
-{% if user.is_authenticated %}
-    <a href="{% url 'create_post' %}">Create New Post</a>
-{% endif %}
+        <a href="{% url 'create_post' %}" class="btn btn-primary">Create Post</a>
+        {% else %}
+        <p><a href="{% url 'account_login' %}">Login</a> or <a href="{% url 'account_signup' %}">Sign Up</a> here to post about this movie.</p>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}

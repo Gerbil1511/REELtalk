@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from .models import ForumPost
@@ -12,7 +13,10 @@ def forum_post_list(request):
     - Renders the 'forum/forum_post_list.html' template with the posts.
     """
     posts = ForumPost.objects.all().order_by('-created_at')
-    return render(request, 'forum/forum_post_list.html', {'posts': posts})
+    paginator = Paginator(posts, 6)  # Show 6 posts per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'forum/forum_post_list.html', {'page_obj': page_obj})
 
 
 def forum_post_detail(request, post_id):
@@ -57,22 +61,28 @@ def create_or_edit_post(request, post_id=None):
         post = None
 
     if request.method == 'POST':
-        form = ForumPostForm(request.POST, instance=post)
-        if form.is_valid():
-            new_post = form.save(commit=False)
-            new_post.author = request.user
-            new_post.save()
-            if post_id:
-                messages.success(request, 'Post updated successfully.')
+        if 'delete_post' in request.POST and post:
+            if post.author == request.user:
+                post.delete()
+                messages.success(request, 'Post deleted successfully.')
+                return redirect('forum_post_list')
             else:
-                messages.success(request, 'Post created successfully.')
-            return redirect('forum_post_detail', post_id=new_post.id)
+                messages.error(request, 'You are not authorized to delete this post.')
+                return redirect('forum_post_detail', post_id=post.id)
         else:
-            messages.error(request, 'There was an error with your submission.')
+            form = ForumPostForm(request.POST, instance=post)
+            if form.is_valid():
+                new_post = form.save(commit=False)
+                new_post.author = request.user
+                new_post.save()
+                if post_id:
+                    messages.success(request, 'Post updated successfully.')
+                else:
+                    messages.success(request, 'Post created successfully.')
+                return redirect('forum_post_detail', post_id=new_post.id)
     else:
         form = ForumPostForm(instance=post)
-
-    return render(request, 'forum/forum_post_form.html', {'form': form})
+    return render(request, 'forum/forum_post_form.html', {'form': form, 'post': post})
 
 
 def upvote_post(request, post_id):
@@ -87,3 +97,4 @@ def downvote_post(request, post_id):
     post.downvotes.add(request.user)
     messages.success(request, 'Post downvoted.')
     return redirect('forum_post_detail', post_id=post.id)
+

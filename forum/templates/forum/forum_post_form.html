@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<h1>Create/Edit Forum Post</h1>
+<h1>Create a Forum Post</h1>
 <form method="post">
     {% csrf_token %}
     {{ form|crispy }}
