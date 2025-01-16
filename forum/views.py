@@ -5,11 +5,25 @@ from .forms import ForumPostForm
 
 
 def forum_post_list(request):
+    """
+    View to list all forum posts.
+    - Fetches all ForumPost objects from the database.
+    - Orders the posts by creation date in descending order.
+    - Renders the 'forum/forum_post_list.html' template with the posts.
+    """
     posts = ForumPost.objects.all().order_by('-created_at')
     return render(request, 'forum/forum_post_list.html', {'posts': posts})
 
 
 def forum_post_detail(request, post_id):
+    """
+    View to display the details of a single forum post.
+    - Fetches the ForumPost object with the given post_id.
+    - If the request method is POST, handles edit and delete actions.
+    - If 'edit_post' is in the POST data, updates the post if the user is the author.
+    - If 'delete_post' is in the POST data, deletes the post if the user is the author.
+    - Renders the 'forum/forum_post_detail.html' template with the post and form.
+    """
     post = get_object_or_404(ForumPost, id=post_id)
     if request.method == 'POST':
         if 'edit_post' in request.POST:

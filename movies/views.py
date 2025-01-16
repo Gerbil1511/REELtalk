@@ -10,6 +10,13 @@ from datetime import datetime
 DEFAULT_POSTER_PATH = 'images/no_poster_for_movie.webp'  # Define the path to your default poster
 
 def home(request):
+    """
+    View to display the home page with a list of movies.
+    - Fetches movie data from the TMDb API based on a search query or displays the latest movies.
+    - Handles pagination for the list of movies.
+    - Fetches the latest movie and entertainment news.
+    - Renders the 'home.html' template with the movies and news.
+    """
     query = request.GET.get('q')
     movies = []
     if query:
@@ -100,6 +107,13 @@ def home(request):
     })
 
 def movie_detail(request, tmdb_id):
+    """
+    View to display the details of a single movie.
+    - Fetches the Movie object with the given slug.
+    - Fetches additional movie details from the TMDb API.
+    - Fetches related forum posts for the movie.
+    - Renders the 'movies/movie_detail.html' template with the movie details and forum posts.
+    """
     movie = get_object_or_404(Movie, tmdb_id=tmdb_id)
     movie_details = fetch_movie_details(movie.tmdb_id)
     forum_posts = movie.forum_posts.all()
