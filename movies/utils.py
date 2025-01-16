@@ -34,5 +34,8 @@ def fetch_latest_news(page_size=20):
     url = f'https://newsapi.org/v2/top-headlines?category=entertainment&pageSize={page_size}&apiKey={api_key}'
     response = requests.get(url)
     if response.status_code == 200:
-        return response.json().get('articles', [])
+        articles = response.json().get('articles', [])
+        # Filter out articles with missing or removed titles
+        filtered_articles = [article for article in articles if article.get('title') and article.get('title') != 'removed']
+        return filtered_articles
     return []

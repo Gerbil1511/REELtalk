@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container">
     <div class="main-content">
-        <h1>Movies</h1>
+        <h1>Latest Top 20 Movies</h1>
         <form method="get" action="{% url 'home' %}">
             <input type="text" name="q" placeholder="Search for movies...">
             <button type="submit">Search</button>
@@ -11,8 +11,9 @@
         <ul>
             {% for movie in movie_page_obj %}
             <li>
+                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}" style="width: 100px; height: auto;">
                 <a href="{% url 'movie_detail' tmdb_id=movie.tmdb_id %}">{{ movie.title }}</a>
-                <p>{{ movie.release_date }}</p>
+                <p>Release Date: {{ movie.release_date }}</p>
             </li>
             {% endfor %}
         </ul>
@@ -40,6 +41,9 @@
         <ul>
             {% for news in news_page_obj %}
             <li>
+                {% if news.urlToImage %}
+                <img src="{{ news.urlToImage }}" alt="{{ news.title }}" style="width: 100px; height: auto;">
+                {% endif %}
                 <a href="{{ news.url }}" target="_blank">{{ news.title }}</a>
                 <p>{{ news.description }}</p>
             </li>

@@ -85,7 +85,7 @@ def home(request):
     latest_news = fetch_latest_news()
 
     # Implement pagination for movies
-    movie_paginator = Paginator(movies, 10)  # Show 10 movies per page
+    movie_paginator = Paginator(movies, 5)  # Show 5 movies per page
     movie_page_number = request.GET.get('page')
     movie_page_obj = movie_paginator.get_page(movie_page_number)
 
