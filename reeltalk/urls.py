@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from movies import views as movie_views  # Import the home view from the movies app
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
@@ -25,4 +26,5 @@ urlpatterns = [
     path('movies/', include('movies.urls')),
     path('summernote/', include('django_summernote.urls')),
     path('', movie_views.home, name='home'),  # Add this line to handle the root URL
+    
 ]
