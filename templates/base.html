@@ -24,69 +24,107 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary mt-1">
-            <div class="container">
-                <a class="navbar-brand" href="{%url 'home' %}">REELtalk</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbar">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{%url 'home'%}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{%url 'forum_post_list'%}">Forum</a>
-                        </li>
-                    </ul>
+    <main>
+        <nav class="nav-menu">
+            <div>
+                <div class="logo">
+                    <a href="{% url 'home' %}">
+                        <img src="{% static 'images/' %}" alt="ReelTalk Logo">
+                    </a>
+                    <p>REELtalk</p>
+                </div>
+                <div class="search">
                     <form method="get" action="{% url 'home' %}">
                         <input type="text" name="q" placeholder="Search for movies...">
                         <button type="submit">Search</button>
                     </form>
-                    <ul class="navbar-nav ml-auto">
-                        {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">You are loggged in as {{ user.username }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ logout_url }}">Logout</a>
-                        </li>
-                        {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ login_url }}">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ signup_url }}">Sign Up</a>
-                        </li>
-                        {% endif %}
-                    </ul>
+                </div>
+                <div>
+                    <li class="nav-item">
+                        <a href="{%url 'home'%}">
+                            <span class="nav-text">Movies</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{%url 'forum_post_list'%}">
+                            <span class="nav-text">Community</span>
+                        </a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{{ logout_url }}">
+                            <span class="nav-text">Logout</span>
+                        </a>
+                    </li>                 
+                    {% else %}
+                    <li class="nav-item">
+                        <a href="{{ login_url }}">
+                            <span class="nav-text">Login</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ signup_url }}">
+                            <span class="nav-text">Sign Up</span>
+                        </a>
+                    </li>
+                    {% endif %}
                 </div>
             </div>
         </nav>
-    </header>
-    <main>
-        {% if messages %}
-        <div>
-            {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">
-                {{ message }}
+            <!-- <div class="collapse navbar-collapse" id="navbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{%url 'home'%}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{%url 'forum_post_list'%}">Forum</a>
+                    </li>
+                </ul>
+                <form method="get" action="{% url 'home' %}">
+                    <input type="text" name="q" placeholder="Search for movies...">
+                    <button type="submit">Search</button>
+                </form>
+                <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">You are loggged in as {{ user.username }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ logout_url }}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ login_url }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ signup_url }}">Sign Up</a>
+                    </li>
+                    {% endif %}
+                </ul>
             </div>
-            {% endfor %}
+            </div> -->
+        </nav>
+
+        <div>
+            {% if messages %}
+            <div>
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+
+            {% block content %}
+
+            {% endblock %}
         </div>
-        {% endif %}
-
-
-        {% block content %}
-
-        {% endblock %}
+        <div>
+            <p>&copy; 2025 ReelTalk</p>
+        </div>
     </main>
-    <footer>
-        <p>&copy; 2025 ReelTalk</p>
-    </footer>
-
     <!--  Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
