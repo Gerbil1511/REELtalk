@@ -3,3 +3,5 @@
  https://www.freepik.com/free-photo/light-background-with-sunset-projector-lamp_16011401.htm the lava-like background image
 
 logo movie reel by leo-graph.com from <a href="https://thenounproject.com/browse/icons/term/movie-reel/" target="_blank" title="movie reel Icons">Noun Project</a> (CC BY 3.0)
+
+css image slider: https://www.youtube.com/@ironcoding   https://www.youtube.com/watch?v=UPcP0iEqJ3U

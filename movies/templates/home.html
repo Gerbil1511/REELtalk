@@ -1,69 +1,44 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<div class="container">
-    <div class="main-content">
-        <h1>Latest Top 20 Movies</h1>
-       
-        <ul>
-            {% for movie in movie_page_obj %}
-            <li>
-                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}" style="width: 100px; height: auto;">
-                <a href="{% url 'movie_detail' tmdb_id=movie.tmdb_id %}">{{ movie.title }}</a>
-                <p>Release Date: {{ movie.release_date }}</p>
-            </li>
-            {% endfor %}
-        </ul>
-
-        <div class="pagination">
-            <span class="step-links">
-                {% if movie_page_obj.has_previous %}
-                    <a href="?page=1">&laquo; first</a>
-                    <a href="?page={{ movie_page_obj.previous_page_number }}">previous</a>
-                {% endif %}
-
-                <span class="current">
-                    Page {{ movie_page_obj.number }} of {{ movie_page_obj.paginator.num_pages }}.
-                </span>
-
-                {% if movie_page_obj.has_next %}
-                    <a href="?page={{ movie_page_obj.next_page_number }}">next</a>
-                    <a href="?page={{ movie_page_obj.paginator.num_pages }}">last &raquo;</a>
-                {% endif %}
-            </span>
+<!-- top 20 movies -->
+<h2>TMDb Top 20 Movies</h2>
+<div class="slider">
+    <div class="slides" id="slide container">
+        {% for movie in movies %}
+        <div class="slide">
+            <a href="{% url 'movie_detail' movie.id %}">
+                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+            </a>
         </div>
+        {% endfor %}
     </div>
-    <div class="sidebar">
-        <h2>Latest Movie and Entertainment News</h2>
-        <ul>
-            {% for news in news_page_obj %}
-            <li>
-                {% if news.urlToImage %}
-                <img src="{{ news.urlToImage }}" alt="{{ news.title }}" style="width: 100px; height: auto;">
-                {% endif %}
-                <a href="{{ news.url }}" target="_blank">{{ news.title }}</a>
-                <p>{{ news.description }}</p>
-            </li>
-            {% endfor %}
-        </ul>
+    <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="next" onclick="moveSlide(1)">&#10095;</button>
+</div>
 
-        <div class="pagination">
-            <span class="step-links">
-                {% if news_page_obj.has_previous %}
-                    <a href="?news_page=1">&laquo; first</a>
-                    <a href="?news_page={{ news_page_obj.previous_page_number }}">previous</a>
-                {% endif %}
-
-                <span class="current">
-                    Page {{ news_page_obj.number }} of {{ news_page_obj.paginator.num_pages }}.
-                </span>
-
-                {% if news_page_obj.has_next %}
-                    <a href="?news_page={{ news_page_obj.next_page_number }}">next</a>
-                    <a href="?news_page={{ news_page_obj.paginator.num_pages }}">last &raquo;</a>
-                {% endif %}
-            </span>
+<!-- entertainment/movie news -->
+<div class="news-container mt-5">
+    <h2>Latest Entertainment News</h2>
+    <div class="row" id="news-container">
+        {% for article in news %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="{{ article.urlToImage }}" class="card-img-top" alt="{{ article.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ article.title }}</h5>
+                    <p class="card-text">{{ article.description }}</p>
+                    <a href="{{ article.url }}" class="btn btn-primary" target="_blank">Read more</a>
+                </div>
+            </div>
         </div>
+        {% endfor %}
     </div>
 </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{% static 'js/script.js' %}"></script>
 {% endblock %}

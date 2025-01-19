@@ -4,10 +4,8 @@
 {% url 'account_signup' as signup_url %}
 {% url 'account_logout' as logout_url %}
 
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html class="h-100" lang="en">
-
-</html>
 
 <head>
     <meta charset="UTF-8">
@@ -20,50 +18,63 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    
+    <!-- Font Awesome Favicons-->
+    <script src="https://kit.fontawesome.com/33a7724bf9.js" crossorigin="anonymous"></script>
 
 </head>
-
 <body>
-    <main>
-        <nav class="nav-menu">
-            <div>
-                <div class="logo">
+    <main class="main-container d-flex">
+        <div class="content-container flex-grow-1">
+          
+        </div>
+        <nav class="right-sidebar text-white p-3">
+            <button class="btn btn-primary d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse d-md-block" id="sidebarMenu">
+            <div class="logo text-center mb-3">
                     <a href="{% url 'home' %}">
                         <img src="{% static 'images/' %}" alt="ReelTalk Logo">
                     </a>
                     <p>REELtalk</p>
                 </div>
-                <div class="search">
+                <div class="search mb-3">
                     <form method="get" action="{% url 'home' %}">
-                        <input type="text" name="q" placeholder="Search for movies...">
-                        <button type="submit">Search</button>
+                        <input type="text" name="q" placeholder="Search movies...">
+                        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
                 </div>
-                <div>
+                <ul class="nav-menu flex-column">
                     <li class="nav-item">
-                        <a href="{%url 'home'%}">
+                        <a href="{%url 'home'%}" class="nav-link text-white">
+                            <i class="fa-solid fa-film"></i>
                             <span class="nav-text">Movies</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{%url 'forum_post_list'%}">
+                        <a href="{%url 'forum_post_list'%}" class="nav-link text-white">
+                            <i class="fa-solid fa-comments"></i>
                             <span class="nav-text">Community</span>
                         </a>
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a href="{{ logout_url }}">
+                        <a href="{{ logout_url }}" class="nav-link text-white">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
                             <span class="nav-text">Logout</span>
                         </a>
-                    </li>                 
+                    </li>
                     {% else %}
                     <li class="nav-item">
-                        <a href="{{ login_url }}">
+                        <a href="{{ login_url }}" class="nav-link text-white">
+                            <i class="fa-solid fa-arrow-right-to-bracket"></i>
                             <span class="nav-text">Login</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ signup_url }}">
+                        <a href="{{ signup_url }}" class="nav-link text-white">
+                            <i class="fa-solid fa-user-plus"></i>
                             <span class="nav-text">Sign Up</span>
                         </a>
                     </li>
@@ -71,7 +82,7 @@
                 </div>
             </div>
         </nav>
-            <!-- <div class="collapse navbar-collapse" id="navbar">
+        <!-- <div class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{%url 'home'%}">Home</a>
@@ -102,8 +113,8 @@
                     {% endif %}
                 </ul>
             </div>
-            </div> -->
-        </nav>
+            </div> 
+        </nav> -->
 
         <div>
             {% if messages %}
@@ -116,19 +127,22 @@
             </div>
             {% endif %}
 
-
             {% block content %}
-
+            <!-- movies/news and forum content -->
             {% endblock %}
         </div>
-        <div>
-            <p>&copy; 2025 ReelTalk</p>
-        </div>
+   
+     
     </main>
+    
     <!--  Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
         </script>
-</body>
 
-</html>
+    <!-- DTL JavaScript -->
+         <script src="{% static 'js/script.js' %}"></script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html> 
+

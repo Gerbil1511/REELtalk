@@ -1,6 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/inclusive-sans-2');
 
-
-@import url('https://fonts.cdnfonts.com/css/hubot-sans');
 
 /* base.html styling */
 body {
@@ -8,157 +7,149 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-image: url('/static/images/glow_background.webp');
+  /*  cssgradient.io */
+  background: rgb(1, 0, 3);
+  background: -moz-linear-gradient(135deg, rgba(1, 0, 3, 1) 0%, rgba(20, 6, 54, 1) 33%, rgba(13, 3, 38, 1) 72%, rgba(7, 1, 13, 1) 100%);
+  background: -webkit-linear-gradient(135deg, rgba(1, 0, 3, 1) 0%, rgba(20, 6, 54, 1) 33%, rgba(13, 3, 38, 1) 72%, rgba(7, 1, 13, 1) 100%);
+  background: linear-gradient(135deg, rgba(1, 0, 3, 1) 0%, rgba(20, 6, 54, 1) 33%, rgba(13, 3, 38, 1) 72%, rgba(7, 1, 13, 1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#010003", endColorstr="#07010d", GradientType=1);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   color: #fff;
-  font-family: 'Hubot-Sans', sans-serif;
-  
-}
+  font-family: 'Inclusive-Sans-2', sans-serif;
 
+}
 main {
-  display: grid;
-  grid-template-columns: 15% 85%;
-  width: 95%;
-  margin: 40px;
-  font-size: clamp(0.8rem, 2vw, 1.5rem);
-  background: rgba(16, 21, 61, 0.5);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 15px;
-  box-shadow: 0 0.5px 0 1px rgba(255, 255, 255, 0.23) inset,
-    0 1px 0 0 rgba(255, 255, 255, 0.6) inset, 0 4px 16px rgba(0, 0, 0, 0.12);
-  z-index: 10;
-}
+    display: grid;
+    grid-template-columns: 15% 85%;
+    width: 95%;
+    margin: 40px;
+    font-size: clamp(0.8rem, 2vw, 1.5rem);
+    background: rgba(1, 0, 3, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+    box-shadow: 0 0.5px 0 1px rgba(255, 255, 255, 0.23) inset,
+      0 1px 0 0 rgba(255, 255, 255, 0.6) inset, 0 4px 16px rgba(0, 0, 0, 0.12);
+    z-index: 10;
+  }
+    
 
-/* navigation styles */
-.logo img {
-  /* padding: 12px 24px 6px;
-  border-radius: 50%; */
-}
-
-.logo p {
-  color: #fff;
-  
-  text-align: center;
-  text-decoration: none;
-  padding: 0 6px 32px;
-}
-
-.search input {
-  width: 300px; 
-  max-width: 80%; /* Ensure it doesn't exceed the container's width */
-  padding: 8px; /* Optional: Add some padding for better appearance */
-  border: 1px solid #ccc; /* Optional: Add a border */
-  border-radius: 4px; /* Optional: Add rounded corners */
-}
-
-.nav-menu {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-radius: 15px 0 0 15px;
-  border-right: 1px solid rgba(255, 255, 255, 0.5);
-  padding: 12px 0 20px;
-  /* overflow: hidden; */
-  font-size: clamp(0.8rem, 2vw, 1.5rem);
-}
-
-.nav-item {
-  display: block;
-}
-
-.nav-item a {
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  color: #fff;
-  font-size: 1rem;
-  padding: 12px 0;
-  margin: 0 8px;
-  border-radius: 5px;
-  text-decoration: none;
-}
-
-.nav-item.active a {
-  background: rgba(106, 109, 155, 0.5);
-  text-decoration: none;
-}
-
-.nav-text {
-  display: block;
-  width: 70px;
-  height: 20px;
-  letter-spacing: 0;
-  font-size: clamp(0.8rem, 1.5vw, 1.5rem)
-}
-/* nav icons for when designed */
-.nav-icon {
-  width: 40px;
-  height: 20px;
-  font-size: 1.1rem;
-}
-
-/* top 20 movies section */
-
-h1 {
-  font-size: clamp(2rem, 4vw, 3rem)
-}
-
-/* latest news section */
-/* .container {
+  .main-container {
     display: flex;
-    flex-wrap: wrap;
-}
-
-.main-content {
-    flex: 3;
-    padding: 20px;
-}
-
-.sidebar {
+    height: 100%;
+  }
+  
+  .content-container {
     flex: 1;
     padding: 20px;
+    overflow-y: auto;
+  }
+  
+  .sidebar {
+    width: 250px;
     background-color: #140207;
+    padding: 20px;
     border-left: 1px solid #ddd;
-    font-family: 'Montserrat', sans-serif;
-}
-
-.sidebar h2 {
-    margin-top: 0;
-}
-
-.sidebar ul {
+    overflow-y: auto;
+  }
+  
+  .logo {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .logo img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .search {
+    margin-bottom: 20px;
+  }
+  
+  .nav-menu {
     list-style-type: none;
     padding: 0;
-}
-
-.sidebar ul li {
+  }
+  
+  .nav-item {
     margin-bottom: 10px;
-}  */
-
-
-
-/* media queries */
-@media (max-width: 1024px) {
-
-}
-
-@media (max-width: 750px) {
-  main {
-    grid-template-columns: 20% 80%;
+  }
+  
+  .nav-item a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .nav-item a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
   }
 
-}
-
-@media (max-width: 450px) {
-  main {
-    grid-template-columns: 25% 75%;
+  /* top 20 movies (home.html) */
+  .slider {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
   }
-  .logo img {
-    padding: 6px 6px 2px;
+  
+  /* Slides container */
+  .slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 2000%; /* Adjust this value based on the number of slides */
   }
-
-}
+  
+  /* Individual slide */
+  .slide {
+    min-width: 20%; /* Adjust this value based on the number of slides per view */
+    box-sizing: border-box;
+  }
+  
+  /* Slide image */
+  .slide img {
+    width: 100%;
+    height: auto;
+    max-height: 400px; /* Adjust this value as needed */
+    object-fit: cover;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0.5px 0 1px rgba(255, 255, 255, 0.23) inset,
+                0 1px 0 0 rgba(255, 255, 255, 0.6) inset,
+                0 4px 16px rgba(0, 0, 0, 0.12);
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  /* Hover effect for slide image */
+  .slide img:hover {
+    transform: scale(1.05); /* Slightly enlarge the image */
+  }
+  
+  /* Navigation buttons */
+  .prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10; /* Ensure the buttons are above other content */
+  }
+  
+  .prev {
+    left: 10px;
+  }
+  
+  .next {
+    right: 10px;
+  }
