@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+ <!-- Hero Section -->
+ <div class="hero-section">
+    <div class="container">
+        
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container mt-4">
+   
+    {% block additional_content %}{% endblock %}
+</div>
+
+<!-- Latest Movie News Section -->
+<div class="container mt-4 news-section">
+    <h2>Latest Movie News</h2>
+    <div class="row">
+        {% for article in latest_news %}
+        <div class="col-md-3">
+            <div class="card mb-4">
+                <img src="{{ article.image_url }}" class="card-img-top" alt="{{ article.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ article.title }}</h5>
+                    <a href="{{ article.url }}" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

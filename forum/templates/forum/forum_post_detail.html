@@ -7,7 +7,7 @@
 <p>Last updated on {{ post.updated_at }}</p>
 <a href="{% url 'forum_post_list' %}">Back to Forum Posts</a>
 
-{% if request.user == post.author %}
+<!-- {% if request.user == post.author %}
     <h2>Edit Forum Post</h2>
     <form method="post">
         {% csrf_token %}
@@ -19,6 +19,6 @@
     <form method="post">
         {% csrf_token %}
         <button type="submit" name="delete_post">Delete Post</button>
-    </form>
-{% endif %}
+    </form> -->
+<!-- {% endif %} -->
 {% endblock %}

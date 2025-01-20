@@ -16,15 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from movies import views as movie_views  # Import the home view from the movies app
+from . import views 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.home, name='home'),
+    path('movies/', views.movies, name='movies'),
+    path('community/', views.forum_post_list, name='forum_post_list'),
     path('accounts/', include('allauth.urls')),
     path('forum/', include('forum.urls')),
-    path('movies/', include('movies.urls')),
     path('summernote/', include('django_summernote.urls')),
-    path('', movie_views.home, name='home'),  # Add this line to handle the root URL
-    
 ]

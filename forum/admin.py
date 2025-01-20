@@ -1,12 +1,12 @@
 from django.contrib import admin
-from .models import ForumPost
+from .models import ForumPost, PostComment
 
 # Register your models here.
 @admin.register(ForumPost)
 class ForumPostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'movie', 'created_at', 'total_upvotes', 'total_downvotes')
-    search_fields = ('title', 'content', 'author__username', 'movie__title')
-    list_filter = ('author', 'movie', 'created_at')  # Add fields to filter by
+    list_display = ('movie', 'slug', 'author', 'title', 'content', 'created_at', 'updated_at', 'approved_post')
+    search_fields = ('movie', 'author', 'author__username', 'movie__title', 'status', 'approved_post')
+    list_filter = ('author', 'movie', 'created_at', 'updated_at', 'status', 'approved_post')  # Add fields to filter by
     
     def total_upvotes(self, obj):
         return obj.upvotes.count()
@@ -15,3 +15,11 @@ class ForumPostAdmin(admin.ModelAdmin):
     def total_downvotes(self, obj):
         return obj.downvotes.count()
     total_downvotes.short_description = 'Downvotes'
+
+
+@admin.register(PostComment)
+class PostCommentAdmin(admin.ModelAdmin):
+    list_display = ('post', 'author', 'comment', 'created_at', 'approved_comment')
+    search_fields = ('post', 'author', 'comment', 'created_at', 'approved_comment')
+    list_filter = ('post', 'author', 'created_at', 'approved_comment')  # Add fields to filter by
+

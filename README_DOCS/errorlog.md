@@ -90,3 +90,25 @@ Remove the popularity field from the list_display attribute in the MovieAdmin cl
 
 7. No data is being fetched from the API in Genres, the result is "movies.Genre.None" and the Overview is blank
 
+
+
+
+
+1. NoReverseMatch at /forum/
+Reverse for 'edit_post' not found. 'edit_post' is not a valid view function or pattern name.
+
+2. AttributeError: module 'movies.views' has no attribute 'movie_detail'
+
+3. SystemCheckError: System check identified some issues:
+
+ERRORS:
+<class 'movies.admin.MovieAdmin'>: (admin.E108) The value of 'list_display[2]' refers to 'TMDb_id', which is not a callable or attribute of 'MovieAdmin', or an attribute, method, or field on 'movies.Movie'.
+
+4. ERRORS:
+<class 'forum.admin.ForumPostAdmin'>: (admin.E108) The value of 'list_display[10]' refers to 'approved', which is not a callable or attribute of 'ForumPostAdmin', or an attribute, method, or field on 'forum.ForumPost'.
+<class 'forum.admin.ForumPostAdmin'>: (admin.E109) The value of 'list_display[7]' must not be a many-to-many field or a reverse foreign key.
+<class 'forum.admin.ForumPostAdmin'>: (admin.E109) The value of 'list_display[8]' must not be a many-to-many field or a reverse foreign key.
+
+5. ERRORS:
+<class 'forum.admin.ForumPostAdmin'>: (admin.E109) The value of 'list_display[7]' must not be a many-to-many field or a reverse foreign key.
+<class 'forum.admin.ForumPostAdmin'>: (admin.E109) The value of 'list_display[8]' must not be a many-to-many field or a reverse foreign key.
