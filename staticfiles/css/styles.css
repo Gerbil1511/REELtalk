@@ -3,15 +3,17 @@
 body {
     background-color: #141414;
     color: #fff;
+    font-family: 'Inclusive Sans', sans-serif;
 }
 
 .navbar {
     background-color: #141414;
 }
 
-.logo {
-    max-height: 50px; /* Adjust the height as needed */
-    width: auto;
+.logo_nav {
+    max-width: 200px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-left: 70px;
 }
 
 .navbar-brand,
@@ -28,20 +30,28 @@ body {
     list-style-type: none;
 }
 
+.nav-item i {
+    color: #e26f11; /* Orange color for icons */
+}
+
 .nav-item span {
-    color: #fff; 
+    color: #fff; /* White color for text */
 }
 
-.nav-item span:hover {
-    background-color: transparent;
+.nav-item:hover i {
+    color: #fff; /* White color for icons on hover */
 }
 
-.nav-item a:hover span {
-    color: #e26f11;
+.nav-item:hover span {
+    color: #e26f11; /* Orange color for text on hover */
 }
 
 #message {
     color: #e26f11;
+}
+
+hr {
+    border-top: 3px solid #e26f11;
 }
 
 .hero-section {
@@ -55,22 +65,29 @@ body {
     text-align: center;
 }
 
+/*  hero section */
 .hero-section .search-bar {
     width: 50%;
+}
+
+/* news section */
+.news-section .card {
+    background-color: #333;
+    color: #fff;
 }
 
 /* footer section */
 footer {
     background-color: #141414;
     color: #fff;
-    padding: 20px 0;
+    padding: 40px 0;
     text-align: center;
 }
-/* footer section */
+
 .logo-footer {
-    height: 40px; /* Adjust the height as needed */
-    width: auto; /* Maintain aspect ratio */
-    margin-right: 5px; /* Space between logo and text */
+    max-width: 100px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-top: 10px; /* Optional: Add some space above the logo */
     position: relative; /* Enable relative positioning */
     margin-top: -15px; /* Move the logo upwards */
     vertical-align: middle; /* Align vertically with text */
@@ -84,7 +101,6 @@ footer {
     justify-content: space-evenly;
     list-style-type: none;
 }
-
 #social-networks i {
     font-size: 160%;
     padding: 5%;
@@ -95,16 +111,64 @@ footer {
     color: #e26f11;
 }
 
+.contact,  .follow {
+    font-size: 160%;
+    padding: 5%;
+    color: #e26f11;
+}
+
+
 .news-section .card {
     background-color: #333;
     color: #fff;
 }
 
 /* community forum page */
-h2{
+.movie-poster {
+    width: 25%; /* Resize the poster to 25% of its original size */
+    margin-right: 10px; /* Add some space to the right of the image */
+}
+
+#forum-posts-table td {
+    vertical-align: middle; /* Align content vertically in the middle */
+    padding: 10px; /* Adjust padding as needed */
+}
+
+.read_more {
     color: #e26f11;
 }
 
-.movie-poster {
-    width: 25%; /* Resize the poster to 25% of its original size */
+.read_more:hover {
+    color: #000;
+}
+
+.pagination .page-item .page-link {
+    color: #e26f11; /* Orange text for page links */
+}
+
+.pagination .page-item .page-link:hover {
+
+    color: #000; /* White text on hover */
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #e26f11; /* Orange background for active page */
+    border-color: #e26f11; /* Orange border for active page */
+    color: #fff; /* White text for active page */
+}
+
+/* forum post detail and comment page */
+.list-group-item {
+    margin-bottom: 5px;
+}
+
+.poster-comment{
+    width: 50%; /* Resize the poster to 50% of its original size */
+    margin-right: 10px;
+}
+
+.btn{
+    background-color: #e26f11;
+    border-color: #e26f11;
+    color: #fff;
 }

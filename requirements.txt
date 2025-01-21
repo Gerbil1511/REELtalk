@@ -1,6 +1,6 @@
 asgiref==3.8.1
 cloudinary==1.42.0
-crispy-bootstrap5==2024.10
+crispy-bootstrap5==0.7
 dj-database-url==0.5.0
 Django==5.1.4
 django-allauth==65.3.1
@@ -12,4 +12,3 @@ psycopg2==2.9.10
 python-decouple==3.8
 sqlparse==0.5.3
 whitenoise==6.8.2
-requests==2.26.0
