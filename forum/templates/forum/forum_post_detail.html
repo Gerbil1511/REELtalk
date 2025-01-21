@@ -1,24 +1,41 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Community Post Detail{% endblock %}
 
 {% block content %}
-<h1>{{ post.title }}</h1>
-<p>{{ post.content }}</p>
-<p>Posted by {{ post.author }} on {{ post.created_at }}</p>
-<p>Last updated on {{ post.updated_at }}</p>
-<a href="{% url 'forum_post_list' %}">Back to Forum Posts</a>
-
-<!-- {% if request.user == post.author %}
-    <h2>Edit Forum Post</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" name="edit_post">Update Post</button>
-    </form>
-
-    <h2>Delete Forum Post</h2>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit" name="delete_post">Delete Post</button>
-    </form> -->
-<!-- {% endif %} -->
+<div class="container mt-4">
+    <h1 class="display-5">Community Forum</h2>
+    <h2>{{ post.title }}</h2>
+    <div class="row">
+        <div class="col-md-3 mt-2 poster-comment">
+            <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster" class="img-fluid movie-poster">
+            <p class="mt-2">Posted by: <strong>{{ post.author.username }}</strong></p>
+            
+        </div>
+        <div class="col-md-9">
+            <hr>
+            <p>{{ post.content }}</p>
+            <hr>
+            <h4>Comments</h4>
+            <ul class="list-group">
+                {% for comment in post.original_post.all %}
+                <li class="list-group-item">
+                    <strong>{{ comment.author.username }}</strong>:  
+                    {{ comment.comment }}
+                </li>
+                {% empty %}
+                <li class="list-group-item">No comments yet.</li>
+                {% endfor %}
+                <hr> 
+            </ul>
+            <h4 class="mt-2">Post a Comment</h4>
+            <form method="post">
+                {% csrf_token %}
+                {{ form | crispy }}
+                <button type="submit" class="btn">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

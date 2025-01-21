@@ -1,59 +1,65 @@
-
-
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Forum Posts{% endblock %}
+{% block title %}Community Forum{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
-    <h2>Community Forum</h2>
-    <div class="forum-posts">
-        {% for post in posts %}
-        <div class="forum-post">
-            <h3>{{ post.title }}</h3>
-            <p>{{ post.content }}</p>
-            <a href="{% url 'forum_post_detail' post.id %}">Read More</a>
-        </div>
-        {% endfor %}
-    </div>
-
-    <!-- Pagination -->
-    <div class="pagination-container">
-        <nav aria-label="Page navigation">
-            <ul class="pagination">
-                {% if page_obj.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page=1" aria-label="First">
-                        <span aria-hidden="true">&laquo;&laquo;</span>
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                {% endif %}
-                {% for num in page_obj.paginator.page_range %}
-                {% if page_obj.number == num %}
-                <li class="page-item active"><span class="page-link">{{ num }}</span></li>
-                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <li class="page-item"><a
-                        class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-                    {% endif %}
-                    {% endfor %}
-                    {% if page_obj.has_next %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
-                            <span aria-hidden="true">&raquo;&raquo;</span>
-                        </a>
-                    </li>
-                    {% endif %}
-            </ul>
-        </nav>
-    </div>
+    <h1 class="display-5">Community Forum</h2>
+    <hr>
+    <p>Welcome to the REELtalk Community Forum! This is a place where movie enthusiasts can come together to discuss
+            their favorite films, share reviews, and engage in meaningful conversations. Whether you're a casual viewer
+            or a hardcore cinephile, you'll find a welcoming community here.</p>
+    <p>Here are a few things you can do in our forum:</p>
+    <ul>
+        <li><strong>Start a Discussion:</strong> Have a topic in mind? Start a new thread and get the conversation
+                going.</li>
+        <li><strong>Share Reviews:</strong> Watched a movie recently? Share your thoughts and reviews with the
+                community.</li>
+        <li><strong>Comment on Posts:</strong> Join existing discussions by commenting on posts. Your insights and
+                opinions are valuable!</li>
+        <li><strong>Upvote and Downvote:</strong> Show your appreciation for great posts by upvoting them, or
+                downvote posts that you think are not helpful.</li>
+    </ul>
+    <p>Please remember to be respectful and follow our community guidelines. Let's keep the discussions friendly and
+            enjoyable for everyone. Happy posting!</p>
+    <hr>
+    <table id="forum-posts-table" class="table table-striped">
+        <tbody>
+            {% for post in page_obj %}
+            <tr>
+                <td>
+                    <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}"
+                        alt="{{ post.movie.title }} Poster" class="img-fluid movie-poster">
+                </td>
+                <td>{{ post.title }}</td>
+                <td>{{ post.content|truncatewords:20 }}</td>
+                <td><a href="{% url 'forum_post_detail' post.id %}" class="read_more">Read More</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
+</div>
+{% if is_paginated %}
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+        <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+        {% elif num > page_obj.number|add:'-6' and num < page_obj.number|add:'6' %}
+        <li class="page-item"><a href="?page={{ num }}" class="page-link">{{ num }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <li class="page-item"><a href="?page={{ page_obj.next_page_number }}" class="page-link">NEXT &raquo;</a></li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+</div>
+
 {% endblock %}

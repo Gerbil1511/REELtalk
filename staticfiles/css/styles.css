@@ -1,2 +1,110 @@
 @import url('https://fonts.cdnfonts.com/css/inclusive-sans-2');
 
+body {
+    background-color: #141414;
+    color: #fff;
+}
+
+.navbar {
+    background-color: #141414;
+}
+
+.logo {
+    max-height: 50px; /* Adjust the height as needed */
+    width: auto;
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+    color: #fff;
+}
+
+.nav-menu {
+    list-style-type: none;
+    padding: 0;
+}
+
+.nav-item {
+    list-style-type: none;
+}
+
+.nav-item span {
+    color: #fff; 
+}
+
+.nav-item span:hover {
+    background-color: transparent;
+}
+
+.nav-item a:hover span {
+    color: #e26f11;
+}
+
+#message {
+    color: #e26f11;
+}
+
+.hero-section {
+    background-image: url('path/to/your/static/image.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-section .search-bar {
+    width: 50%;
+}
+
+/* footer section */
+footer {
+    background-color: #141414;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+/* footer section */
+.logo-footer {
+    height: 40px; /* Adjust the height as needed */
+    width: auto; /* Maintain aspect ratio */
+    margin-right: 5px; /* Space between logo and text */
+    position: relative; /* Enable relative positioning */
+    margin-top: -15px; /* Move the logo upwards */
+    vertical-align: middle; /* Align vertically with text */
+    margin-bottom: 10px;
+}
+
+#social-networks {
+    text-align: end;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-evenly;
+    list-style-type: none;
+}
+
+#social-networks i {
+    font-size: 160%;
+    padding: 5%;
+    color: #fff;
+}
+
+#social-networks i:hover {
+    color: #e26f11;
+}
+
+.news-section .card {
+    background-color: #333;
+    color: #fff;
+}
+
+/* community forum page */
+h2{
+    color: #e26f11;
+}
+
+.movie-poster {
+    width: 25%; /* Resize the poster to 25% of its original size */
+}

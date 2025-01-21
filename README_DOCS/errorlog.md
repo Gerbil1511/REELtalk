@@ -112,3 +112,5 @@ ERRORS:
 5. ERRORS:
 <class 'forum.admin.ForumPostAdmin'>: (admin.E109) The value of 'list_display[7]' must not be a many-to-many field or a reverse foreign key.
 <class 'forum.admin.ForumPostAdmin'>: (admin.E109) The value of 'list_display[8]' must not be a many-to-many field or a reverse foreign key.
+
+6. importError: cannot import name 'PostCommentForm' from 'forum.forms' (/workspace/ReelTalk/forum/forms.py)
