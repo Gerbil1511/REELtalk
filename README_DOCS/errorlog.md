@@ -123,3 +123,15 @@ Request URL:	http://localhost:8000/forum/358/
 
 The `IntegrityError` indicates that a `PostComment` is being saved without an `author_id`, which violates the not-null constraint on the `author` field. This typically happens when the `author` field is not set before saving the comment.
 
+8. DoesNotExist at /forum/movie/594/
+Movie matching query does not exist.
+Request Method:	POST
+Request URL:	http://localhost:8000/forum/movie/594/
+Django Version:	4.2.17
+Exception Type:	DoesNotExist
+Exception Value:	
+Movie matching query does not exist.
+
+This is happening because the movie variable is being overwritten by the response from the TMDB API.
+
+To fix this, you should use a different variable name for the response from the TMDB API and ensure that the Movie object is correctly created if it does not exist.

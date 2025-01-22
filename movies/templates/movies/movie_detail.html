@@ -18,11 +18,11 @@
             <p><strong>Vote Count:</strong> {{ movie.vote_count }}</p>
             <p><strong>Vote Average:</strong> {{ movie.vote_average }}</p>
             <hr>
-            <h4>Write a Post/Review</h4>
+            <h4>Write a Post/Review:</h4>
             <form method="post">
                 {% csrf_token %}
                 {{ post_form|crispy }}
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn submit">Submit</button>
             </form>
         </div>
     </div>

@@ -8,53 +8,91 @@
     <h1 class="display-5">Movies</h1>
     <hr>
 
-    <!-- Most Popular Movies Carousel -->
-    <h2>Most Popular Movies</h2>
-    <div id="popularMoviesCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            {% for movie in popular_movies %}
-            <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                <a href="{% url 'movie_detail' movie.slug %}"></a>
-                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="d-block w-100" alt="{{ movie.title }}">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>{{ movie.title }}</h5>
-                </div>
+    <div class="container mt-4 mb-5">
+        <!-- Search bar for TMDB API -->
+        <h2>Search for Movies</h2>
+        <form method="get">
+            <div class="input-group mb-3">
+                <input type="text" name="search" class="form-control" placeholder="Search for movies...">
+                <button class="btn submit" type="submit">Search</button>
             </div>
-            {% endfor %}
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#popularMoviesCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#popularMoviesCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+        </form>
     </div>
 
-    <hr>
-
-    <!-- Top Rated Movies Carousel -->
-    <h2>Top Rated Movies</h2>
-    <div id="topRatedMoviesCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            {% for movie in top_rated_movies %}
-            <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="d-block w-100" alt="{{ movie.title }}">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>{{ movie.title }}</h5>
+    <!-- Search Results -->
+    {% if tmdb_results %}
+    <h2>Search Results</h2>
+    <div class="row mb-4">
+        {% for movie in tmdb_results %}
+        <div class="col-md-3">
+            <div class="card">
+                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="card-img-top"
+                    alt="{{ movie.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ movie.title }}</h5>
+                    <p class="card-text">{{ movie.overview|truncatewords:20 }}</p>
+                    <a href="{% url 'movie_detail' movie.id %}" class="btn btn-primary">View Details</a>
                 </div>
             </div>
-            {% endfor %}
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#topRatedMoviesCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#topRatedMoviesCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+        {% endfor %}
+    </div>
+    <hr>
+    {% endif %}
+
+    <div class="container movie-list">
+        <h1 class="display-5 mb-5">Top Popular Movies</h1>
+        <hr>
+        
+        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
+            class="img-fluid movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
+            class="img-fluid movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
+            class="img-fluid movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
+            class="img-fluid movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
+            class="img-fluid movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
+            class="img-fluid movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
+            class="img-fluid movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
+            class="img-fluid movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
+            class="img-fluid movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
+            class="img-fluid movie-poster">
+        
+    </div>
+
+
+    <div class="container movie-list">
+        <h1 class="display-5 mb-5">All Time Top Rated Movies</h1>
+        <hr>
+        
+        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
+            class="img-fluid movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
+            class="img-fluid movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
+            class="img-fluid movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
+            class="img-fluid movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
+            class="img-fluid movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
+            class="img-fluid movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
+            class="img-fluid movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
+            class="img-fluid movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
+            class="img-fluid movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
+            class="img-fluid movie-poster">
+        
     </div>
 </div>
 {% endblock %}
