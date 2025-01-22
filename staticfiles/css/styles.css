@@ -19,6 +19,15 @@ body {
     margin-left: 70px;
 }
 
+#toggle {
+    color: #fff !important;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(226, 111, 17, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    /* Orange color for the toggler icon */
+}
+
 .navbar-brand,
 .navbar-nav .nav-link {
     color: #fff;
@@ -57,6 +66,9 @@ body {
     color: #e26f11;
 }
 
+.display-5 {
+    color: #e26f11;
+}
 hr {
     border-top: 3px solid #e26f11;
 }
@@ -138,16 +150,27 @@ footer {
 }
 
 /* movies page */
-/* Carousel styling */
-.carousel-item img {
-    height: 500px;
-    object-fit: cover;
+/* Slider styling */
+.container .movie-list{
+    margin: 100px 0 0 200px;
+    width: 70%;
+    height: 300px;
+    display: flex
+    justify-content: center;
+    gap: 10px;
+
 }
 
-.carousel-caption {
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px;
-    border-radius: 5px;
+.container .movie-list img{
+  width: 10%;
+  height: 100%;
+  object-fit: cover;
+  border: 2px solid #e26f11; 
+  transition: all ease-in-out 0.5s; 
+}
+
+.container .movie-list img:hover {
+    width: 25%;
 }
 
 /* Movie detail page styling */
@@ -165,35 +188,32 @@ footer {
 }
 
 
-/* movie details page */
-
-
-
 /* community forum page */
 .card {
-    width: 18rem !important; /* Adjust the width as needed */
-    margin: 1rem !important;
+    width: 18rem; /* Adjust the width as needed */
+    margin: 1rem;
 }
 .card img {
-    height: 12rem !important; /* Adjust the height as needed */
-    object-fit: cover !important;
+    height: 12rem; /* Adjust the height as needed */
+    object-fit: cover;
 }
 .card-body {
-    height: 8rem !important; /* Adjust the height as needed */
-    overflow: hidden !important;
+    height: 8rem; /* Adjust the height as needed */
+    overflow: hidden;
 }
+
 
 strong {
     color: #e26f11;
     /* Orange color for strong text */
 }
 
-.movie-poster {
+/* .movie-poster {
     width: 50%;
     /* Resize the poster to 25% of its original size */
-    margin-right: 10px;
+    /* margin-right: 10px; */
     /* Add some space to the right of the image */
-}
+} */
 
 #forum-posts-table td {
     vertical-align: middle;
@@ -210,15 +230,20 @@ strong {
     color: #000;
 }
 
-.votes .btn-link {
+.fa-comment {
+    color: #e26f11;
+    /* Orange color for comment icon */
+}
 
+.votes .btn-link {
     margin-top: 2px;
     /* Add a gap between the buttons */
     margin-bottom: 2px;
+    color: #000;
 }
 
 .votes .btn-link:hover {
-    color: #000;
+    color: #e26f11;
     /* Black text on hover */
 }
 

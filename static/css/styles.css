@@ -20,7 +20,7 @@ body {
 }
 
 #toggle {
-    color: #fff
+    color: #fff !important;
 }
 
 .navbar-toggler-icon {
