@@ -1,43 +1,59 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Home{% endblock %}
 
 {% block content %}
+
 <!-- Hero Section -->
 <div class="hero-section">
-    <div class="container">
-
+    <div class="container-fluid p-0">
+        <div class="hero-image" style="background-image: url('{% static 'hero_temp.png' %}');">
+            <div class="hero-text">
+                <h1>Welcome to ReelTalk</h1>
+                <p>Your ultimate movie discussion platform</p>
+                <a href="{% url 'movies_list' %}" class="btn submit">Explore Movies</a>
+            </div>
+        </div>
     </div>
 </div>
 
+<div class="container">
 <!-- Latest News Section -->
-<div class="latest-news">
+div class="latest-news">
     <h1 class="display-5">Latest Entertainment News</h1>
-    <div id="newsCarousel" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            {% for article in articles %}
-            <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                <div class="card">
-                    {% if article.urlToImage %}
-                    <img src="{{ article.urlToImage }}" class="card-img-top" alt="{{ article.title }}">
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ article.title|truncatewords:6 }}</h5>
-                        <a href="{{ article.url }}" class="btn submit" target="_blank">Read More</a>
-                    </div>
+    <div class="row">
+        {% for article in page_obj %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                {% if article.urlToImage %}
+                <img src="{{ article.urlToImage }}" class="card-img-top" alt="{{ article.title }}" style="max-height: 200px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ article.title|truncatewords:6 }}</h5>
+                    <p class="card-text">{{ article.description|truncatewords:20 }}</p>
+                    <a href="{{ article.url }}" class="btn submit" target="_blank">Read More</a>
                 </div>
             </div>
-            {% endfor %}
         </div>
-        <a class="carousel-control-prev" href="#newsCarousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#newsCarousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+        {% endfor %}
     </div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo; Previous</a></li>
+            {% endif %}
+            {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+            <li class="page-item active"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+            {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next &raquo;</a></li>
+            {% endif %}
+        </ul>
+    </nav>
 </div>
 </div>
 {% endblock %}

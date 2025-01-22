@@ -1,27 +1,30 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.conf import settings
 from .models import Movie
-from django.contrib.auth.decorators import login_required
-from forum.models import ForumPost
 from forum.forms import ForumPostForm
 
 
 def movies_list(request):
     """
-    View to list all movies. Allows searching by movie title.
+    View to list movies based on search query.
     """
     search_query = request.GET.get('search', '')
     movie_results = []
 
     if search_query:
         movie_results = Movie.objects.filter(title__icontains=search_query)
-    else:
-        movie_results = Movie.objects.all()
+
+    top_popular_movies = Movie.objects.order_by('-popularity')[:10]
+    top_rated_movies = Movie.objects.order_by('-vote_average')[:10]
 
     return render(request, 'movies/movies_list.html', {
         'movie_results': movie_results,
         'search_query': search_query,
+        'top_popular_movies': top_popular_movies,
+        'top_rated_movies': top_rated_movies,
     })
+  
+
+
 
 def movie_detail(request, tmdb_id):
     """
@@ -30,7 +33,7 @@ def movie_detail(request, tmdb_id):
     """
     movie = get_object_or_404(Movie, tmdb_id=tmdb_id)
     
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user.is_authenticated:
         post_form = ForumPostForm(request.POST)
         if post_form.is_valid():
             post = post_form.save(commit=False)
@@ -39,7 +42,7 @@ def movie_detail(request, tmdb_id):
             post.save()
             return redirect('forum_post_list')
     else:
-        post_form = ForumPostForm()
+        post_form = ForumPostForm() if request.user.is_authenticated else None
 
     return render(request, 'movies/movie_detail.html', {
         'movie': movie,

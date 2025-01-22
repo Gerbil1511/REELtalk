@@ -1,6 +1,8 @@
-import requests
 from django.shortcuts import render
 from django.conf import settings
+from django.core.paginator import Paginator
+import requests
+
 
 def home(request):
     """
@@ -15,7 +17,11 @@ def home(request):
         data = response.json()
         articles = data.get('articles', [])
 
-    return render(request, 'home.html', {'articles': articles})
+    paginator = Paginator(articles, 5)  # Show 5 articles per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'home.html', {'page_obj': page_obj})
 
 def movies(request):
     return render(request, 'movies/movies.html')

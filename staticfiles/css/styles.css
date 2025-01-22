@@ -42,6 +42,11 @@ body {
     list-style-type: none;
 }
 
+.nav-item.active .nav-link {
+    border-bottom: 2px solid #e26f11; /* Orange border color */
+    padding-bottom: 5px; /* Adjust padding to make space for the border */
+}
+
 .nav-item i {
     color: #e26f11;
     /* Orange color for icons */
@@ -150,28 +155,34 @@ footer {
 }
 
 /* movies page */
-/* Slider styling */
-.container .movie-list{
+/* .carousel-inner img {
+    max-height: 100px; /* Adjust the height as needed */
+    /* object-fit: cover; /* Ensure the image covers the container */
+} */ */
+
+
+/* Slider styling
+.container .movie-list {
     margin: 100px 0 0 200px;
     width: 70%;
-    height: 300px;
-    display: flex
+    height: 450px;
+    display: flex;
     justify-content: center;
     gap: 10px;
-
 }
 
-.container .movie-list img{
-  width: 10%;
-  height: 100%;
-  object-fit: cover;
-  border: 2px solid #e26f11; 
-  transition: all ease-in-out 0.5s; 
+.contaier .movie-list img {
+    width: 10%;
+    height: 100%;
+    object-fit: cover;
+    border: 2px solid #e26f11;
+    transition: all ease-in-out 0.5s;
 }
 
 .container .movie-list img:hover {
     width: 25%;
 }
+
 
 /* Movie detail page styling */
 .movie-detail img {
@@ -189,18 +200,18 @@ footer {
 
 
 /* community forum page */
-.card {
-    width: 18rem; /* Adjust the width as needed */
+/* .card {
+    width: 18rem; /* Adjust the width as needed *
     margin: 1rem;
 }
 .card img {
-    height: 12rem; /* Adjust the height as needed */
+    height: 12rem; /* Adjust the height as needed *
     object-fit: cover;
 }
 .card-body {
-    height: 8rem; /* Adjust the height as needed */
+    height: 8rem; /* Adjust the height as needed *
     overflow: hidden;
-}
+} */
 
 
 strong {

@@ -41,59 +41,61 @@
 </div>
 
 
-    <div class="container movie-list">
-        <h1 class="display-5 mb-5">Top Popular Movies</h1>
-        <hr>
-        
-        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
-            class="img-fluid movie-poster">
-        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
-            class="img-fluid movie-poster">
-        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
-            class="img-fluid movie-poster">
-        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
-            class="img-fluid movie-poster">
-        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
-            class="img-fluid movie-poster">
-        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
-            class="img-fluid movie-poster">
-        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
-            class="img-fluid movie-poster">
-        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
-            class="img-fluid movie-poster">
-        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
-            class="img-fluid movie-poster">
-        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
-            class="img-fluid movie-poster">
-        
+<div class="container movie-list">
+    <h1 class="display-5 my-5">Top Popular Movies</h1>
+    <hr>
+    <div id="popularMoviesCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            {% for movie in top_popular_movies %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="d-block" style="width: 200px; height: auto; object-fit: cover;"  alt="{{ movie.title }}">
+            </div>
+            {% endfor %}
+        </div>
+        <a class="carousel-control-prev" href="#popularMoviesCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#popularMoviesCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
+</div>
 
 
-    <div class="container movie-list">
-        <h1 class="display-5 mb-5">All Time Top Rated Movies</h1>
-        <hr>
-        
-        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
-            class="img-fluid movie-poster">
-        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
-            class="img-fluid movie-poster">
-        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
-            class="img-fluid movie-poster">
-        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
-            class="img-fluid movie-poster">
-        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
-            class="img-fluid movie-poster">
-        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
-            class="img-fluid movie-poster">
-        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
-            class="img-fluid movie-poster">
-        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
-            class="img-fluid movie-poster">
-        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
-            class="img-fluid movie-poster">
-        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster"
-            class="img-fluid movie-poster">
-        
+<div class="container movie-list">
+    <h1 class="display-5 my-5">All Time Top Rated Movies</h1>
+    <hr>
+    <div id="ratedMoviesCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            {% for movie in top_rated_movies %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="d-block " alt="{{ movie.title }}" style="width: 200px; height: auto; object-fit: cover;">
+            </div>
+            {% endfor %}
+        </div>
+        <a class="carousel-control-prev" href="#ratedMoviesCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#ratedMoviesCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container movie-list">
+    <img src="{% static 'images/no_poster_for_movie.webp'}" style="width: 100px; height: auto;" alt="">
+    <img src="static/images/no_poster_for_movie.webp" style="width: 100px; height: auto;"alt="">
+    <img src="static/images/no_poster_for_movie.webp" style="width: 100px; height: auto;"alt="">
+    <img src="static/images/no_poster_for_movie.webp" style="width: 100px; height: auto;"alt="">
 </div>
 {% endblock %}

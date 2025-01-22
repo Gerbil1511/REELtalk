@@ -22,12 +22,20 @@
             <p><strong>Vote Count:</strong> {{ movie.vote_count }}</p>
             <p><strong>Vote Average:</strong> {{ movie.vote_average }}</p>
             <hr>
+            {% if user.is_authenticated %}
             <h4>Write a Post/Review:</h4>
             <form method="post">
                 {% csrf_token %}
                 {{ post_form|crispy }}
                 <button type="submit" class="btn submit">Submit</button>
             </form>
+            {% else %}
+            <br>
+            <br>
+            <div class="text-center">
+            <h4>Why not <a class="link" href="{{ signup_url }}">sign up</a> or <a class="link" href="{{ login_url }}">login</a> to write a post/review and join the conversations happening now!</h4>
+            {% endif %}
+            <div>
         </div>
     </div>
 </div>

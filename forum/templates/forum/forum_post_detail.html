@@ -5,11 +5,16 @@
 {% block title %}Community Post Detail{% endblock %}
 
 {% block content %}
-<a href="{% url 'forum_post_list' %}" class="btn submit my-3">
-    <i class="fa fa-arrow-left"></i> Back to Community Forum
-</a>
+
+
 <div class="container mt-4">
-    <h1 class="display-5">Comments</h1>
+    <a href="{% url 'forum_post_list' %}" class="btn submit my-1">
+        <i class="fa fa-arrow-left"></i> Back to Community Forum
+    </a>
+    <br>
+    <br>
+  
+    <h1 class="display-5 mt-1">Comments</h1>
     <hr>
     <h1 class="display-6">Orginal post:</h1>
     <div class="row">

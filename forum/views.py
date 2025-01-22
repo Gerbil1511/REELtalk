@@ -35,7 +35,7 @@ def forum_post_detail(request, id):
     Allows logged-in users to submit comments.
     """
     post = get_object_or_404(ForumPost, id=id, status=1)  # Get the post or return 404 if not found
-    comments = post.comments.filter(approved_comment=True).order_by('-created_at')  # Get approved comments
+    comments = post.original_post.filter(approved_comment=True).order_by('-created_at')  # Get approved comments
     comment_count = comments.count()
 
     if request.method == 'POST':
