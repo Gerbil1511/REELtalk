@@ -5,6 +5,10 @@
 {% block title %}{{ movie.title }}{% endblock %}
 
 {% block content %}
+<a href="{% url 'movies_list' %}" class="btn submit my-3">
+    <i class="fa fa-arrow-left"></i> Back to Movies
+</a>
+<hr>
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-4">

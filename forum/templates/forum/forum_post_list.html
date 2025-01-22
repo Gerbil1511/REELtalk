@@ -6,7 +6,7 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h1 class="display-5">Community Forum</h2>
+    <h1 class="display-5">Community Forum</h1>
         <hr>
         <p>Welcome to the REELtalk Community Forum! This is a place where movie enthusiasts can come together to discuss
             their favorite films, share reviews, and engage in meaningful conversations. Whether you're a casual viewer
@@ -30,7 +30,7 @@
             enjoyable for everyone. Happy posting!</p>
         <hr>
 
-        <!-- Search bar for TMDB API -->
+        <!-- Search bar for Movie model -->
         <h2>Search for Movies</h2>
         <form method="get">
             <div class="input-group mb-3">
@@ -39,8 +39,28 @@
             </div>
         </form>
 
-        <!-- Display TMDB search results -->
-        {% if tmdb_results %}
+        <!-- Movie Search Results -->
+    {% if page_obj %}
+    <h3>Search Results</h3>
+    <div class="row mb-4">
+        {% for movie in page_obj %}
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <a href="{% url 'movie_detail' movie.tmdb_id %}">
+                    <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="card-img-top" alt="{{ movie.title }}">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">{{ movie.title }}</h5>
+                    <p class="card-text">Release Date: {{ movie.release_date }}</p>
+                    <a href="{% url 'movie_detail' movie.tmdb_id %}" class="btn submit">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+        <!-- Display Movie search results -->
+        <!-- {% if tmdb_results %}
         <h3>Search Results</h3>
         <div class="row">
             {% for result in tmdb_results %}
@@ -59,21 +79,22 @@
             </div>
             {% endfor %}
         </div>
-        {% endif %}
+        {% endif %} -->
 
         <table id="forum-posts-table" class="table table-striped">
             <tbody>
                 {% for post in page_obj %}
                 <tr>
-                    <td>
+                    <td class="col-2">
                         <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}"
                             alt="{{ post.movie.title }} Poster" class="img-fluid movie-poster">
                     </td>
-                    <td>By: <strong>{{ post.author.username }}</strong></td>
-                    <td>{{ post.title }}</td>
-                    <td>{{ post.content|truncatewords:20 }}</td>
-                    <td><a href="{% url 'forum_post_detail' post.id %}" class="read_more">Read More</a></td>
-                    <td class="votes text-center">
+                    <td class="col-2">By: <strong>{{ post.author.username }}</strong></td>
+                    <td class="col-3">{{ post.title|truncatewords:15 }}</td>
+                    <td class="col-3">{{ post.content|truncatewords:15 }}</td>
+                    <td class="col-1"><i class="fa-solid fa-comments"></i> {{ post.comment_count }}</td>
+                    <td class="col-1"><a href="{% url 'forum_post_detail' post.id %}" class="read_more">Read More</a></td>
+                    <td class="col-1 text-center">
                         {% if user.is_authenticated %}
                         <a href="{% url 'upvote_post' post.id %}" class="btn btn-link">
                             <i class="fa fa-thumbs-up"></i> {{ post.upvotes.count }}

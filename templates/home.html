@@ -3,34 +3,41 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
- <!-- Hero Section -->
- <div class="hero-section">
+<!-- Hero Section -->
+<div class="hero-section">
     <div class="container">
-        
+
     </div>
 </div>
 
-<!-- Main Content -->
-<div class="container mt-4">
-   
-    {% block additional_content %}{% endblock %}
-</div>
-
-<!-- Latest Movie News Section -->
-<div class="container mt-4 news-section">
-    <h2>Latest Movie News</h2>
-    <div class="row">
-        {% for article in latest_news %}
-        <div class="col-md-3">
-            <div class="card mb-4">
-                <img src="{{ article.image_url }}" class="card-img-top" alt="{{ article.title }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ article.title }}</h5>
-                    <a href="{{ article.url }}" class="btn btn-primary">Read More</a>
+<!-- Latest News Section -->
+<div class="latest-news">
+    <h1 class="display-5">Latest Entertainment News</h1>
+    <div id="newsCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            {% for article in articles %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <div class="card">
+                    {% if article.urlToImage %}
+                    <img src="{{ article.urlToImage }}" class="card-img-top" alt="{{ article.title }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ article.title|truncatewords:6 }}</h5>
+                        <a href="{{ article.url }}" class="btn submit" target="_blank">Read More</a>
+                    </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
+        <a class="carousel-control-prev" href="#newsCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#newsCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
+</div>
 </div>
 {% endblock %}

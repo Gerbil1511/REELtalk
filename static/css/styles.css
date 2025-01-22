@@ -19,6 +19,15 @@ body {
     margin-left: 70px;
 }
 
+#toggle {
+    color: #fff
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(226, 111, 17, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    /* Orange color for the toggler icon */
+}
+
 .navbar-brand,
 .navbar-nav .nav-link {
     color: #fff;
@@ -57,6 +66,9 @@ body {
     color: #e26f11;
 }
 
+.display-5 {
+    color: #e26f11;
+}
 hr {
     border-top: 3px solid #e26f11;
 }
@@ -196,12 +208,12 @@ strong {
     /* Orange color for strong text */
 }
 
-.movie-poster {
+/* .movie-poster {
     width: 50%;
     /* Resize the poster to 25% of its original size */
-    margin-right: 10px;
+    /* margin-right: 10px; */
     /* Add some space to the right of the image */
-}
+} */
 
 #forum-posts-table td {
     vertical-align: middle;
@@ -218,15 +230,20 @@ strong {
     color: #000;
 }
 
-.votes .btn-link {
+.fa-comment {
+    color: #e26f11;
+    /* Orange color for comment icon */
+}
 
+.votes .btn-link {
     margin-top: 2px;
     /* Add a gap between the buttons */
     margin-bottom: 2px;
+    color: #000;
 }
 
 .votes .btn-link:hover {
-    color: #000;
+    color: #e26f11;
     /* Black text on hover */
 }
 

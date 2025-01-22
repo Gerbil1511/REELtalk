@@ -7,9 +7,8 @@
 <div class="container mt-4">
     <h1 class="display-5">Movies</h1>
     <hr>
-
     <div class="container mt-4 mb-5">
-        <!-- Search bar for TMDB API -->
+        <!-- Search bar for Movie model -->
         <h2>Search for Movies</h2>
         <form method="get">
             <div class="input-group mb-3">
@@ -19,26 +18,28 @@
         </form>
     </div>
 
-    <!-- Search Results -->
-    {% if tmdb_results %}
-    <h2>Search Results</h2>
+    <!-- Movie Search Results -->
+    {% if movie_results %}
     <div class="row mb-4">
-        {% for movie in tmdb_results %}
-        <div class="col-md-3">
+        {% for movie in movie_results %}
+        <div class="col-md-3 mb-3">
             <div class="card">
-                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="card-img-top"
-                    alt="{{ movie.title }}">
+                <a href="{% url 'movie_detail' movie.tmdb_id %}">
+                    <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="card-img-top" alt="{{ movie.title }}">
+                </a>
                 <div class="card-body">
                     <h5 class="card-title">{{ movie.title }}</h5>
-                    <p class="card-text">{{ movie.overview|truncatewords:20 }}</p>
-                    <a href="{% url 'movie_detail' movie.id %}" class="btn btn-primary">View Details</a>
+                    <a href="{% url 'movie_detail' movie.tmdb_id %}" class="btn submit">More Details</a>
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
-    <hr>
+    {% else %}
+    <p>No movies found matching your search criteria.</p>
     {% endif %}
+</div>
+
 
     <div class="container movie-list">
         <h1 class="display-5 mb-5">Top Popular Movies</h1>

@@ -39,6 +39,8 @@ ALLOWED_HOSTS = [
                 'localhost',
                 '.herokuapp.com',
                 'codeinstitute-ide.net',
+                'https://8000-gerbil1511-reeltalk-ctlc2xemywf.ws.codeinstitute-ide.net/',
+                '8000-gerbil1511-reeltalk-ctlc2xemywf.ws.codeinstitute-ide.net',
 ]
 
 # Application definition

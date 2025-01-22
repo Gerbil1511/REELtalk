@@ -37,9 +37,9 @@
             <a class="navbar-brand" href="{% url 'home' %}">
                 <img class="logo_nav" src="{% static 'images/reeltalk_logo.png' %}" alt="REELtalk Logo">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            <button id="toggle" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon" ></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
@@ -49,7 +49,7 @@
                             <span class="nav-text">Home</span>
                         </a>
                     <li class="nav-item">
-                        <a href="{% url 'movies'%}" class="nav-link text-white">
+                        <a href="{% url 'movies_list' %}" class="nav-link text-white">
                             <i class="fa-solid fa-film"></i>
                             <span class="nav-text">Movies</span>
                         </a>
@@ -88,27 +88,21 @@
             </div>
         </div>
     </nav>
-    <main>
-        {% block content %}{% endblock %}
-    </main>
-    <div>
+    <div class="container">
+        <!-- Messages Block -->
         {% if messages %}
-        <div>
+        <div class="messages">
             {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %}" role="alert">
                 {{ message }}
             </div>
             {% endfor %}
         </div>
         {% endif %}
-
-        <!-- Footer -->
-        <!-- <footer class="footer">
-            <div class="container">
-                <p>&copy; 2025 REELtalk. All rights reserved.</p>
-            </div>
-        </footer> -->
-
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    
         <!-- Footer -->
     <!-- mt-auto added to push footer to the bottom of the page -->
     <footer class="footer text-center mt-auto">

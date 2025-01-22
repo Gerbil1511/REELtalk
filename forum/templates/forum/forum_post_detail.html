@@ -5,26 +5,32 @@
 {% block title %}Community Post Detail{% endblock %}
 
 {% block content %}
+<a href="{% url 'forum_post_list' %}" class="btn submit my-3">
+    <i class="fa fa-arrow-left"></i> Back to Community Forum
+</a>
 <div class="container mt-4">
-    <h1 class="display-5">Community Forum</h2>
-        <hr>
-    <div class="row align-items-center">
-        <div class="col-md-2 mt-2 poster-comment">
+    <h1 class="display-5">Comments</h1>
+    <hr>
+    <h1 class="display-6">Orginal post:</h1>
+    <div class="row">
+        <div class="col-md-2 my-2 poster-comment">
             <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}" alt="{{ post.movie.title }} Poster" class="img-fluid movie-poster">
         </div>
+        <div class="col d-flex flex-column justify-content-end">
         <div class="col-md-7">
             <h2>{{ post.title }}</h2>
         </div>
         <div class="col-md-3">
             <p class="mt-2">Posted by: <strong>{{ post.author.username }}</strong></p>
-        </div>   
+        </div>
+        </div> 
+        <p>{{ post.content }}</p>  
     </div>
-    <hr>
+
     <div class="row">
         <div class="col-md-12">
-            <p>{{ post.content }}</p>
             <hr>
-            <h4>Comments</h4>
+            <h4>Comments:</h4>
             <ul class="list-group">
                 {% for comment in post.original_post.all %}
                 <li class="list-group-item" id="comment{{ comment.id }}">
@@ -41,6 +47,7 @@
                 <li class="list-group-item">No comments yet.</li>
                 {% endfor %}
             </ul>
+            <hr>
             {% if user.is_authenticated %}
             <h4 class="mt-2">Post a Comment</h4>
             <form id="commentForm" method="post">
