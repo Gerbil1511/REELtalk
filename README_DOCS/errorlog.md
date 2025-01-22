@@ -114,3 +114,12 @@ ERRORS:
 <class 'forum.admin.ForumPostAdmin'>: (admin.E109) The value of 'list_display[8]' must not be a many-to-many field or a reverse foreign key.
 
 6. importError: cannot import name 'PostCommentForm' from 'forum.forms' (/workspace/ReelTalk/forum/forms.py)
+
+7. IntegrityError at /forum/358/
+null value in column "author_id" of relation "forum_postcomment" violates not-null constraint
+DETAIL:  Failing row contains (347, I was wondering what your movie genre preference was? Perhaps th..., 2025-01-21 22:29:51.149203+00, f, null, null).
+Request Method:	POST
+Request URL:	http://localhost:8000/forum/358/
+
+The `IntegrityError` indicates that a `PostComment` is being saved without an `author_id`, which violates the not-null constraint on the `author` field. This typically happens when the `author` field is not set before saving the comment.
+

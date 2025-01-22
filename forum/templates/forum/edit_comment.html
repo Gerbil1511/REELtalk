@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Edit Comments{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="display-5">Edit Comments</h1>
+    <hr>
+    <form method="post">
+        {% csrf_token %}
+        {{ comment_form|crispy }}
+        <button type="submit" class="btn">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

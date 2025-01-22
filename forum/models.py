@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from movies.models import Movie
+from django.utils.text import slugify  # Import slugify
+import random
+import string
 
 # Create your models here.
 STATUS = ((0, "Draft"), (1, "Published"))
@@ -37,8 +40,7 @@ class ForumPost(models.Model):
             # Ensure the slug is unique
             while ForumPost.objects.filter(slug=self.slug).exists():
                 # Append a random string to the slug if it already exists
-                self.slug = f"{slugify(
-                self.title)}-{''.join(random.choices(string.ascii_lowercase + string.digits, k=6))}"
+                self.slug = f"{slugify(self.title)}-{''.join(random.choices(string.ascii_lowercase + string.digits, k=6))}"
         super().save(*args, **kwargs)  # Call the original save method
 
     def __str__(self):

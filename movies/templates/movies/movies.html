@@ -1,44 +1,60 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block content %}
-<!-- top 20 movies -->
-<h2>TMDb Top 20 Movies</h2>
-<div class="slider">
-    <div class="slides" id="slide container">
-        {% for movie in movies %}
-        <div class="slide">
-            <a href="{% url 'movie_detail' movie.id %}">
-                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
-            </a>
-        </div>
-        {% endfor %}
-    </div>
-    <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
-    <button class="next" onclick="moveSlide(1)">&#10095;</button>
-</div>
+{% block title %}Movies{% endblock %}
 
-<!-- entertainment/movie news -->
-<div class="news-container mt-5">
-    <h2>Latest Entertainment News</h2>
-    <div class="row" id="news-container">
-        {% for article in news %}
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <img src="{{ article.urlToImage }}" class="card-img-top" alt="{{ article.title }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ article.title }}</h5>
-                    <p class="card-text">{{ article.description }}</p>
-                    <a href="{{ article.url }}" class="btn btn-primary" target="_blank">Read more</a>
+{% block content %}
+<div class="container mt-4">
+    <h1 class="display-5">Movies</h1>
+    <hr>
+
+    <!-- Most Popular Movies Carousel -->
+    <h2>Most Popular Movies</h2>
+    <div id="popularMoviesCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% for movie in popular_movies %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <a href="{% url 'movie_detail' movie.slug %}"></a>
+                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="d-block w-100" alt="{{ movie.title }}">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>{{ movie.title }}</h5>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
+        <button class="carousel-control-prev" type="button" data-bs-target="#popularMoviesCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#popularMoviesCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <hr>
+
+    <!-- Top Rated Movies Carousel -->
+    <h2>Top Rated Movies</h2>
+    <div id="topRatedMoviesCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% for movie in top_rated_movies %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="d-block w-100" alt="{{ movie.title }}">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>{{ movie.title }}</h5>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#topRatedMoviesCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#topRatedMoviesCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
 </div>
-</div>
-{% endblock %}
-
-{% block extra_scripts %}
-<script src="{% static 'js/script.js' %}"></script>
 {% endblock %}

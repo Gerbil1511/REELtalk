@@ -1,5 +1,8 @@
 {% load static %}
 
+{% url 'home' as home_url %}
+{% url 'movies' as movies_url %}
+{% url 'community' as community_url %}
 {% url 'account_login' as login_url %}
 {% url 'account_signup' as signup_url %}
 {% url 'account_logout' as logout_url %}
@@ -18,6 +21,13 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <!-- favicon.io -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+<link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+<link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
+<link rel="manifest" href="{% static 'images/site.webmanifest' %}">
+
 </head>
 
 <body>

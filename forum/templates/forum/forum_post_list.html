@@ -10,9 +10,10 @@
     <p>Welcome to the REELtalk Community Forum! This is a place where movie enthusiasts can come together to discuss
             their favorite films, share reviews, and engage in meaningful conversations. Whether you're a casual viewer
             or a hardcore cinephile, you'll find a welcoming community here.</p>
+            <br>
     <p>Here are a few things you can do in our forum:</p>
     <ul>
-        <li><strong>Start a Discussion:</strong> Have a topic in mind? Start a new thread and get the conversation
+        <li><strong>Start a Discussion:</strong> Have something valuable to say? Start a new thread and get the conversation
                 going.</li>
         <li><strong>Share Reviews:</strong> Watched a movie recently? Share your thoughts and reviews with the
                 community.</li>
@@ -21,7 +22,8 @@
         <li><strong>Upvote and Downvote:</strong> Show your appreciation for great posts by upvoting them, or
                 downvote posts that you think are not helpful.</li>
     </ul>
-    <p>Please remember to be respectful and follow our community guidelines. Let's keep the discussions friendly and
+    <br>
+    <p ><strong>Please remember</strong> to be respectful and follow our community guidelines. Let's keep the discussions friendly and
             enjoyable for everyone. Happy posting!</p>
     <hr>
     <table id="forum-posts-table" class="table table-striped">
@@ -35,6 +37,20 @@
                 <td>{{ post.title }}</td>
                 <td>{{ post.content|truncatewords:20 }}</td>
                 <td><a href="{% url 'forum_post_detail' post.id %}" class="read_more">Read More</a></td>
+                <td class="votes text-center">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'upvote_post' post.id %}" class="btn btn-link">
+                            <i class="fa fa-thumbs-up"></i> {{ post.upvotes.count }}
+                        </a>
+                        <a href="{% url 'downvote_post' post.id %}" class="btn btn-link">
+                            <i class="fa fa-thumbs-down"></i> {{ post.downvotes.count }}
+                        </a>
+                    {% else %}
+                        <span>{{ post.upvotes.count }} <i class="fa fa-thumbs-up"></i></span>
+                        <span>{{ post.downvotes.count }} <i class="fa fa-thumbs-down"></i></span>
+                    {% endif %}
+                </td>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

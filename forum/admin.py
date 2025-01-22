@@ -4,7 +4,7 @@ from .models import ForumPost, PostComment
 # Register your models here.
 @admin.register(ForumPost)
 class ForumPostAdmin(admin.ModelAdmin):
-    list_display = ('movie', 'slug', 'author', 'title', 'content', 'created_at', 'updated_at', 'approved_post')
+    list_display = ('content', 'author', 'movie', 'title', 'created_at', 'updated_at', 'approved_post')
     search_fields = ('movie', 'author', 'author__username', 'movie__title', 'status', 'approved_post')
     list_filter = ('author', 'movie', 'created_at', 'updated_at', 'status', 'approved_post')  # Add fields to filter by
     
@@ -19,7 +19,7 @@ class ForumPostAdmin(admin.ModelAdmin):
 
 @admin.register(PostComment)
 class PostCommentAdmin(admin.ModelAdmin):
-    list_display = ('post', 'author', 'comment', 'created_at', 'approved_comment')
+    list_display = ('comment', 'author', 'post', 'created_at', 'approved_comment')
     search_fields = ('post', 'author', 'comment', 'created_at', 'approved_comment')
-    list_filter = ('post', 'author', 'created_at', 'approved_comment')  # Add fields to filter by
+    list_filter = ('author', 'created_at', 'approved_comment')  # Add fields to filter by
 

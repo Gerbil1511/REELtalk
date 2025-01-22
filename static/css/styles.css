@@ -1,5 +1,6 @@
 @import url('https://fonts.cdnfonts.com/css/inclusive-sans-2');
 
+/* base.html */
 body {
     background-color: #141414;
     color: #fff;
@@ -54,6 +55,7 @@ hr {
     border-top: 3px solid #e26f11;
 }
 
+/*  hero section */
 .hero-section {
     background-image: url('path/to/your/static/image.jpg');
     background-size: cover;
@@ -65,12 +67,16 @@ hr {
     text-align: center;
 }
 
-/*  hero section */
 .hero-section .search-bar {
     width: 50%;
 }
 
 /* news section */
+.news-section .card {
+    background-color: #333;
+    color: #fff;
+}
+
 .news-section .card {
     background-color: #333;
     color: #fff;
@@ -91,7 +97,7 @@ footer {
     position: relative; /* Enable relative positioning */
     margin-top: -15px; /* Move the logo upwards */
     vertical-align: middle; /* Align vertically with text */
-    margin-bottom: 10px;
+   
 }
 
 #social-networks {
@@ -117,15 +123,44 @@ footer {
     color: #e26f11;
 }
 
-
-.news-section .card {
-    background-color: #333;
-    color: #fff;
+/* movies page */
+/* Carousel styling */
+.carousel-item img {
+    height: 500px;
+    object-fit: cover;
 }
 
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Movie detail page styling */
+.movie-detail img {
+    max-width: 100%;
+    height: auto;
+}
+
+.movie-detail h1 {
+    margin-top: 0;
+}
+
+.movie-detail p {
+    margin-bottom: 10px;
+}
+
+
+/* movie details page */
+
+
+
 /* community forum page */
+strong {
+    color: #e26f11; /* Orange color for strong text */
+}
 .movie-poster {
-    width: 25%; /* Resize the poster to 25% of its original size */
+    width: 50%; /* Resize the poster to 25% of its original size */
     margin-right: 10px; /* Add some space to the right of the image */
 }
 
@@ -140,6 +175,15 @@ footer {
 
 .read_more:hover {
     color: #000;
+}
+
+.votes .btn-link {
+    margin-top: 2px; /* Add a gap between the buttons */
+    margin-bottom: 2px;
+}
+
+.votes .btn-link:hover {
+    color: #000; /* Black text on hover */
 }
 
 .pagination .page-item .page-link {
@@ -160,15 +204,35 @@ footer {
 /* forum post detail and comment page */
 .list-group-item {
     margin-bottom: 5px;
+    position: relative;
 }
 
 .poster-comment{
-    width: 50%; /* Resize the poster to 50% of its original size */
-    margin-right: 10px;
+    display: flex;
+    align-items: center;
 }
 
-.btn{
+.poster-comment img {
+    width: 100%; /* Make the image responsive */
+    max-width: 200px; /* Set a maximum width for larger screens */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 300px; /* Set a maximum height */
+    object-fit: cover; /* Ensure the image covers the container */
+    
+}
+
+.comment-actions {
+    float: right;
+    margin-left: 10px; /* Optional: Add some space between the buttons */
+}
+
+.submit {
     background-color: #e26f11;
     border-color: #e26f11;
     color: #fff;
+}
+.submit:hover{
+    background-color: #fff;
+    border-color: #fff;
+    color: #e26f11;
 }
