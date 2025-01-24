@@ -58,8 +58,6 @@
         <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="10000">
             <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="d-block w-100" alt="{{ movie.title }}">
             <div class="carousel-caption d-none d-md-block">
-                <!-- <div class="carousel-caption"> -->
-                <h1 class="display-6">{{ movie.title }}</h5>
                 <a href="{% url 'movie_detail' movie.tmdb_id %}" class="btn submit">More Details</a>
             </div>
         </div>
@@ -90,7 +88,6 @@
         <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="10000">
             <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="d-block w-100" alt="{{ movie.title }}">
             <div class="carousel-caption d-none d-md-block">
-                <h1 class="display-6">{{ movie.title }}</h5>
                 <a href="{% url 'movie_detail' movie.tmdb_id %}" class="btn submit">More Details</a>
             </div>
         </div>
