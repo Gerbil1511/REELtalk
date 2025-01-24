@@ -1,4 +1,16 @@
 @import url('https://fonts.cdnfonts.com/css/inclusive-sans-2');
+
+/* base.html styles */
+body {
+    background-color: #141414;
+    color: #fff;
+    font-family: 'Inclusive Sans', sans-serif;
+}
+
+.navbar {
+    background-color: #141414;
+}
+
 .logo_nav {
     max-width: 200px;
     /* Adjust the width as needed */
@@ -7,9 +19,83 @@
     margin-left: 70px;
 }
 
-body {
-    
-    font-family: 'Inclusive Sans', sans-serif;
+#toggle {
+    color: #fff !important;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(226, 111, 17, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    /* Orange color for the toggler icon */
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+    color: #fff;
+}
+
+.nav-menu {
+    list-style-type: none;
+    padding: 0;
+}
+
+.nav-item {
+    list-style-type: none;
+}
+
+.nav-item.active .nav-link {
+    border-bottom: 2px solid #e26f11; /* Orange border color */
+    padding-bottom: 5px; /* Adjust padding to make space for the border */
+}
+
+.nav-item i {
+    color: #e26f11;
+    /* Orange color for icons */
+}
+
+.nav-item span {
+    color: #fff;
+    /* White color for text */
+}
+
+.nav-item:hover i {
+    color: #fff;
+    /* White color for icons on hover */
+}
+
+.nav-item:hover span {
+    color: #e26f11;
+    /* Orange color for text on hover */
+}
+
+#message {
+    color: #e26f11;
+}
+
+.display-5 {
+    color: #e26f11;
+}
+hr {
+    border: 1px solid #e26f11;
+
+}
+
+main {
+    display: grid;
+    width: 95%;
+    margin: 0 auto;
+    /* font-size: clamp(0.8rem, 2vw, 1.5rem); */
+    border: 1px solid rgba(226, 111, 17, 0.5);
+    border-radius: 10px;
+    box-shadow: 0 0.5px 0 1px rgba(255, 255, 255, 0.23) inset,
+      0 1px 0 0 rgba(255, 255, 255, 0.6) inset, 0 4px 16px rgba(0, 0, 0, 0.12);
+    z-index: 10;
+}
+
+footer {
+    background-color: #141414;
+    color: #fff;
+    padding: 40px 0;
+    text-align: center;
 }
 
 .logo-footer {
@@ -50,3 +136,258 @@ body {
     padding: 5%;
     color: #e26f11;
 }
+
+
+/*  home.html page */
+.hero-section {
+    background-image: url('path/to/your/static/image.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-section .search-bar {
+    width: 50%;
+}
+
+.card {
+    border: 1px solid rgba(226, 111, 17, 0.5);
+    border-radius: 10px;
+    box-shadow: 0 0.5px 0 1px rgba(255, 255, 255, 0.23) inset,
+      0 1px 0 0 rgba(255, 255, 255, 0.6) inset, 0 4px 16px rgba(0, 0, 0, 0.12);
+    z-index: 10;
+    padding: 10px;
+}
+
+.card-img-top {
+    max-height: 200px;
+    object-fit: cover;
+}
+.card-title {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-body {
+    flex-grow: 1;
+    overflow: hidden; /* Hide any overflowing content within the card body */
+}
+
+.card-footer {
+    text-align: left;
+}
+
+.btn.submit.btn-sm {
+    font-size: 0.875rem;
+    padding: 4px 8px;
+}
+
+/* movies_list.html page */
+/* carousel/slider styling */
+.carousel-inner img {
+    width: 100%;
+    height: auto;
+    max-height: 500px; /* Adjust this value as needed */
+    object-fit: cover;
+    margin: auto;
+}
+
+.carousel-caption {
+    color: #fff !important;
+}
+
+/* movie_detail.html page */
+.movie-detail img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.movie-detail h1 {
+    margin-top: 0;
+}
+
+.movie-detail p {
+    margin-bottom: 10px;
+}
+
+
+/* forum_post_list.html page */
+.forum-img-fluid {
+    width: 100%;
+    /* Make the image responsive */
+    max-width: 300px;
+    /* Set a maximum width for larger screens */
+    height: auto;
+    /* Maintain aspect ratio */
+    max-height: 300px;
+    /* Set a maximum height */
+    object-fit: cover;
+
+    /* max-width: 100%;
+    height: auto; */
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* .card {
+    width: 18rem; /* Adjust the width as needed *
+    margin: 1rem;
+}
+.card img {
+    height: 12rem; /* Adjust the height as needed *
+    object-fit: cover;
+}
+.card-body {
+    height: 8rem; /* Adjust the height as needed *
+    overflow: hidden;
+} */
+
+
+strong {
+    color: #e26f11;
+    /* Orange color for strong text */
+}
+
+/* .movie-poster {
+    width: 50%;
+    /* Resize the poster to 25% of its original size */
+    /* margin-right: 10px; */
+    /* Add some space to the right of the image */
+} */
+
+#forum-posts-table td {
+    vertical-align: middle;
+    /* Align content vertically in the middle */
+    padding: 10px;
+    /* Adjust padding as needed */
+}
+
+.read_more {
+    color: #e26f11;
+}
+
+.read_more:hover {
+    color: #000;
+}
+
+.fa-comment {
+    color: #e26f11;
+    /* Orange color for comment icon */
+}
+
+.votes .btn-link {
+    margin-top: 2px;
+    /* Add a gap between the buttons */
+    margin-bottom: 2px;
+    color: #000;
+}
+
+.votes .btn-link:hover {
+    color: #e26f11;
+    /* Black text on hover */
+}
+
+.pagination .page-item .page-link {
+    color: #e26f11;
+    /* Orange text for page links */
+}
+
+.pagination .page-item .page-link:hover {
+    color: #000;
+    /* White text on hover */
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #e26f11;
+    /* Orange background for active page */
+    border-color: #e26f11;
+    /* Orange border for active page */
+    color: #fff;
+    /* White text for active page */
+}
+
+/* forum_post_detail.html page */
+.list-group-item {
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.poster-comment {
+    display: flex;
+    align-items: center;
+}
+
+.poster-comment img {
+    width: 100%;
+    /* Make the image responsive */
+    max-width: 200px;
+    /* Set a maximum width for larger screens */
+    height: auto;
+    /* Maintain aspect ratio */
+    max-height: 300px;
+    /* Set a maximum height */
+    object-fit: cover;
+    /* Ensure the image covers the container */
+
+}
+
+.comment-actions {
+    float: right;
+    margin-left: 20px;
+    /* Optional: Add some space between the buttons */
+}
+
+
+
+.submit {
+    background-color: #e26f11;
+    border-color: #e26f11;
+    color: #fff;
+}
+
+.submit:hover {
+    background-color: #fff;
+    border-color: #fff;
+    color: #e26f11;
+}
+
+@media (max-width: 576px) {
+    .carousel-inner img {
+        max-height: 200px; /* Adjust this value for extra small screens */
+    }
+    
+    .card {
+        margin-bottom: 16px;
+    }
+
+    .table-responsive td {
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
+
+    .table-responsive td img {
+        margin: 0 auto;
+        
+    }
+
+    .table-responsive td img {
+        margin: 0 auto;
+        
+    }
+}
+@media (max-width: 768px) {
+    .carousel-inner img {
+        max-height: 300px; /* Adjust this value for smaller screens */
+    }
+}
+

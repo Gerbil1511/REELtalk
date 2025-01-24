@@ -50,22 +50,24 @@
                                 <button type="submit" class="btn btn-success">Save</button>
                             </form>
                         </div>
+                        {% endif %}
                     </div>
                     {% empty %}
                     <li class="list-group-item">No comments yet.</li>
                     {% endfor %}
                 </div>
             </div>
-        </div>
-    </div>
-    <hr>
+            <hr>
     {% if user.is_authenticated %}
     <h4 class="mt-2">Post a Comment</h4>
-    <form method="post" action="{% url 'forum_post_detail' movie_slug=forum_post.movie.slug forum_post_slug=forum_post.slug %}">
+    <form id="CommentForm" method="post">
+    <!-- <form method="post" action="{% url 'forum_post_detail' movie_slug=forum_post.movie.slug forum_post_slug=forum_post.slug %}"> -->
         {% csrf_token %}
         {{ comment_form.as_p }}
         <button type="submit" id="submitButton" class="btn submit btn-primary">Submit</button>
     </form>
+    {% else %}
+    <p><a href="{% url 'account_login' %}">Log in</a> to add a comment.</p>
     {% endif %}
 </div>
 

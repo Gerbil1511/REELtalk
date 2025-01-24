@@ -33,11 +33,24 @@
                     <form id="ForumPostForm" class="mb-5" method="post">
                         {% csrf_token %}
                         {{ post_form|crispy }}
-                    <button type="submit" id="submitButton" class="btn submit btn-primary">Submit</button>
+                    <button type="submit" id="submitButton" class="btn submit">Submit</button>
                 </form>
+                <hr>
+                <h2>Your Posts</h2>
+    {% for post in user_posts %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">{{ post.content }}</p>
+            <a href="{% url 'forum_post_detail' post.movie.slug post.slug %}" class="btn submit">View Post</a>
+            <a href="{% url 'edit_post' post.id %}" class="btn btn-primary">Edit</a>
+            <a href="{% url 'delete_post' post.id %}" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+    {% endfor %}
                 {% else %}
                 <div class="text-center">
-                    <h4>Why not <a class="link" href="{{ account_login }}">sign up</a> or <a class="link" href="{{ login_url }}">login</a> to write a post/review and join the conversations happening now!</h4>
+                    <h4>Why not <a class="link" href="{% url 'account_signup' %}">sign up</a> or <a class="link" href="{% url 'account_login' %}">login</a> to write a post/review and join the conversations happening now!</h4>
                 <div>
                 {% endif %}
             </div>

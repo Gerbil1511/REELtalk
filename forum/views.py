@@ -64,6 +64,18 @@ def forum_post_detail(request, movie_slug, forum_post_slug):
         'comment_form': comment_form,
     })
 
+# def comment_detail(request, movie_slug, forum_post_slug, comment_id):
+#     """
+#     View to display a single comment on a forum post.
+#     """
+#     movie = get_object_or_404(Movie, slug=movie_slug)
+#     forum_post = get_object_or_404(ForumPost, slug=forum_post_slug, movie=movie, status=1)
+#     comment = get_object_or_404(PostComment, id=comment_id, forum_post=forum_post, approved_comment=True)
+
+#     return render(request, 'forum/forum_post_detail.html', {
+#         'comment': comment,
+#     })
+
 # @login_required
 # def create_post(request):
 #     """
@@ -161,13 +173,13 @@ def delete_comment(request, comment_id):
     """
     # Get the comment or return 404 if not found or if the user is not the author
     comment = get_object_or_404(PostComment, id=comment_id, author=request.user)
-    forum_post_slug = comment.forum_post.slug  # Store the post slug for redirection
-    movie_slug = comment.forum_post.movie.slugcomment.delete()  # Delete the comment
-    comment.delete()  
-    messages.add_message(
-        request, messages.SUCCESS,
-        'Comment deleted successfully'
-    )
-    # Redirect to the post detail page
-    return redirect('forum_post_detail', movie_slug=movie_slug, forum_post_slug=forum_post_slug)
+    forum_post = comment.forum_post
+    movie = forum_post.movie
+    if request.method == 'POST':
+        comment.delete()
+        messages.success(request, 'Your comment has been deleted.')
+        return redirect('forum_post_detail', movie_slug=movie.slug, forum_post_slug=forum_post.slug)
 
+    return render(request, 'forum/delete_comment.html', {
+        'comment': comment,
+    })

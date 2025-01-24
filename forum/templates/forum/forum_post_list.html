@@ -43,7 +43,7 @@
                     <td class="col-2">{{ post.title|truncatewords:15 }}</td>
                     <td class="col-3">{{ post.content|truncatewords:15 }}</td>
                     <td class="col-1"><i class="fa-solid fa-comments"></i> {{ comment_count }}</td>
-                    <td class="col-1"><a href="{% url 'forum_post_detail' post.id %}" class="read_more">Read More</a></td>
+                    <td class="col-1"><a href="{% url 'forum_post_detail' post.movie.slug post.slug %}" class="read_more">Read More</a></td>
                     <td class="col-2 text-center">
                         {% if user.is_authenticated %}
                         <a href="{% url 'upvote_post' post.id %}" class="btn btn-link">

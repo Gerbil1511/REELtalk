@@ -37,7 +37,7 @@ class ForumPost(models.Model):
         return f"Movie: {self.movie}  -  {self.title}  by  {self.author} on  {self.created_at}"
 
 class PostComment(models.Model):
-    forum_post = models.ForeignKey(ForumPost, on_delete=models.CASCADE, related_name='comments', null=True, blank=True)  # Temporarily make it nullable
+    forum_post = models.ForeignKey(ForumPost, on_delete=models.CASCADE, related_name='comments',)  # Temporarily make it nullable
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comment_author')
     comment = models.TextField(default='')
     created_at = models.DateTimeField(auto_now_add=True)
