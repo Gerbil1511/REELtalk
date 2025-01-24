@@ -1,11 +1,14 @@
 from django import forms
-from .models import ForumPost
-from .models import PostComment
+from django_summernote.widgets import SummernoteWidget
+from .models import ForumPost, PostComment
 
 class ForumPostForm(forms.ModelForm):
-    class Meta:
+     class Meta:
         model = ForumPost
         fields = ['title', 'content']
+        widgets = {
+            'content': SummernoteWidget(),
+        }
 
 
 class PostCommentForm(forms.ModelForm):
@@ -13,5 +16,5 @@ class PostCommentForm(forms.ModelForm):
         model = PostComment
         fields = ['comment']
         widgets = {
-            'comment': forms.Textarea(attrs={'rows': 3, 'placeholder': 'Write your comment here...'}),
+            'content': SummernoteWidget(),
         }

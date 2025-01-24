@@ -19,7 +19,8 @@ class ForumPostAdmin(admin.ModelAdmin):
 
 @admin.register(PostComment)
 class PostCommentAdmin(admin.ModelAdmin):
-    list_display = ('post', 'author', 'comment', 'approved_comment', 'created_at')
-    search_fields = ('post', 'author', 'comment', 'created_at', )
+    list_display = ('forum_post', 'author', 'comment', 'approved_comment', 'created_at')
+    search_fields = ('forum_post', 'author', 'comment', 'created_at', )
     list_filter = ('author', 'created_at', 'approved_comment')  # Add fields to filter by
+
 

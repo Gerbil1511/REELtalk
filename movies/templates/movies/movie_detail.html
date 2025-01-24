@@ -8,7 +8,7 @@
 
 
 <div class="container mt-4">
-    <a href="{% url 'forum_post_list' %}" class="btn submit my-1">
+    <a href="{% url 'list_movies' %}" class="btn submit my-1">
         <i class="fa fa-arrow-left"></i> Back to Movies
     </a>
     <hr>
@@ -30,14 +30,14 @@
             <div class="col-md-12 mt-3">
                 {% if user.is_authenticated %}
                 <h4 class="mt-2">Post a Comment</h4>
-                    <form id="ForumPostForm" class=" mb-5" method="post">
+                    <form id="ForumPostForm" class="mb-5" method="post">
                         {% csrf_token %}
-                        {{ comment_form|crispy }}
+                        {{ post_form|crispy }}
                     <button type="submit" id="submitButton" class="btn submit btn-primary">Submit</button>
                 </form>
                 {% else %}
                 <div class="text-center">
-                    <h4>Why not <a class="link" href="{{ signup_url }}">sign up</a> or <a class="link" href="{{ login_url }}">login</a> to write a post/review and join the conversations happening now!</h4>
+                    <h4>Why not <a class="link" href="{{ account_login }}">sign up</a> or <a class="link" href="{{ login_url }}">login</a> to write a post/review and join the conversations happening now!</h4>
                 <div>
                 {% endif %}
             </div>

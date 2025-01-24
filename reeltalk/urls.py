@@ -16,15 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from . import views
+from .views import home, movies
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
-    path('movies/', include('movies.urls')),
-    path('community/', views.forum_post_list, name='forum_post_list'),
-    path('accounts/', include('allauth.urls')),
-    path('forum/', include('forum.urls')),
-    path('summernote/', include('django_summernote.urls')),
+    path('', home, name='home'),  # Home page view
+    path('movies/', include('movies.urls')),  # Movies page view
+    path('community/', include('forum.urls')),  # Include forum app URLs
+    path('accounts/', include('allauth.urls')),  # Assuming you are using django-allauth for authentication
+    path('summernote/', include('django_summernote.urls')),  # Include Summernote URLs
 ]
