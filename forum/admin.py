@@ -4,10 +4,10 @@ from .models import ForumPost, PostComment
 # Register your models here.
 @admin.register(ForumPost)
 class ForumPostAdmin(admin.ModelAdmin):
-    list_display = ( 'content', 'approved_post','author', 'movie', 'title', 'created_at', 'updated_at')
-    search_fields = ('movie', 'author', 'author__username', 'movie__title', 'status', 'approved_post')
-    list_filter = ('author', 'movie', 'created_at', 'updated_at', 'status', 'approved_post')  # Add fields to filter by
-    
+    list_display = ('title',  'author', 'movie', 'approved_post', 'status', 'created_at', 'slug')
+    search_fields = ('title', 'author', 'movie', 'created_at')
+    list_filter = ('author', 'movie', 'approved_post', 'status', 'created_at')
+
     def total_upvotes(self, obj):
         return obj.upvotes.count()
     total_upvotes.short_description = 'Upvotes'
@@ -19,7 +19,7 @@ class ForumPostAdmin(admin.ModelAdmin):
 
 @admin.register(PostComment)
 class PostCommentAdmin(admin.ModelAdmin):
-    list_display = ( 'comment', 'approved_comment', 'author', 'post', 'created_at')
-    search_fields = ('post', 'author', 'comment', 'created_at', 'approved_comment')
+    list_display = ('post', 'author', 'comment', 'approved_comment', 'created_at')
+    search_fields = ('post', 'author', 'comment', 'created_at', )
     list_filter = ('author', 'created_at', 'approved_comment')  # Add fields to filter by
 

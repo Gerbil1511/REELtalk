@@ -1,6 +1,6 @@
 @import url('https://fonts.cdnfonts.com/css/inclusive-sans-2');
 
-/* base.html */
+/* base.html styles */
 body {
     background-color: #141414;
     color: #fff;
@@ -75,37 +75,22 @@ body {
     color: #e26f11;
 }
 hr {
-    border-top: 3px solid #e26f11;
+    border: 1px solid #e26f11;
+
 }
 
-/*  hero section */
-.hero-section {
-    background-image: url('path/to/your/static/image.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 60vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+main {
+    display: grid;
+    width: 95%;
+    margin: 0 auto;
+    /* font-size: clamp(0.8rem, 2vw, 1.5rem); */
+    border: 1px solid rgba(226, 111, 17, 0.5);
+    border-radius: 10px;
+    box-shadow: 0 0.5px 0 1px rgba(255, 255, 255, 0.23) inset,
+      0 1px 0 0 rgba(255, 255, 255, 0.6) inset, 0 4px 16px rgba(0, 0, 0, 0.12);
+    z-index: 10;
 }
 
-.hero-section .search-bar {
-    width: 50%;
-}
-
-/* news section */
-.news-section .card {
-    background-color: #333;
-    color: #fff;
-}
-
-.news-section .card {
-    background-color: #333;
-    color: #fff;
-}
-
-/* footer section */
 footer {
     background-color: #141414;
     color: #fff;
@@ -115,7 +100,6 @@ footer {
 
 .logo-footer {
     max-width: 100px;
-    /* Adjust the width as needed */
     height: auto;
     /* Maintain aspect ratio */
     margin-top: 10px;
@@ -126,7 +110,6 @@ footer {
     /* Move the logo upwards */
     vertical-align: middle;
     /* Align vertically with text */
-
 }
 
 #social-networks {
@@ -154,40 +137,78 @@ footer {
     color: #e26f11;
 }
 
-/* movies page */
-/* .carousel-inner img {
-    max-height: 100px; /* Adjust the height as needed */
-    /* object-fit: cover; /* Ensure the image covers the container */
-} */ */
 
-
-/* Slider styling
-.container .movie-list {
-    margin: 100px 0 0 200px;
-    width: 70%;
-    height: 450px;
+/*  home.html page */
+.hero-section {
+    background-image: url('path/to/your/static/image.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 60vh;
     display: flex;
+    align-items: center;
     justify-content: center;
-    gap: 10px;
+    text-align: center;
 }
 
-.contaier .movie-list img {
-    width: 10%;
-    height: 100%;
+.hero-section .search-bar {
+    width: 50%;
+}
+
+
+.card {
+    border: 1px solid rgba(226, 111, 17, 0.5);
+    border-radius: 10px;
+    box-shadow: 0 0.5px 0 1px rgba(255, 255, 255, 0.23) inset,
+      0 1px 0 0 rgba(255, 255, 255, 0.6) inset, 0 4px 16px rgba(0, 0, 0, 0.12);
+    z-index: 10;
+    padding: 10px;
+}
+
+.card-img-top {
+    max-height: 200px;
     object-fit: cover;
-    border: 2px solid #e26f11;
-    transition: all ease-in-out 0.5s;
+}
+.card-title {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.container .movie-list img:hover {
-    width: 25%;
+.card-body {
+    flex-grow: 1;
+    overflow: hidden; /* Hide any overflowing content within the card body */
 }
 
+.card-footer {
+    text-align: left;
+}
 
-/* Movie detail page styling */
+.btn.submit.btn-sm {
+    font-size: 0.875rem;
+    padding: 4px 8px;
+}
+
+/* movies_list.html page */
+/* carousel/slider styling */
+.carousel-inner img {
+    width: 100%;
+    height: auto;
+    max-height: 500px; /* Adjust this value as needed */
+    object-fit: cover;
+    margin: auto;
+}
+
+.carousel-caption {
+    color: #fff !important;
+   
+}
+
+/* movie_detail.html page */
 .movie-detail img {
     max-width: 100%;
     height: auto;
+    border-radius: 10px;
 }
 
 .movie-detail h1 {
@@ -199,7 +220,26 @@ footer {
 }
 
 
-/* community forum page */
+/* forum_post_list.html page */
+.forum-img-fluid {
+    width: 100%;
+    /* Make the image responsive */
+    max-width: 300px;
+    /* Set a maximum width for larger screens */
+    height: auto;
+    /* Maintain aspect ratio */
+    max-height: 300px;
+    /* Set a maximum height */
+    object-fit: cover;
+
+    /* max-width: 100%;
+    height: auto; */
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
 /* .card {
     width: 18rem; /* Adjust the width as needed *
     margin: 1rem;
@@ -277,7 +317,7 @@ strong {
     /* White text for active page */
 }
 
-/* forum post detail and comment page */
+/* forum_post_detail.html page */
 .list-group-item {
     margin-bottom: 5px;
     position: relative;
@@ -304,9 +344,11 @@ strong {
 
 .comment-actions {
     float: right;
-    margin-left: 10px;
+    margin-left: 20px;
     /* Optional: Add some space between the buttons */
 }
+
+
 
 .submit {
     background-color: #e26f11;
@@ -319,3 +361,35 @@ strong {
     border-color: #fff;
     color: #e26f11;
 }
+
+@media (max-width: 576px) {
+    .carousel-inner img {
+        max-height: 200px; /* Adjust this value for extra small screens */
+    }
+    
+    .card {
+        margin-bottom: 16px;
+    }
+
+    .table-responsive td {
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
+
+    .table-responsive td img {
+        margin: 0 auto;
+        
+    }
+
+    .table-responsive td img {
+        margin: 0 auto;
+        
+    }
+}
+@media (max-width: 768px) {
+    .carousel-inner img {
+        max-height: 300px; /* Adjust this value for smaller screens */
+    }
+}
+

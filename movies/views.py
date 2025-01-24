@@ -1,29 +1,26 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Movie
 from forum.forms import ForumPostForm
+from django.contrib import messages
 
-
-def movies_list(request):
+def movie_list(request):
     """
-    View to list movies based on search query.
+    View to list movies based on various queries.
     """
     search_query = request.GET.get('search', '')
-    movie_results = []
-
     if search_query:
-        movie_results = Movie.objects.filter(title__icontains=search_query)
+        movie_list = Movie.objects.filter(title__icontains=search_query)
+    else:
+        movie_list = Movie.objects.all()
 
-    top_popular_movies = Movie.objects.order_by('-popularity')[:10]
-    top_rated_movies = Movie.objects.order_by('-vote_average')[:10]
-
-    return render(request, 'movies/movies_list.html', {
-        'movie_results': movie_results,
+    context = {
+        'movie_list': movie_list,
         'search_query': search_query,
-        'top_popular_movies': top_popular_movies,
-        'top_rated_movies': top_rated_movies,
-    })
-  
+        'latest_movies': Movie.objects.order_by('-release_date')[:10],  
+        'top_rated_movies': Movie.objects.order_by('-vote_average')[:10],
+    }
 
+    return render(request, 'movies/movies_list.html', context)
 
 
 def movie_detail(request, tmdb_id):
@@ -34,17 +31,28 @@ def movie_detail(request, tmdb_id):
     movie = get_object_or_404(Movie, tmdb_id=tmdb_id)
     
     if request.method == 'POST' and request.user.is_authenticated:
-        post_form = ForumPostForm(request.POST)
+        post_form = ForumPostForm(data=request.POST)
         if post_form.is_valid():
+            # If the form is valid, save the post but don't commit to the database yet
             post = post_form.save(commit=False)
             post.movie = movie
             post.author = request.user
             post.save()
-            return redirect('forum_post_list')
+            messages.add_message(
+                request, messages.SUCCESS,
+                    'Your post has been submitted and awaiting approval.'
+            )
+            return redirect('forum_post_list')   
     else:
+        # If the request method is GET, create an empty post form if the user is authenticated
         post_form = ForumPostForm() if request.user.is_authenticated else None
 
-    return render(request, 'movies/movie_detail.html', {
-        'movie': movie,
-        'post_form': post_form,
-    })
+        return render(
+            request,
+            'movies/movies_list.html', 
+            {
+                'movie': movie,
+                'post_form': post_form,
+            
+            }
+)

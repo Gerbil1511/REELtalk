@@ -31,18 +31,6 @@ class ForumPost(models.Model):
     class Meta:
         ordering = ['-created_at']
 
-    def save(self, *args, **kwargs):
-        """
-        Override the save method to generate a unique slug if not already set.
-        """
-        if not self.slug:
-            self.slug = slugify(self.title)  # Generate slug from title
-            # Ensure the slug is unique
-            while ForumPost.objects.filter(slug=self.slug).exists():
-                # Append a random string to the slug if it already exists
-                self.slug = f"{slugify(self.title)}-{''.join(random.choices(string.ascii_lowercase + string.digits, k=6))}"
-        super().save(*args, **kwargs)  # Call the original save method
-
     def __str__(self):
         return f"Movie: {self.movie}  -  {self.title}  by  {self.author} on  {self.created_at}"
 

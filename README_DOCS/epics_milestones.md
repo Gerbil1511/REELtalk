@@ -4,7 +4,7 @@
 1. **Admin Management**: Implementing admin features to manage users and content.
 2. **User Authentication**: Implementing login, registration, and logout functionality.
 3. **Movie Search and Display**: Integrating TMDb API to search and display movies.
-4. **Forum Functionality**: Creating a forum for movie discussions with CRUD capabilities.
+4. **Forum Functionality**: Creating a forum for movie discussions using Posts and comments with CRUD capabilities.
 5. **Voting System**: Implementing upvote and downvote functionality for forum posts.
 6. **News Integration**: Integrating News API to display the latest movie news.
 7. **User Profile Management**: Implementing features for users to manage their profiles, including viewing, editing, and customizing their personal information and settings.
@@ -23,14 +23,15 @@
    - Integration with Django Allauth
 
 3. **Movie Search and Display Milestone**
-   - Fetch and display top 20 movies from TMDb API
+   - Display Latest Popular and Top Rated movies from Movie Model
    - Implement movie search functionality
    - Create movie detail page
 
 4. **Forum Functionality Milestone**
    - Create forum page to list all posts
-   - Implement CRUD for forum posts
-   - Add forum posts to movie detail pages
+   - Add comments to forum Posts
+   - Implement CRUD for forum posts/comments
+   - Add voting options to forum posts
 
 5. **Voting System Milestone**
    - Implement upvote and downvote functionality

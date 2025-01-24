@@ -5,13 +5,17 @@
 {% block title %}{{ movie.title }}{% endblock %}
 
 {% block content %}
-<a href="{% url 'movies_list' %}" class="btn submit my-3">
-    <i class="fa fa-arrow-left"></i> Back to Movies
-</a>
-<hr>
+
+
 <div class="container mt-4">
+    <a href="{% url 'forum_post_list' %}" class="btn submit my-1">
+        <i class="fa fa-arrow-left"></i> Back to Movies
+    </a>
+    <hr>
+    <h1 class="display-5 mt-1">Your Selected Movie Details</h1>
+    <hr>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 mb-5">
             <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="img-fluid" alt="{{ movie.title }}">
         </div>
         <div class="col-md-8">
@@ -21,22 +25,44 @@
             <p><strong>Popularity:</strong> {{ movie.popularity }}</p>
             <p><strong>Vote Count:</strong> {{ movie.vote_count }}</p>
             <p><strong>Vote Average:</strong> {{ movie.vote_average }}</p>
-            <hr>
-            {% if user.is_authenticated %}
-            <h4>Write a Post/Review:</h4>
-            <form method="post">
-                {% csrf_token %}
-                {{ post_form|crispy }}
-                <button type="submit" class="btn submit">Submit</button>
-            </form>
-            {% else %}
-            <br>
-            <br>
-            <div class="text-center">
-            <h4>Why not <a class="link" href="{{ signup_url }}">sign up</a> or <a class="link" href="{{ login_url }}">login</a> to write a post/review and join the conversations happening now!</h4>
-            {% endif %}
-            <div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12 mt-3">
+                {% if user.is_authenticated %}
+                <h4 class="mt-2">Post a Comment</h4>
+                    <form id="ForumPostForm" class=" mb-5" method="post">
+                        {% csrf_token %}
+                        {{ comment_form|crispy }}
+                    <button type="submit" id="submitButton" class="btn submit btn-primary">Submit</button>
+                </form>
+                {% else %}
+                <div class="text-center">
+                    <h4>Why not <a class="link" href="{{ signup_url }}">sign up</a> or <a class="link" href="{{ login_url }}">login</a> to write a post/review and join the conversations happening now!</h4>
+                <div>
+                {% endif %}
+            </div>
         </div>
     </div>
 </div>
-{% endblock %}
+        
+        <!-- Deletion Confirmation Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete this comment? This cannot be undone.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <a href="#" id="deleteConfirm" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        {% endblock %}

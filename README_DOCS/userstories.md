@@ -8,7 +8,7 @@
     - Admins have access to all necessary management tools from the admin dashboard. 
   - **Tasks**: 
     - Set up the Django admin interface. 
-    - Ensure all relevant models (users, forum posts, movies etc.) are registered with the admin. 
+    - Ensure all relevant models (users, forum posts, comments, movies) are registered with the admin. 
     - Customize the dashboard layout for ease of use.
    
 - **User Story 2:** As an admin, I want to view, edit, and delete users via the Django admin dashboard so that I can manage user accounts efficiently.
@@ -22,15 +22,15 @@
     - Register the User model with the Django admin. 
     - Customize the admin interface for user management.
     
-- **User Story 3:** : As an admin, I want to moderate forum posts using the Django admin dashboard so that I can ensure content quality and adherence to community guidelines. 
+- **User Story 3:** : As an admin, I want to moderate forum posts and comments using the Django admin dashboard so that I can ensure content quality and adherence to community guidelines. 
   - **Acceptance Criteria**: 
-    - Admins can view all forum posts in the Django admin dashboard. 
-    - Admins can edit forum posts from the admin dashboard. 
-    - Admins can delete forum posts from the admin dashboard. 
+    - Admins can view all forum posts and comments in the Django admin dashboard. 
+    - Admins can edit forum posts and comments from the admin dashboard. 
+    - Admins can delete forum posts and comments from the admin dashboard. 
   - **Tasks**: 
-    - Register the ForumPost model with the Django admin. 
-    - Customize the admin interface for forum post management. 
-    - Implement filtering and search functionality in the admin dashboard for forum posts.
+    - Register the ForumPost and PostComment model with the Django admin. 
+    - Customize the admin interface for forum post/comment management. 
+    - Implement filtering and search functionality in the admin dashboard for forum posts/comments.
 
 - **User Story 4:** As an admin, I want to manage movies through the Django admin interface so that I can easily add and delete movie records. 
   - **Acceptance Criteria**: 
@@ -57,59 +57,87 @@
     - Test the registration, login and logout processes to ensure users can sign up, login and logout. i.e., ensure that the registration and login options are available to all site visitors and that the logout option is visible to logged in users only.
 
 
-## Movie Search and Display
-- **User Story 6:** As a user, I want to search for movies so that I can find information about my favorite movies. Once I select a movie I can also see the forum posts associated with it as well as movie details.
+## User Profile Management
+-- **User Story 6:** As a Logged-in user, I want to view and edit my profile so that I can keep my personal information up to date and customise my profile settings.
   - **Acceptance Criteria:**
-    - Users can see the top 20 movies on the home page.
+    - The user can access their profile page by clicking on the "Profile" or "My Account" link/button.
+    - The profile page displays the user's name, email, bio, profile picture, and a list of created posts/comments.
+    - The user can access the edit profile form by clicking on the "Edit Profile" button.
+    - The edit profile form allows the user to update their name, email, bio, and profile picture.
+    - The user can submit the form to save changes.
+    - The application displays a success message if the profile is updated successfully.
+    - The application displays an error message if the profile update fails.
+    - The user can access the delete profile option by clicking on the "Delete Profile" button.
+    - The application asks for confirmation before deleting the profile.
+    - The user confirms the deletion.
+    - The application deletes the user's profile and all associated data.
+    - The application displays a success message if the profile is deleted successfully.
+    - The user is redirected to the home page after successful profile deletion.
+  - **Tasks:**
+    - Add a link/button in the navigation menu to access the profile page.
+    - Create a profile page template view to fetch and display the user's profile information.
+    - Implement a view to handle the submissions to update/delete the user's profile.
+    - Design an edit profile form template using 'Crispy Forms' and add validation for the form fields.
+    - Display success/error messages based on the form submission result.
+    - Create a delete profile confirmation dialog.
+    - Implement a view to handle profile deletion.
+    - Ensure that all associated data (posts/comments) are deleted.
+    - Display success/error messages based on the deletion result.
+    - Redirect the user to the home page after successful deletion.
+
+
+## Movie Search and Display
+- **User Story 7:** As a user, I want to search for movies so that I can find information about my favorite movies. 
+  - **Acceptance Criteria:**
+    - Users can see the latest popular and top rated movies on the Movie page.
     - Users can search for specific movies.
     - Users can view detailed information about a movie.
-    - Users can see all forum posts relating to the particular movie
-  - **Tasks:**
-    - Integrate TMDb API.
-    - Create a view to display the top 20 movies.
+    - **Tasks:**
+    - Utilise the TMDb API to add records to the Movie model database.
+    - Create a view to display the latest popular and top rated movies.
     - Implement search functionality.
-    - Design movie detail page that displays movie information and lists all forum posts related to it.
-    - Fetch movie details from TMDb API.
-
+    - Design movie detail page that displays movie information.
+   
 
 ## Forum Functionality
-- **User Story 7:** As a user, I want to create, edit, and delete my forum posts so that I can share my thoughts and engage with the community.
+- **User Story 8:** As a Logged-in user, I want to create, edit, and delete my forum posts and comments so that I can share my thoughts and engage with the community.
   - **Acceptance Criteria:**
-    - Users can view all forum posts.
-    - Users can create new forum posts.
-    - Users can edit their own posts.
-    - Users can delete their own posts.
+    - Users can view all forum posts/comments.
+    - Logged-in Users can create new forum posts/comments.
+    - Logged-in Users can edit their own posts/comments.
+    - Logged-in Users can delete their own posts/comments.
   - **Tasks:**
-    - Set up database models for forum posts.
-    - Create views for listing, creating, editing, and deleting posts.
-    - Design forms for creating and editing posts using 'Crispy Forms'.
-    - Implement permissions to allow users to edit/delete their own posts only.
+    - Set up ForumPost and PostComment models for forum posts and comments.
+    - Create views for listing, creating, editing, and deleting posts/comments.
+    - Design forms for creating and editing posts/comments using 'Crispy Forms'.
+    - Implement permissions to allow users to edit/delete their own posts/comments only.
+    _ Display the number of comments on the forum post in the forum post list page.
 
 
 ## Voting System
-- **User Story 8:** As a user, I want to upvote or downvote posts so that I can express my opinion on forum posts.
+- **User Story 9:** As a Logged-in user, I want to upvote or downvote posts so that I can express my opinion on forum posts.
   - **Acceptance Criteria**
-    - Users can upvote a post.
-    - Users can downvote a post.
-    - Users can vote only once per post.
+    - Logged-in Users can upvote a post.
+    - Logged-in Users can downvote a post.
+    - Logged-in Users can vote only once per post.
   - **Tasks**
-    - Add vote fields to the forum post model.
+    - Add vote fields to the ForumPost model.
     - Create views and buttons for upvoting and downvoting.
-    - Implement logic to ensure users can vote only once per post.
+    - Implement logic to ensure logged-in users can vote only once per post.
     - Display the number of upvotes and downvotes in the templates.
 
 
 ## Success and Error Messages
-- **User Story9:** As a user, I want to see success and error messages so that I know the result of my actions.
+- **User Story 10:** As a user, I want to see success and error messages so that I know the result of my actions.
   - **Acceptance Criteria:**
-    - Success and error messages are displayed for actions such as creating, editing, and deleting posts.
+    - Success and error messages are displayed for user actions.
   - **Tasks:** 
     - Implement Django's messaging framework.
-    - Add success and error messages to views for creating, editing, deleting posts and for upvoting/downvoting.
+    - Add success and error messages to views for creating, editing, and deleting posts/comments, editing/deleting user profile or sign up/login/logout.s and for upvoting/downvoting.
     - Display messages in the templates.
 
-## News Integration
-- **User Story 10:** As a user, I want to view the latest entertainment/movie news so that I can stay informed about current events in the entertainment industry.
+## Latest Entertainment/Movie News
+- **User Story 11:** As a user, I want to view the latest entertainment/movie news so that I can stay informed about current events in the entertainment industry.
   - **Acceptance Criteria:**
     - Users can see the latest entertainment/movie news from various worldwide sources.
   - **Tasks:**
@@ -117,19 +145,6 @@
     - Create a view to display the latest news.
     - Design a latest news section on the home page with pagination.
 
-## User Profile Management
-- **User Story 11:** As a user, I want to view and edit my profile so that I can keep my personal information up to date and customize my profile settings. 
-  - **Acceptance Criteria:** 
-    - Users can view their profile information. 
-    - Users can edit their profile information. 
-    - Users can save changes to their profile. 
-    - Customized profile settings are saved and reflected immediately. 
-  - **Tasks:** 
-    - Create a view for displaying user profile information. 
-    - Design and implement forms for editing profile information. 
-    - Ensure form validation and error handling. 
-    - Implement backend logic to update user profile information in the database. 
-    - Test the profile view and edit functionality to ensure it works correctly.
 
 ## Testing and Deployment Framework
 - **User Story 12:** As a developer, I want to set up a comprehensive testing environment and deploy the application to a production environment so that I can ensure the application works correctly at various levels and is accessible to users.

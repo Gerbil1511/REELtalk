@@ -19,18 +19,21 @@
 
 <div class="container">
 <!-- Latest News Section -->
-div class="latest-news">
+<div class="latest-news">
     <h1 class="display-5">Latest Entertainment News</h1>
     <div class="row">
         {% for article in page_obj %}
-        <div class="col-md-4 mb-4">
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
             <div class="card h-100">
                 {% if article.urlToImage %}
-                <img src="{{ article.urlToImage }}" class="card-img-top" alt="{{ article.title }}" style="max-height: 200px; object-fit: cover;">
-                {% endif %}
+                    <img src="{{ article.urlToImage }}" class="card-img-top" alt="{{ article.title }}" style="max-height: 200px; object-fit: cover;">
+                    {% else %}
+                    <img src="{% static 'images/no_image.webp' %}" class="card-img-top" alt="No Image Available" style="max-height: 200px; object-fit: cover;">
+                    {% endif %}
                 <div class="card-body">
-                    <h5 class="card-title">{{ article.title|truncatewords:6 }}</h5>
-                    <p class="card-text">{{ article.description|truncatewords:20 }}</p>
+                    <h5 class="card-title">{{ article.title }}</h5>
+                </div>
+                <div class="card-footer">
                     <a href="{{ article.url }}" class="btn submit" target="_blank">Read More</a>
                 </div>
             </div>
@@ -38,7 +41,7 @@ div class="latest-news">
         {% endfor %}
     </div>
     <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
+        <ul class="pagination justify-content-center mb-5">
             {% if page_obj.has_previous %}
             <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo; Previous</a></li>
             {% endif %}
