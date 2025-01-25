@@ -5,7 +5,7 @@
 {% block title %}Community Post Detail{% endblock %}
 
 {% block content %}
-<div class="container  mt-4">
+<div class="container mt-4">
     <a href="{% url 'forum_post_list' %}" class="btn submit my-1">
         <i class="fa fa-arrow-left"></i> Back to Community Forum
     </a>
@@ -21,6 +21,7 @@
             <h1>{{ forum_post.title }}</h1>
             <p class="mt-2">Posted by: <strong>{{ forum_post.author }}</strong></p>
             <p>{{ forum_post.content }}</p>
+            <p><strong>{{ forum_post.created_at|timesince }}</strong> ago</p>
             <p><strong>{{ forum_post.upvotes.count }} <i class="fa fa-thumbs-up"></i></strong>
                 | <strong> {{ forum_post.downvotes.count }} <i class="fa fa-thumbs-down"></i></strong>
             </p>
@@ -30,8 +31,9 @@
                     <h4>Comments on this post:</h4>
                     {% for comment in comments %}
                     <div class="list-group-item" id="comment{{ comment.id }}">
-                        <strong>{{ comment.author.username }}</strong>:
+                        <p><strong>{{ comment.author.username }} </strong>said:</p>
                         {{ comment.comment }}
+                        <p><strong>{{ comment.created_at|timesince }}</strong> ago</p>
                         {% if comment.author == user %}
                         <div class="comment-actions">
                             <button type="button" class="btn btn-edit btn-sm btn-warning mx-2" data-bs-toggle="collapse"
@@ -42,10 +44,10 @@
                                 Delete
                             </button>
                         </div>
-                        <hr>
+                        
                         <div class="collapse" id="editComment{{ comment.id }}">
                             <form method="post" class="form"
-                                action="{% url 'forum_post_detail' movie_slug=forum_post.movie.slug forum_post_slug=forum_post.slug %}">
+                                action="{% url 'edit_comment' comment.id %}"> 
                                 {% csrf_token %}
                                 <input type="hidden" name="comment_id" value="{{ comment.id }}">
                                 {{ comment_form.as_p }}
@@ -73,29 +75,31 @@
                 {% endif %}
             </div>
         </div>
+    </div>
+</div>
 
-        <!-- Deletion Confirmation Modal -->
-        {% for comment in comments %}
-        <div class="modal fade" id="deleteModal{{ comment.id }}" tabindex="-1"
-            aria-labelledby="deleteModalLabel{{ comment.id }}" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModalLabel{{ comment.id }}">Confirm Deletion</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Are you sure you want to delete this comment? This cannot be undone.
-                    </div>
-                    <div class="modal-footer">
-                        <form method="post" action="{% url 'delete_comment' comment.id %}">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-danger" id="confirmDeleteButton">Delete</button>
-                        </form>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
+<!-- Deletion Confirmation Modal -->
+{% for comment in comments %}
+<div class="modal fade" id="deleteModal{{ comment.id }}" tabindex="-1"
+    aria-labelledby="deleteModalLabel{{ comment.id }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel{{ comment.id }}">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this comment? This cannot be undone.
+            </div>
+            <div class="modal-footer">
+                <form method="post" action="{% url 'delete_comment' comment.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger" id="confirmDeleteButton">Delete</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             </div>
         </div>
-        {% endfor %}
-        {% endblock %}
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

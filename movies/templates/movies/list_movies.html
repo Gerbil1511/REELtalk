@@ -9,17 +9,17 @@
 <div class="container mt-4">
     <h1 class="display-5">Movies</h1>
     <hr>
-    <div class="container mt-4 mb-5">
+    <div class="container my-5">
         <!-- Search bar for Movie model -->
         <h2>Search for Movies</h2>
-        <form method="get">
-            <div class="input-group mb-3">
-                <input type="text" name="search" class="form-control" placeholder="Search for movies...">
+        <form method="get" action="{% url 'list_movies' %}">
+            <div class="input-group mb-5">
+                <input type="text" name="search" class="form-control" placeholder="Search for movie titles..." aria-label="search">
                 <button class="btn submit" type="submit">Search</button>
             </div>
         </form>
+        <hr>
     </div>
-
     <!-- Movie Search Results -->
     {% if movie_list %}
     <div class="row mb-4">
@@ -34,73 +34,80 @@
                     </div>
                     <div class="search-card-footer">
                     <a href="{% url 'movie_detail' movie.tmdb_id %}" class="btn submit">More Details</a>
+                    </div>
                 </div>
             </div>
-        </div>
         {% endfor %}
-    </div>
+        </div>
     {% else %}
     <p>No movies found matching your search criteria.</p>
     {% endif %}
-</div>    
+    </div> 
 
-<h1 class="display-5 my-5">Top Popular Movies</h1>
-<hr>
-<div class="container" style="max-width: 500px;">
-<div id="carouselLatestMovies" class="carousel carousel-dark slide">
-    <div class="carousel-indicators">
-        {% for movie in latest_movies %}
-        <button type="button" data-bs-target="#carouselLatestMovies" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}" aria-current="true" aria-label="Slide {{ forloop.counter }}"></button>
-        {% endfor %}
-    </div>
-    <div class="carousel-inner">
-        {% for movie in latest_movies %}
-        <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="10000">
-            <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="d-block w-100" alt="{{ movie.title }}">
-            <div class="carousel-caption d-none d-md-block">
-                <a href="{% url 'movie_detail' movie.tmdb_id %}" class="btn submit">More Details</a>
+    <div class="container my-5" style="max-width: 500px;">
+        <h1 class="display-5 text-center my-5">Top Popular Movies</h1>
+        <div id="carouselLatestMovies" class="carousel carousel-dark slide">
+            <div class="carousel-indicators">
+                {% for movie in latest_movies %}
+                <button type="button" data-bs-target="#carouselLatestMovies" data-bs-slide-to="{{ forloop.counter0 }}"
+                    class="{% if forloop.first %}active{% endif %}" aria-current="true"
+                    aria-label="Slide {{ forloop.counter }}"></button>
+                {% endfor %}
             </div>
-        </div>
-        {% endfor %}
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselLatestMovies" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselLatestMovies" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
-</div>
-
-<h1 class="display-5 my-5">All Time Top Rated Movies</h1>
-<hr>
-<div class="container" style="max-width: 500px;">
-<div id="carouselTopRatedMovies" class="carousel carousel-dark slide">
-    <div class="carousel-indicators">
-        {% for movie in top_rated_movies %}
-        <button type="button" data-bs-target="#carouselTopRatedMovies" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}" aria-current="true" aria-label="Slide {{ forloop.counter }}"></button>
-        {% endfor %}
-    </div>
-    <div class="carousel-inner">
-        {% for movie in top_rated_movies %}
-        <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="10000">
-            <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="d-block w-100" alt="{{ movie.title }}">
-            <div class="carousel-caption d-none d-md-block">
-                <a href="{% url 'movie_detail' movie.tmdb_id %}" class="btn submit">More Details</a>
+            <div class="carousel-inner">
+                {% for movie in latest_movies %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="10000">
+                    <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="d-block w-100"
+                        alt="{{ movie.title }}">
+                    <div class="carousel-caption d-none d-md-block">
+                        <a href="{% url 'movie_detail' movie.tmdb_id %}" class="btn submit">More Details</a>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselLatestMovies"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselLatestMovies"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-        {% endfor %}
+    <div class="container my-5" style="max-width: 500px;">
+        <h1 class="display-5 text-center my-5">All Time Top Rated Movies</h1>
+        <div id="carouselTopRatedMovies" class="carousel carousel-dark slide">
+            <div class="carousel-indicators">
+                {% for movie in top_rated_movies %}
+                <button type="button" data-bs-target="#carouselTopRatedMovies"
+                    data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}"
+                    aria-current="true" aria-label="Slide {{ forloop.counter }}"></button>
+                {% endfor %}
+            </div>
+            <div class="carousel-inner">
+                {% for movie in top_rated_movies %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="10000">
+                    <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="d-block w-100"
+                        alt="{{ movie.title }}">
+                    <div class="carousel-caption d-none d-md-block">
+                        <a href="{% url 'movie_detail' movie.tmdb_id %}" class="btn submit">More Details</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselTopRatedMovies"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselTopRatedMovies"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselTopRatedMovies" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselTopRatedMovies" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
 </div>
 {% endblock %}

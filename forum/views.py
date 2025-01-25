@@ -9,6 +9,7 @@ from movies.models import Movie
 from .forms import PostCommentForm, ForumPostForm
 import requests
 
+
 class ForumPostList(generic.ListView):
     """
     View to list all forum posts. Allows searching by movie title.
@@ -20,21 +21,30 @@ class ForumPostList(generic.ListView):
     def get_queryset(self):
         search_query = self.request.GET.get('search', '')
         if search_query:
-            forum_post_list = ForumPost.objects.filter(title__icontains=search_query)
+            forum_post_list = ForumPost.objects.filter(title__icontains=search_query).annotate(comment_count=Count('comments'))
         else:
-            forum_post_list = ForumPost.objects.filter(status=1)
+            forum_post_list = ForumPost.objects.filter(status=1).annotate(comment_count=Count('comments'))
         return forum_post_list
+    
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['post_form'] = ForumPostForm()
+    #     return context
+
 
 def forum_post_detail(request, movie_slug, forum_post_slug):
     """
     View to display a single forum post and handle comment creation and editing.
     """
     movie = get_object_or_404(Movie, slug=movie_slug)
-    forum_post = get_object_or_404(ForumPost, slug=forum_post_slug, movie=movie)
-    
+    forum_post = get_object_or_404(
+        ForumPost, slug=forum_post_slug, movie=movie)
+
     if request.user.is_authenticated:
-        comments = forum_post.comments.filter(Q(status=1) | Q(author=request.user)).order_by('-created_at')
-        comment_count = forum_post.comments.filter(Q(status=1) | Q(author=request.user)).count()
+        comments = forum_post.comments.filter(Q(status=1) | Q(
+            author=request.user)).order_by('-created_at')
+        comment_count = forum_post.comments.filter(
+            Q(status=1) | Q(author=request.user)).count()
     else:
         comments = forum_post.comments.filter(status=1).order_by('-created_at')
         comment_count = forum_post.comments.filter(status=1).count()
@@ -66,19 +76,23 @@ def forum_post_detail(request, movie_slug, forum_post_slug):
         'comments': comments,
         'comment_count': comment_count,
         'comment_form': comment_form,
-    })
+        })
+
 
 def comment_detail(request, movie_slug, forum_post_slug, comment_id):
     """
     View to display a single comment on a forum post.
     """
     movie = get_object_or_404(Movie, slug=movie_slug)
-    forum_post = get_object_or_404(ForumPost, slug=forum_post_slug, movie=movie)
-    comment = get_object_or_404(PostComment, id=comment_id, forum_post=forum_post, status=1)
+    forum_post = get_object_or_404(
+        ForumPost, slug=forum_post_slug, movie=movie)
+    comment = get_object_or_404(
+        PostComment, id=comment_id, forum_post=forum_post, status=1)
 
     return render(request, 'forum/comment_detail.html', {
         'comment': comment,
     })
+
 
 @login_required
 def create_comment(request, movie_slug, forum_post_slug):
@@ -86,8 +100,9 @@ def create_comment(request, movie_slug, forum_post_slug):
     View to create a new comment. Only accessible to logged-in users.
     """
     movie = get_object_or_404(Movie, slug=movie_slug)
-    forum_post = get_object_or_404(ForumPost, slug=forum_post_slug, movie=movie)
-    
+    forum_post = get_object_or_404(
+        ForumPost, slug=forum_post_slug, movie=movie)
+
     if request.method == 'POST':
         comment_form = PostCommentForm(data=request.POST)
         if comment_form.is_valid():
@@ -95,7 +110,8 @@ def create_comment(request, movie_slug, forum_post_slug):
             comment.forum_post = forum_post
             comment.author = request.user
             comment.save()
-            messages.success(request, 'Your comment has been added and is awaiting approval.')
+            messages.success(
+                request, 'Your comment has been added and is awaiting approval.')
             return redirect('forum_post_detail', movie_slug=movie_slug, forum_post_slug=forum_post_slug)
     else:
         comment_form = PostCommentForm()
@@ -105,12 +121,14 @@ def create_comment(request, movie_slug, forum_post_slug):
         'forum_post': forum_post,
     })
 
+
 @login_required
 def edit_comment(request, comment_id):
     """
     View to edit an existing comment. Only accessible to the comment's author.
     """
-    comment = get_object_or_404(PostComment, id=comment_id, author=request.user)
+    comment = get_object_or_404(
+        PostComment, id=comment_id, author=request.user)
     if request.method == 'POST':
         comment_form = PostCommentForm(data=request.POST, instance=comment)
         if comment_form.is_valid():
@@ -125,15 +143,17 @@ def edit_comment(request, comment_id):
         'comment': comment,
     })
 
+
 @login_required
 def delete_comment(request, comment_id):
     """
     View to delete an existing comment. Only accessible to the comment's author.
     """
-    comment = get_object_or_404(PostComment, id=comment_id, author=request.user)
+    comment = get_object_or_404(
+        PostComment, id=comment_id, author=request.user)
     forum_post = comment.forum_post
     movie = forum_post.movie
-    
+
     if request.method == 'POST':
         comment.delete()
         messages.success(request, 'Your comment has been deleted.')
@@ -143,25 +163,32 @@ def delete_comment(request, comment_id):
         'comment': comment,
     })
 
+
 @login_required
-def upvote_post(request, slug):
+def upvote_post(request, post_id):
     """
     View to handle upvoting a forum post. Only accessible to logged-in users.
     """
-    post = get_object_or_404(ForumPost, id=id)  # Get the post or return 404 if not found
+    post = get_object_or_404(
+        ForumPost, id=post_id)  # Get the post or return 404 if not found
     post.upvotes.add(request.user)  # Add the current user to the upvotes
-    post.downvotes.remove(request.user)  # Remove the current user from the downvotes
+    # Remove the current user from the downvotes
+    post.downvotes.remove(request.user)
     return redirect('forum_post_list')  # Redirect to the forum post list
 
+
 @login_required
-def downvote_post(request, slug):
+def downvote_post(request, post_id):
     """
     View to handle downvoting a forum post. Only accessible to logged-in users.
     """
-    post = get_object_or_404(ForumPost, id=id)  # Get the post or return 404 if not found
+    post = get_object_or_404(
+        ForumPost, id=post_id)  # Get the post or return 404 if not found
     post.downvotes.add(request.user)  # Add the current user to the downvotes
-    post.upvotes.remove(request.user)  # Remove the current user from the upvotes
+    # Remove the current user from the upvotes
+    post.upvotes.remove(request.user)
     return redirect('forum_post_list')  # Redirect to the forum post list
+
 
 @login_required
 def create_post(request, movie_slug):
@@ -186,6 +213,7 @@ def create_post(request, movie_slug):
         'movie': movie,
     })
 
+
 @login_required
 def edit_post(request, post_id):
     """
@@ -201,10 +229,11 @@ def edit_post(request, post_id):
     else:
         post_form = ForumPostForm(instance=post)
 
-    return render(request, 'forum/edit_post.html', {
+    return render(request, 'forum/forum_post_list.html', {
         'post_form': post_form,
         'post': post,
     })
+
 
 @login_required
 def delete_post(request, post_id):

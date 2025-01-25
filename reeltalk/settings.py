@@ -32,7 +32,7 @@ TMDB_API_KEY = os.environ.get('TMDB_API_KEY')
 NEWS_API_KEY = os.environ.get('NEWS_API_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
                 '127.0.0.1',

@@ -7,7 +7,7 @@
 {% block content %}
 
 
-<div class="container mt-4">
+<!-- <div class="container mt-4">
     <a href="{% url 'list_movies' %}" class="btn submit my-1">
         <i class="fa fa-arrow-left"></i> Back to Movies
     </a>
@@ -18,48 +18,65 @@
         <div class="col-md-4 mb-5">
             <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="img-fluid" alt="{{ movie.title }}">
         </div>
-        <div class="col-md-8">
-            <h1>{{ movie.title }}</h1>
+            <div class="col-md-8 my-3">
+                <h1><strong>{{ movie.title }}</strong></h1>
+                <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
+                <p><strong>Overview:</strong> {{ movie.overview }}</p>
+                <p><strong>Popularity:</strong> {{ movie.popularity }}</p>
+                <p><strong>Vote Count:</strong> {{ movie.vote_count }}</p>
+                <p><strong>Vote Average:</strong> {{ movie.vote_average }}</p>
+                        <hr>
+            <div class="row">
+                <div class="col-md-12 mt-3">
+                    {% if not user.is_authenticated %}
+                    <p class="text-center">If you would like to write a review or your thoughts about this movie then <a class="link" href="{% url 'account_signup' %}">sign up</a> or <a class="link" href="{% url 'account_login' %}">login here</a></p>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                    <h3 class="my-2"><strong>Why not write a review or your thoughts about this movie and start a discussion?:</strong></h3>
+                    <form id="ForumPostForm" class="mt-3" method="post">
+                        {% csrf_token %}
+                        {{ post_form|crispy }}
+                    <button type="submit" id="submitButton" class="btn submit mb-5">Submit</button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<div class="container mt-4">
+    <div class="row">
+        <div class=" mb-5">
+            <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="img-fluid" alt="{{ movie.title }}">
+        </div>
+        <div class="col-md-12">
+            <h1><strong>{{ movie.title }}</strong></h1>
             <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
             <p><strong>Overview:</strong> {{ movie.overview }}</p>
             <p><strong>Popularity:</strong> {{ movie.popularity }}</p>
             <p><strong>Vote Count:</strong> {{ movie.vote_count }}</p>
             <p><strong>Vote Average:</strong> {{ movie.vote_average }}</p>
-        <hr>
-        <div class="row">
-            <div class="col-md-12 mt-3">
-                {% if user.is_authenticated %}
-                <h4 class="mt-2">Post a Comment</h4>
-                    <form id="ForumPostForm" class="mb-5" method="post">
-                        {% csrf_token %}
-                        {{ post_form|crispy }}
-                    <button type="submit" id="submitButton" class="btn submit">Submit</button>
-                </form>
-                <hr>
-                <h2>Your Posts</h2>
-    {% for post in user_posts %}
-    <div class="card mb-3">
-        <div class="card-body">
-            <h5 class="card-title">{{ post.title }}</h5>
-            <p class="card-text">{{ post.content }}</p>
-            <a href="{% url 'forum_post_detail' post.movie.slug post.slug %}" class="btn submit">View Post</a>
-            <a href="{% url 'edit_post' post.id %}" class="btn btn-primary">Edit</a>
-            <a href="{% url 'delete_post' post.id %}" class="btn btn-danger">Delete</a>
+            <hr>
         </div>
     </div>
-    {% endfor %}
-                {% else %}
-                <div class="text-center">
-                    <h4>Why not <a class="link" href="{% url 'account_signup' %}">sign up</a> or <a class="link" href="{% url 'account_login' %}">login</a> to write a post/review and join the conversations happening now!</h4>
-                <div>
-                {% endif %}
-            </div>
+    <div class="row">
+        <div class="col-md-12 mt-3">
+            {% if not user.is_authenticated %}
+            <p class="text-center">If you would like to write a review or your thoughts about this movie then <a class="link" href="{% url 'account_signup' %}">sign up</a> or <a class="link" href="{% url 'account_login' %}">login here</a></p>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <h3 class="my-2"><strong>Why not write a review or your thoughts about this movie and start a discussion?:</strong></h3>
+            <form id="ForumPostForm" class="mt-3" method="post">
+                {% csrf_token %}
+                {{ post_form|crispy }}
+                <button type="submit" id="submitButton" class="btn btn-primary mb-5">Submit</button>
+            </form>
+            {% endif %}
         </div>
     </div>
-</div>
-        
+</div>       
         <!-- Deletion Confirmation Modal -->
-        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <!-- <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -76,6 +93,6 @@
                 </div>
             </div>
         </div>
-        
+         -->
         
         {% endblock %}
