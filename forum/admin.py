@@ -6,7 +6,7 @@ from .models import ForumPost, PostComment
 class ForumPostAdmin(admin.ModelAdmin):
     list_display = ('title',  'author', 'movie', 'approved_post', 'status', 'created_at', 'slug')
     search_fields = ('title', 'author', 'movie', 'created_at')
-    list_filter = ('author', 'movie', 'approved_post', 'status', 'created_at')
+    list_filter = ('author', 'movie', 'created_at', 'approved_post', 'status',)
 
     def total_upvotes(self, obj):
         return obj.upvotes.count()
@@ -19,8 +19,8 @@ class ForumPostAdmin(admin.ModelAdmin):
 
 @admin.register(PostComment)
 class PostCommentAdmin(admin.ModelAdmin):
-    list_display = ('forum_post', 'author', 'comment', 'approved_comment', 'created_at')
+    list_display = ('forum_post', 'author', 'comment', 'approved_comment', 'status', 'created_at')
     search_fields = ('forum_post', 'author', 'comment', 'created_at', )
-    list_filter = ('author', 'created_at', 'approved_comment')  # Add fields to filter by
+    list_filter = ('author', 'created_at', 'approved_comment', 'status',)  # Add fields to filter by
 
 

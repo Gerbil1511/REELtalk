@@ -15,7 +15,7 @@ class ForumPost(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     upvotes = models.ManyToManyField(User, related_name='forum_post_upvotes', blank=True)
     downvotes = models.ManyToManyField(User, related_name='forum_post_downvotes', blank=True)
-    status = models.IntegerField(choices=STATUS, default=1)
+    status = models.IntegerField(choices=STATUS, default=0)
     approved_post = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
@@ -42,6 +42,7 @@ class PostComment(models.Model):
     comment = models.TextField(default='')
     created_at = models.DateTimeField(auto_now_add=True)
     approved_comment = models.BooleanField(default=False)
+    status = models.IntegerField(choices=STATUS, default=0)
 
     class Meta:
         ordering = ['created_at']
