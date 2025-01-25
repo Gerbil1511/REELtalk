@@ -218,35 +218,60 @@ footer {
     padding: 4px 8px;
 }
 
-/* movies_list.html page */
-/* carousel/slider styling */
+/* Movie lists/search page */
 .carousel-inner img {
     width: 100%;
-    height: auto;
-    max-height: 500px; /* Adjust this value as needed */
-    object-fit: cover;
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Ensure the full image is visible */
     margin: auto;
 }
 
 .carousel-caption {
     background-color: rgba(0, 0, 0, 0.8);
-    /* Semi-transparent black background */
     border-radius: 10px;
-    /* padding: 10px; */
     bottom: 40%;
     left: 0;
     right: 0;
     margin-bottom: 20px;
     text-align: center;
     color: #fff !important;
+    width: 100%; /* Adjust width as needed */
+    max-width: 800px; /* Adjust max-width as needed */
 }
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    filter: invert(1); /* Change to white */
-    z-index: 1; /* Ensure it is on top of the caption */
+.carousel-indicators button {
+    background-color: #ffffff !important; 
+    z-index: 1;
 }
 
-/* movie_detail.html page */
+.carousel-indicators .active {
+    background-color: #e26f11 !important; 
+    z-index: 1;
+}
+/* Custom styles for carousel control icons */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: transparent; /* Ensure background is transparent */
+    background-size: 100%, 100%;
+    background-repeat: no-repeat;
+    z-index: 2; /* Ensure it is on top of the caption */
+}
+
+.carousel-control-prev-icon {
+    background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="%23ffffff" viewBox="0 0 16 16"%3E%3Cpath d="M11.354 1.354a.5.5 0 0 1 0 .707L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/%3E%3C/svg%3E');
+}
+
+.carousel-control-next-icon {
+    background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="%23ffffff" viewBox="0 0 16 16"%3E%3Cpath d="M4.646 1.354a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/%3E%3C/svg%3E');
+}
+/* Adjust the height of the carousel for medium and large devices */
+@media (min-width: 768px) {
+    .carousel-inner img, {
+        height: 500px; /* Adjust this value as needed */
+    }
+  
+}
+
+/* Movie detail page */
 .movie-detail img {
     max-width: 100%;
     height: auto;
@@ -402,12 +427,9 @@ strong {
     color: #e26f11;
 }
 
+/* media queries */
 
 @media (max-width: 576px) {
-    .carousel-inner img {
-        max-height: 200px; /* Adjust this value for extra small screens */
-    }
-    
     .card {
         margin-bottom: 16px;
     }
@@ -428,9 +450,10 @@ strong {
         
     }
 }
-@media (max-width: 768px) {
-    .carousel-inner img {
-        max-height: 300px; /* Adjust this value for smaller screens */
-    }
-}
 
+@media (min-width: 768px) {
+    .carousel-inner img, {
+        height: 500px; /* Adjust this value as needed */
+    }
+  
+}
