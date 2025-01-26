@@ -5,7 +5,11 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h1 class="display-5">Movies</h1>
+    <a href="{% url 'forum_post_list' %}" class="btn submit my-1">
+        Looking for Community chat? Click here <i class="fa fa-arrow-right"></i>
+   </a>
+   <hr>
+    <h1 class="display-5"><strong>Movies</strong></h1>
     <hr>
     <div class="container my-5">
         <!-- Search bar for Movie model -->
@@ -42,78 +46,12 @@
     {% endif %}
 </div>
 
-<!-- <div class="container mb-5" id="carouselContainer">
-        <h1 class="display-5 text-center my-5">Top Popular Movies</h1>
-        <div id="carouselLatestMovies" class="carousel carousel-dark slide">
-            <div class="carousel-indicators">
-                {% for movie in latest_movies %}
-                <button type="button" data-bs-target="#carouselLatestMovies" data-bs-slide-to="{{ forloop.counter0 }}"
-                    class="{% if forloop.first %}active{% endif %}" aria-current="true"
-                    aria-label="Slide {{ forloop.counter }}"></button>
-                {% endfor %}
-            </div>
-            <div class="carousel-inner">
-                {% for movie in latest_movies %}
-                <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="1000">
-                    <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="d-block w-100"
-                        alt="{{ movie.title }}">
-                    <div class="carousel-caption d-none d-md-block">
-                        <a href="{% url 'movie_detail' movie.tmdb_id %}" class="btn submit">More Details</a>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
-        </div>
-    </div>
-    <div class="container my-5" style=""> <!-- style="max-width: 500px;" up to 800px -->
-<!-- <h1 class="display-5 text-center my-5">All Time Top Rated Movies</h1>
-        <div id="carouselTopRatedMovies" class="carousel carousel-dark slide">
-            <div class="carousel-indicators">
-                {% for movie in top_rated_movies %}
-                <button type="button" data-bs-target="#carouselTopRatedMovies"
-                    data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}"
-                    aria-current="true" aria-label="Slide {{ forloop.counter }}"></button>
-                {% endfor %}
-            </div>
-            <div class="carousel-inner">
-                {% for movie in top_rated_movies %}
-                <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="10000">
-                    <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="d-block w-100"
-                        alt="{{ movie.title }}">
-                    <div class="carousel-caption d-none d-md-block">
-                        <a href="{% url 'movie_detail' movie.tmdb_id %}" class="btn submit">More Details</a>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselTopRatedMovies"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselTopRatedMovies"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </div>
-</div>
- -->
 
 <div class="container mb-5">
     <div class="row">
         <!-- Carousel for Latest Movies -->
         <div class="col-md-6 mb-5">
-            <h1 class="display-5 text-center my-5">Latest Released Movies</h1>
+            <h1 class="display-5 text-center my-5"><strong>Latest Releases</strong></h1>
             <div id="carouselLatestMovies" class="carousel carousel-dark slide">
                 <div class="carousel-indicators">
                     {% for movie in latest_movies %}
@@ -127,7 +65,7 @@
                     <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="10000">
                         <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="d-block w-100"
                             alt="{{ movie.title }}">
-                        <div class="carousel-caption d-none d-md-block">
+                        <div class="carousel-caption">
                             <a href="{% url 'movie_detail' movie.tmdb_id %}" class="btn submit">More Details</a>
                         </div>
                     </div>
@@ -148,7 +86,7 @@
 
         <!-- Carousel for Top Rated Movies -->
         <div class="col-md-6 mb-5">
-            <h1 class="display-5 text-center my-5">All Time Top Rated Movies</h1>
+            <h1 class="display-5 text-center my-5"><strong>Top Rated</strong></h1>
             <div id="carouselTopRatedMovies" class="carousel carousel-dark slide">
                 <div class="carousel-indicators">
                     {% for movie in top_rated_movies %}
@@ -162,7 +100,7 @@
                     <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="10000">
                         <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="d-block w-100"
                             alt="{{ movie.title }}">
-                        <div class="carousel-caption d-none d-md-block">
+                        <div class="carousel-caption">
                             <a href="{% url 'movie_detail' movie.tmdb_id %}" class="btn submit">More Details</a>
                         </div>
                     </div>

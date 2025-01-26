@@ -11,7 +11,7 @@
             <div class="hero-text">
                 <h1>Welcome to ReelTalk</h1>
                 <p>Your ultimate movie discussion platform</p>
-                <a href="{% url 'list_movies' %}" class="btn submit">Explore Movies</a>
+                <a href="{% url 'list_movies' %}" class="btn submit">Explore Movies</a> <a href="{% url 'forum_post_list' %}" class="btn submit">Join the chat</a>
             </div>
         </div>
     </div>
@@ -20,7 +20,7 @@
 <div class="container news mt-5">       
 <!-- Latest News Section -->
 <div class="latest-news">
-    <h1 class="display-5">Latest Entertainment News</h1>
+    <h1 class="display-5 mb-4"><strong>Latest Entertainment News</strong></h1>
     <div class="row">
         {% for article in page_obj %}
         <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
