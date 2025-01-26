@@ -1143,34 +1143,23 @@ W3C CSS Validator identified no warnings or errors.
 ### FONTS
 <br>
 
-- Font readability -https://fonts.google.com/knowledge/readability_and_accessibility/how_type_influences_readability
-- Some example font pairings, such as Prompt, Cabin, Raleway, etc - https://www.figma.com/google-fonts
+
 <br>
 
 ### COLOURS
+
+Influenced by using applications such as GitPod regularlt I believe i have been subliminally influenced to select the colurs that I did. Apps like Netflic and Letterbod'd use the dark theme to great effect and therefore as an homage to that i opted for the following colour scheme
 <br>
 
-- https://colorhunt.co/palettes/kids
-- https://coolors.co/palettes/popular/kids
-- https://colorkit.co/background-maker/1982c4-8ac926/
-- https://www.freepik.com/author/jcomp
-<br>
 
 ### IMAGERY
+
+Hero image - https://wallpapercave.com/w/wp10615935 by [Tramon1](https://wallpapercave.com/u/tramon1)
+REELtalk logo and Favicon - [Luke Beck](https://lukebeck.substack.com))
+No poster image - [Image by Gerd Altmann/geralt from Pixabay](https://pixabay.com/users/geralt-9301/) 
+
 <br>
 
-- Interactive periodic table - https://artsexperiments.withgoogle.com/periodic-table/
-- 118-element-infographics-RSC https://www.rsc.org/iypt/iypt-elements/?utm_source=rsc-periodic-table-site&utm_medium=referral&utm_content=iypt-banner
-- https://www.istockphoto.com/ images of atoms - Todd Helmenstine. Todd Helmenstine is the physicist/mathematician who creates most of the images found on sciencenotes.org. The graphics are created in Adobe Illustrator, Fireworks and Photoshop.
-- Question mark cards attribution line “Designed by Freepik” www.freepik.com
-- Periodic-table-KS3.jpg – www.pintrest.com
-- Image compressor - https://www.freeconvert.com/image-compressor
-- https://www.vecteezy.com Vectors by Vecteezy
-- https://image.online-convert.com/convert/word-to-svg converts graphics produced on MS Word into svg
-- http://www.cloudinary.com
-- https://inkscape.org/release/inkscape-1.3.2/
-- https://www.freepik.com/free-vector/science-lab-flat-style_7431195.htm#fromView=keyword&page=1&position=52&uuid=fcd0cba6-7fb7-486b-ace7-8e7999b3cc9f
-- https://www.freepik.com/author/brgfx
 
 
 ### RESPONSIVE DEVICE IMAGES
