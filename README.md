@@ -18,7 +18,6 @@ ReelTalk is a movie-centric full-stack platform that combines the excitement of 
 - [Geraldine Edwards](https://www.github.com/Gerbil1511)
 
 
-
 ## Table Of Contents
 
 * [REELTalk](#ReelTalk)
@@ -26,42 +25,179 @@ ReelTalk is a movie-centric full-stack platform that combines the excitement of 
   - [Authors](#author)
   - [Table of Contents](#table-of-contents)
   - [Project Ouline](#project-outline)
-* [Project Planning](#project-planning)
-  - [UX Design](#ux-design)
-  - [User Stories](#user-stories)
-  - [Fonts](#fonts)
-  - [Images](#images)
-  - [Colours](#colours)
-  - [Wireframes](#wireframes)
-* [Features](#features)
-  - 
-  - 
-  - 
-  - [Buttons](#buttons)
-  - [Footer](#footer)
-  - [Responsive Design](#responsive-design)
-  - [Future Features](#future-features)
+* [UX Design Planes](#ux-design-planes)
+  - [Strategy](#strategy)
+  - [Scope](#scope)
+    - [Features](#features)
+      - [Navigation & Landing Page](#navigation--landing-page)
+      - [Movies page](#movies-page)
+      - [Community Forum Page](#community-forum-page)
+      - [Input handling](#input-handling)
+      - [Buttons](#buttons)
+      - [User management](#user-management)
+      - [Future features](#future-features)
+  - [Structure](#structure)
+    - [Project Flow](#project-flow)
+    - [Database Design - ERD](#database-design---erd)
+  - [Skeleton - Wireframes](#skeleton---wireframes)
+  - [Surface Design](#surface-design)
+    - [Typography](#typography)
+    - [Colour Scheme](#colour-scheme)
+    - [Imagery](#imagery)
+    - [Responsive & Accessible Design](#responsive--accessible-design)
 * [Agile Methodology](#agile-methodology)
+  - [GitHub Project Board](#github-project-board)
+  - [GitHub Issues](#github-issues)
+  - [MoSCoW](#moscow)
 * [Tech](#tech)
   - [Languages](#languages)
   - [Frameworks and Libraries](#libraries-and-frameworks)
   - [Software and Tools](#software-and-tools)
-* [AI Tools](#ai-tools)
+* [Testing](#testing)
+  - [Bug Log](#bug-log)
+  - [Testing](#testing)
+    - [Unit Tests](#unit-tests)
+     - Full test suite testing - Generate unit tests for all methods in the task model.
+     - [Test Skeleton](#test-skeleton) - Create an empty test skeleton for the Task model without the asserts.
+     - ghost text - rapidly create tests by just accepting the ghost text suggestions.
+     - edge case testing - prompt like “Generate edge case tests for invalid inputs in the Task model”,
+  - [Validation](#validation)
+* [Deployment](#deployment)
+* [AI Reflection](#ai-reflection)
   - [Development Process](#development-process)
   - [Generating Code](#generating-code)
   - [Debugging Code](#debugging-code)
+  - [Optimizing Code](#optimizing-code)
+  - [Testing Code](#testing-code)
   - [Reflections on AI](#reflections-on-ai)
-* [Deployment](#deployment)
-* [Testing](#testing)
-  - [Bug Log](#bug-log)
-  - [Validation](#validation)
 * [Credits and Acknowledgements](#credits-and-acknowledgements)
   - [Credits](#credits)
   - [Acknowledgements](#acknowledgements)
 
+
+## Project Plan 
+This section outlines the project plan, including UX design and user stories. The plan follows Agile methodology to ensure effective planning and design of the application.
+
+
+
+[Back to top](#table-of-contents)
+
+## Strategy
+The strategy of the Movie app is to provide a platform where users can easily browse a database of movies, access relevant information, and engage with a community of fellow movie enthusiasts. The app aims to offer a space where users can share their opinions, comment on discussions, and stay updated with the latest entertainment news. The primary goal is to create an engaging and informative experience that encourages interaction while ensuring ease of use for all users.
+
+**Add specific strategy details here**
+
+[Back to top](#table-of-contents)
+
+## Scope
+### Features
+#### Navigation & Landing Page
+Design a user-friendly and responsive landing page with intuitive navigation, ensuring no WCAG errors and a seamless user experience.
+
+#### Movies Page
+Integrate TMDb API to display top movies and allow users to search for specific movies.
+
+#### Community Forum Page
+Create a forum for users to discuss movies, implementing CRUD functionality and secure access controls.
+
+#### Input handling
+Implement forms for creating and editing models with validation and user-friendly design.
+
+#### Buttons
+Design accessible and responsive buttons for various user interactions throughout the application.
+
+#### User management
+Implement role-based login and registration, with accurate reflection of login states and proper access controls.
+
+#### Future Features
+Outline potential future enhancements and features to be added to the application.
+
+**Add specific project details here**
+
+[Back to top](#table-of-contents)
+
+## Structure
+### Project Flow
+Detail the workflow of the project from start to finish, including major milestones and deliverables.
+
+### Database Design - ERD
+Present the Entity-Relationship Diagram (ERD) for the database design, highlighting tables and relationships.
+
+## Skeleton
+### Wireframes
+Share the wireframes created during the initial design phase to visualize the layout and structure.
+
+### Surface Design
+#### Typography
+Describe the typography choices made for the application to ensure readability and aesthetic appeal.
+
+#### Colour Scheme
+Explain the chosen colour scheme and its significance in enhancing the user experience.
+
+#### Imagery
+Discuss the imagery used in the application and its role in supporting the content.
+
+#### Responsive & Accessible Design
+Ensure the design adapts to different screen sizes and meets accessibility guidelines.
+
+**Add specific project details here**
+
+[Back to top](#table-of-contents)
+
+## Agile Methodology
+### GitHub Project Board
+Used GitHub Project Board to plan and track tasks and progress.
+
+### GitHub Issues
+Documented and managed issues through GitHub, linking them to project goals and deliverables.
+
+### MoSCoW
+Applied the MoSCoW method to prioritize features and tasks.
+
+**Add specific project details here**
+
+[Back to top](#table-of-contents)
+
+## Testing & Validation
+Implemented comprehensive testing procedures, including unit, integration, and end-to-end tests to ensure functionality, usability, and performance.
+
+**Add specific testing documentation here**
+
+[Back to top](#table-of-contents)
+
+## Technologies & Tools
+List the technologies and tools used in the development of the project, including Django, Git, and any AI tools.
+
+**Add specific technologies and tools here**
+
+[Back to top](#table-of-contents)
+
+## AI Reflection
+Reflect on the role of AI tools in the development process, including code creation, debugging, optimization, and testing.
+
+**Add AI reflection details here**
+
+[Back to top](#table-of-contents)
+
+## Deployment
+Document the deployment process, including steps to deploy the application to a cloud-based platform, ensuring proper functionality and security.
+
+**Add specific deployment instructions here**
+
+[Back to top](#table-of-contents)
+
+## Credits and Acknowledgements
+Acknowledge the contributions of team members, mentors, and any external resources used during the project.
+
+**Add credits and acknowledgements here**
+
+[Back to top](#table-of-contents)
+
+
 <p align="right"><a href="#REELtalk">Back To Top</a></p>
 
 ## PROJECT OUTLINE
+
 Welcome to 'ReelTalk' an interactive, Full-Stack Web application designed for movie enthusiasts.
 
 The idea for this project stems from being one of a family of passionate movie lovers and from the desire to create a dynamic, interactive platform where users can explore and discuss their favorite films (far better than having arguments with family members over differing opinions—no more debates about which Star Wars movie is the best!). 
@@ -70,7 +206,7 @@ Inspired by platforms like Letterboxd, the forum aspect of the application allow
 
 Leveraging Django's robust framework, this project aims to deliver a comprehensive application that encapsulates CRUD (Create, Read, Update, Delete) functionality and custom models.
 
-The application integrates with The Movie Database (TMDb) to provide users with an extensive database of movie information. Users can search for movies, view detailed information, and stay updated with the latest movie news. This feature not only enhances the user experience but also fosters a deeper connection with the world of cinema. It also has a dedicated section for the latest movie news keeps users informed about industry updates, new releases, and film events. By aggregating news from various sources, the application ensures that users have access to the most relevant and up-to-date information.
+The application provides users with a variety of movie information. Users can search for movies, view detailed information, and stay updated with the latest movie chat. This feature not only enhances the user experience but also fosters a deeper connection with the world of cinema. It also integrates a News API and has a dedicated section for the latest entertainment news that keeps users informed about industry updates. By aggregating news from various sources, the application ensures that users have access to the most relevant and up-to-date information.
 
 By combining these elements, the project aims to offer a rich and engaging experience for users, highlighting the importance of both individual exploration and community interaction. Through this application, users can not only discover new movies but also share their insights and connect with like-minded individuals.
 
@@ -427,36 +563,9 @@ W3C CSS Validator identified no warnings or errors.
 
 ### Acknowledgements
 
- A huge thank you to Mark, John and Dillon at Code Institute for their support and help, we truly appreciate it!
- And to our family and friends who tested our deployments and gave great feeback, thank you so much!
+ A huge thank you to Dillon, Mark, Roo, and John at Code Institute for their support and help, I truly appreciate it!
+ Special thanks go out to all my cohort on the Bootcamp as, you are all amazing and talented and supportive and I definitely am grateful i met you all!
+ And to my family and friends who tested my deployments and gave great feeback, love you all, thank you so much!
 
 
 <p align="right"><a href="#REELtalk">Back To Top</a></p>
-
-## Gitpod Reminders
-
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
-
-`python3 -m http.server`
-
-A blue button should appear to click: _Make Public_,
-
-Another blue button should appear to click: _Open Browser_.
-
-To run a backend Python file, type `python3 app.py` if your Python file is named `app.py`, of course.
-
-A blue button should appear to click: _Make Public_,
-
-Another blue button should appear to click: _Open Browser_.
-
-By Default, Gitpod gives you superuser security privileges. Therefore, you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
-
-To log into the Heroku toolbelt CLI:
-
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
-
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you, so do not share it. If you accidentally make it public, you can create a new one with _Regenerate API Key_.
