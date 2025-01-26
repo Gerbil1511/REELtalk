@@ -283,3 +283,17 @@ Update the PostComment Model:
 
 Use the ID of the valid ForumPost instance as the default value for the forum_post field. or 
 forum_post = models.ForeignKey(ForumPost, on_delete=models.CASCADE, related_name='comments', null=True, blank=True)  # Temporarily make it nullable
+
+
+# the search bar issue
+The issue seems to be with the variable name used in the for loop. In your view, you are passing movie_list to the template, but in the template, you are using movie_results in the for loop. This mismatch is causing the template to not render the movie items correctly.
+
+Let's correct the variable name in the template to match the one used in the view.
+
+Corrected Template Code
+movies/templates/movies/list_movies.html
+
+Summary
+By ensuring that the variable name used in the for loop matches the one passed from the view (movie_list), the template should now correctly render the movie items. This should resolve the issue where only the <div class=" mb-4"></div> line is visible in the browser.
+
+

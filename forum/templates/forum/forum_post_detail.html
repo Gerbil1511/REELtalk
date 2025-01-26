@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load custom_filters %}
 {% load static %}
 
 {% block title %}{{ movie.title }}{% endblock %}
 
 {% block content %}
-
 <div class="container mt-4">
     <a href="{% url 'forum_post_list' %}" class="btn submit my-1">
         <i class="fa fa-arrow-left"></i> Back to Community Forum
@@ -15,72 +15,74 @@
     <hr>
     <div class="row">
         <div class="col-md-4 my-2">
-            <img src="https://image.tmdb.org/t/p/w500{{ forum_post.movie.poster_path }}" class="img-fluid" alt="{{ movie.title }}">
+            <img src="https://image.tmdb.org/t/p/w500{{ forum_post.movie.poster_path }}" class="img-fluid"
+                alt="{{ movie.title }}">
         </div>
         <div class="col-md-8 my-2 post-details">
-            <h5>Posted by: <strong>{{ forum_post.author.username }}</strong> - <small></small>{{ forum_post.created_at|timesince  }} ago</small></h5>
+            <h5>Posted by: <strong>{{ forum_post.author.username }}</strong> - <small>{{ forum_post.created_at|timesince_hours }}</small></h5>
             <hr>
             <h2>{{ forum_post.title }}</h2>
             <p>{{ forum_post.content }}</p>
         </div>
     </div>
     <hr>
-   
- 
-            <h3>Previous comments on this post:</h3>
-            <div class="table-responsive">
-                <table class="table table-dark table-striped">
-                    <tbody>
-                        {% for comment in comments %}
-                        <tr>
-                            <td class="col-2">
-                                <strong>{{ comment.author.username }}</strong>
-                            </td>
-                            <td class="col-8">
-                                {{ comment.comment }}
-                            </td>
-                            <td class="col-2 text-center">
-                                <small><strong>{{ comment.created_at|timesince }}</strong></small>
-                            </td>
-                            <td>{% if comment.author == user %}
-                                <div class="comment-actions">
-                                    <button type="button" class="btn btn-edit btn-sm btn-warning my-2 mx-2" data-bs-toggle="collapse"
-                                        data-bs-target="#editComment{{ comment.id }}" aria-expanded="false"
-                                        aria-controls="editComment{{ comment.id }}">Edit</button>
-                                    <button type="button" class="btn btn-delete btn-sm btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#deleteModal{{ comment.id }}">
-                                        Delete
-                                    </button>
-                                </div>
-                                
-                                <div class="collapse" id="editComment{{ comment.id }}">
-                                    <form method="post" class="form"
-                                        action="{% url 'edit_comment' comment.id %}"> 
-                                        {% csrf_token %}
-                                        <input type="hidden" name="comment_id" value="{{ comment.id }}">
-                                        {{ comment_form.as_p }}
-                                        <button type="submit" class="btn btn-success ">Save</button>
-                                    </form>
-                                </div>
-                                {% endif %}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                <div class="container comment-form mb-5">
-                    {% if user.is_authenticated %}
-                    <h4 class="mt-2">Write your comments here:</h4>
-                    <form id="CommentForm" method="post">
-                        {% csrf_token %}
-                        {{ comment_form.as_p }}
-                        <button type="submit" id="submitButton" class="btn submit">Submit</button>
-                    </form>
-                    {% else %}
-                    <p><a href="{% url 'account_login' %}">Log in</a> to add a comment.</p>
-                    {% endif %}
-                </div> 
-            </div>
-        </div>
+
+    <h3>Previous comments on this post:</h3>
+    <div class="table-responsive">
+        <table class="table table-dark table-striped">
+            <tbody>
+                {% for comment in comments %}
+                <tr>
+                    <td class="col-2">
+                        <strong>{{ comment.author.username }}</strong>
+                    </td>
+                    <td class="col-8">
+                        {{ comment.comment }}
+                    </td>
+                    <td class="col-2 text-center">
+                        <small><strong>{{ comment.created_at|timesince_hours }}</strong></small>
+                    </td>
+                    <td>
+                        {% if comment.author == user %}
+                        <div class="comment-actions">
+                            <button type="button" class="btn btn-edit btn-sm btn-warning my-2 mx-2"
+                                data-bs-toggle="collapse" data-bs-target="#editComment{{ comment.id }}"
+                                aria-expanded="false" aria-controls="editComment{{ comment.id }}">Edit</button>
+                            <button type="button" class="btn btn-delete btn-sm btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#deleteModal{{ comment.id }}">
+                                Delete
+                            </button>
+                        </div>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr class="collapse" id="editComment{{ comment.id }}">
+                    <td colspan="4">
+                        {% if comment.author == user %}
+                        <form method="post" class="form" action="{% url 'edit_comment' comment.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                            {{ comment_form.as_p }}
+                            <button type="submit" id="submitButton" class="btn submit">Save</button>
+                        </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="container comment-form mb-5">
+        {% if user.is_authenticated %}
+        <h4 class="mt-2">Write your comments here:</h4>
+        <form id="CommentForm" method="post">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            <button type="submit" id="submitButton" class="btn submit">Submit</button>
+        </form>
+        {% else %}
+        <p><a href="{% url 'account_login' %}">Log in</a> to add a comment.</p>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

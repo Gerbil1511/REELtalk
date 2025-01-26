@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Movie
+from forum.models import ForumPost
 from forum.forms import ForumPostForm
 from django.contrib import messages
 
@@ -9,11 +10,10 @@ def list_movies(request):
     View to list movies based on various queries.
     """
     search_query = request.GET.get('search', '')
+    movie_list = None
     if search_query:  # If search query has data and is not empty, filter the movies based on the query
         movie_list = Movie.objects.filter(title__icontains=search_query)  #icontains is case-insensitive
-    else:
-        movie_list = Movie.objects.all()  # If no search query, return all movies
-
+    
     context = {
         'movie_list': movie_list,
         'search_query': search_query,
@@ -29,7 +29,7 @@ def movie_detail(request, tmdb_id):
     Allows logged-in users to submit a post/review.
     """
     movie = get_object_or_404(Movie, tmdb_id=tmdb_id)
-    # user_posts = ForumPost.objects.filter(movie=movie, author=request.user)
+    user_posts = ForumPost.objects.filter(movie=movie, author=request.user) if request.user.is_authenticated else None
     
     if request.method == 'POST' and request.user.is_authenticated:
         post_form = ForumPostForm(request.POST)
@@ -46,7 +46,7 @@ def movie_detail(request, tmdb_id):
     return render(request, 'movies/movie_detail.html', {
         'movie': movie,
         'post_form': post_form,
-        # 'user_posts': user_posts,
+        'user_posts': user_posts,
     })
 
 @login_required

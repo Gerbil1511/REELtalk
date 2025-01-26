@@ -8,11 +8,13 @@
 {% url 'account_logout' as logout_url %}
 
 <!DOCTYPE html>
-<html class="h-100" lang="en">
+<html lang="en" class="h-100">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="REELtalk, your ultimate movie discussion platform.">
     <title>{% block title %}ReelTalk{% endblock %}</title>
 
     <!-- Bootstrap CSS -->
@@ -36,7 +38,7 @@
             <a class="navbar-brand" href="{% url 'home' %}">
                 <img class="logo_nav" src="{% static 'images/reeltalk_logo.png' %}" alt="REELtalk Logo">
             </a>
-            <button id="toggle" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            <button id="toggleBtn" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span id="toggle" class="navbar-toggler-icon" ></span>
             </button>

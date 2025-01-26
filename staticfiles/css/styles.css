@@ -1,10 +1,11 @@
 @font-face {
     font-family: 'Inclusive Sans';
     src: url('../fonts/inclusive-sans-regular.woff2') format('woff2'),
-         url('../fonts/inclusive-sans-regular.woff') format('woff');
+        url('../fonts/inclusive-sans-regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-    font-display: swap; /* Ensures text is user-visible while webfonts are loading */
+    font-display: swap;
+    /* Ensures text is user-visible while webfonts are loading */
 }
 
 /* base.html styles */
@@ -26,7 +27,7 @@ body {
     margin-left: 50px;
 }
 
-#toggle {
+#toggleBtn {
     color: #fff !important;
 }
 
@@ -50,8 +51,10 @@ body {
 }
 
 .nav-item.active .nav-link {
-    border: 2px solid #e26f11; /* Orange border color */
-    padding-bottom: 5px; /* Adjust padding to make space for the border */
+    border: 2px solid #e26f11;
+    /* Orange border color */
+    padding-bottom: 5px;
+    /* Adjust padding to make space for the border */
 }
 
 .nav-item i {
@@ -98,8 +101,9 @@ main {
     /* font-size: clamp(0.8rem, 2vw, 1.5rem); */
     border: 1px solid rgba(226, 111, 17, 0.5);
     border-radius: 10px;
+
     box-shadow: 0 0.5px 0 1px rgba(255, 255, 255, 0.23) inset,
-      0 1px 0 0 rgba(255, 255, 255, 0.6) inset, 0 4px 16px rgba(0, 0, 0, 0.12);
+        0 1px 0 0 rgba(255, 255, 255, 0.6) inset, 0 4px 16px rgba(0, 0, 0, 0.12);
     z-index: 10;
 }
 
@@ -128,6 +132,7 @@ footer {
     text-align: end;
     padding: 20px 0;
     display: flex;
+
     justify-content: space-evenly;
     list-style-type: none;
 }
@@ -156,19 +161,29 @@ footer {
     border-radius: 10px;
     background-size: cover;
     background-position: center;
-    height: 60vh; /*or 400px; */
+    height: 60vh;
+    /*or 400px; */
     display: flex;
+
     align-items: center;
+
     justify-content: center;
     text-align: center;
     color: #fff;
+
     filter: brightness(0.8) contrast(1.2) saturate(1.5) hue-rotate(30deg);
     overflow: hidden;
 }
 
 .hero-text:hover {
-    transform: scale(1.08); /* Zoom-in effect */
-    transition: transform 0.8s ease; 
+
+    transform: scale(1.08);
+    /* Zoom-in effect */
+
+    transition: -webkit-transform 0.8s ease;
+
+    transition: transform 0.8s ease;
+    transition: transform 0.8s ease, -webkit-transform 0.8s ease;
     overflow: hidden;
 }
 
@@ -178,40 +193,52 @@ footer {
     border-radius: 10px;
 }
 
-.news{
+.news {
     width: 80%;
     margin: 0 auto;
     padding: 20px;
     border-radius: 10px;
 }
+
 .card {
     border: 1px solid rgba(226, 111, 17, 0.5);
     border-radius: 10px;
+
     box-shadow: 0 0.5px 0 1px rgba(255, 255, 255, 0.23) inset,
-    0 1px 0 0 rgba(255, 255, 255, 0.6) inset, 0 4px 16px rgba(0, 0, 0, 0.12);
+        0 1px 0 0 rgba(255, 255, 255, 0.6) inset, 0 4px 16px rgba(0, 0, 0, 0.12);
     z-index: 10;
     padding: 10px;
 }
+
 .card:hover {
-    transform: scale(1.08); /* Zoom-in effect */
-    transition: transform 0.8s ease; 
+
+    transform: scale(1.08);
+    /* Zoom-in effect */
+
+    transition: transform 0.8s ease;
+
     overflow: hidden;
 }
 
 .card-img-top {
     max-height: 200px;
+
     object-fit: cover;
 }
+
 .card-title {
     font-size: 1rem;
     margin-bottom: 8px;
     overflow: hidden;
+
     text-overflow: ellipsis;
 }
 
 .card-body {
+
     flex-grow: 1;
-    overflow: hidden; /* Hide any overflowing content within the card body */
+    overflow: hidden;
+    /* Hide any overflowing content within the card body */
 }
 
 .card-footer {
@@ -227,8 +254,10 @@ footer {
 /* Ensure carousel-inner images show at full height and are responsive */
 .carousel-inner img {
     width: 100%;
-    height: 100%; 
-    object-fit: contain; /* Ensure the full image is visible */
+    height: 100%;
+
+    object-fit: contain;
+    /* Ensure the full image is visible */
     margin: auto;
 }
 
@@ -241,25 +270,31 @@ footer {
     margin-bottom: 20px;
     text-align: center;
     color: #fff !important;
-    width: 100%; /* Adjust width as needed */
-    max-width: 800px; /* Adjust max-width as needed */
+    width: 100%;
+    /* Adjust width as needed */
+    max-width: 800px;
+    /* Adjust max-width as needed */
 }
+
 .carousel-indicators button {
-    background-color: #ffffff !important; 
+    background-color: #ffffff !important;
     z-index: 1;
 }
 
 .carousel-indicators .active {
-    background-color: #e26f11 !important; 
+    background-color: #e26f11 !important;
     z-index: 1;
 }
+
 /* Custom styles for carousel control icons */
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-    background-color: transparent; /* Ensure background is transparent */
+    background-color: transparent;
+    /* Ensure background is transparent */
     background-size: 100%, 100%;
     background-repeat: no-repeat;
-    z-index: 2; /* Ensure it is on top of the caption */
+    z-index: 2;
+    /* Ensure it is on top of the caption */
 }
 
 .carousel-control-prev-icon {
@@ -289,41 +324,57 @@ footer {
 /* forum_post_list.html page */
 #forum-posts-table img.movie-poster {
     width: 100%;
-    max-width: 100px; /* Set a maximum width for the poster image */
-    height: auto; /* Maintain aspect ratio */
-    object-fit: cover; /* Ensure the image covers the container */
+    max-width: 100px;
+    /* Set a maximum width for the poster image */
+    height: auto;
+    /* Maintain aspect ratio */
+
+    object-fit: cover;
+    /* Ensure the image covers the container */
 }
 
 .table-responsive {
     overflow-x: auto;
 }
+
 .table-dark {
-    background-color: #343a40; /* Dark background */
-    color: #ffffff; /* White text */
+    background-color: #343a40;
+    /* Dark background */
+    color: #ffffff;
+    /* White text */
 }
 
 .table-dark tbody tr:nth-of-type(odd) {
-    background-color: #454d55; /* Zebra pattern for odd rows */
+    background-color: #454d55;
+    /* Zebra pattern for odd rows */
 }
 
 .table-dark tbody tr:nth-of-type(even) {
-    background-color: #343a40; /* Zebra pattern for even rows */
+    background-color: #343a40;
+    /* Zebra pattern for even rows */
 }
 
-.table-dark td, .table-dark th {
-    border-color: #454d55; /* Border color */
+.table-dark td,
+.table-dark th {
+    border-color: #454d55;
+    /* Border color */
 }
 
 .table-dark .comment-count {
-    color: #fff; /* White comment count */
+    color: #fff;
+    /* White comment count */
 }
 
-.table-dark .upvote, .table-dark .downvote {
-    color: #fff; /* Orange upvote and downvote */
+.table-dark .upvote,
+.table-dark .downvote {
+    color: #fff;
+    /* Orange upvote and downvote */
 }
 
-.table-dark .upvote:hover, .table-dark .downvote:hover {
-    color: #e26f11; /* Lighter orange on hover */
+.table-dark .upvote:hover,
+.table-dark .downvote:hover {
+    color: #e26f11;
+    /* Lighter orange on hover */
 }
 
 #forum-posts-table td {
@@ -348,7 +399,7 @@ footer {
 
 .pagination .page-item .page-link:hover {
     color: #000;
-    /* White text on hover */
+    /* Black text on hover */
 }
 
 .pagination .page-item.active .page-link {
@@ -367,7 +418,9 @@ footer {
 }
 
 .poster-comment {
+
     display: flex;
+
     align-items: center;
 }
 
@@ -380,6 +433,7 @@ footer {
     /* Maintain aspect ratio */
     max-height: 300px;
     /* Set a maximum height */
+
     object-fit: cover;
     /* Ensure the image covers the container */
 
@@ -408,20 +462,26 @@ footer {
     .card {
         margin-bottom: 16px;
     }
+}
 
 @media (min-width: 768px) {
+
     /* Adjust the height of the carousel for medium and large devices */
-    .carousel-inner img, {
-        height: 500px; /* Adjust this value as needed */
+    .carousel-inner img {
+        height: 500px;
+        /* Adjust this value as needed */
     }
+
     /* Custom styles for forum post list table */
     #forum-posts-table td {
         display: block;
         width: 100%;
         text-align: left;
     }
+
     #forum-posts-table td img.movie-poster {
-        max-width: 100%; /* Full width on small devices */
+        max-width: 100%;
+        /* Full width on small devices */
     }
 }
 
@@ -441,6 +501,8 @@ footer {
 /* .movie-poster {
     width: 50%;
     /* Resize the poster to 25% of its original size */
-    /* margin-right: 10px; */
-    /* Add some space to the right of the image */
-} */
+/* margin-right: 10px; */
+/* Add some space to the right of the image */
+}
+
+*/
