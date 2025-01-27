@@ -301,25 +301,8 @@ footer {
     background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="%23ffffff" viewBox="0 0 16 16"%3E%3Cpath d="M4.646 1.354a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/%3E%3C/svg%3E');
 }
 
-/* Movie detail page */
-.movie-detail img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-}
-
-.movie-detail h1 {
-    margin-top: 0;
-}
-
-.movie-detail p {
-    margin-bottom: 10px;
-}
-
 
 /* forum_post_list.html page */
-
-
 .table-responsive {
     overflow-x: auto;
 }

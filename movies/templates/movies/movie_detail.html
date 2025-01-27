@@ -55,20 +55,14 @@
                     <a href="{% url 'delete_post' post.id %}" class="btn btn-danger">Delete</a>
                 </div>
             </div>
-            <!-- <div id="editForm-{{ post.id }}" class="edit-form" style="display: none;">
-                <form method="post" action="{% url 'edit_post' post.id %}">
-                    {% csrf_token %}
-                    {{ post_form|crispy }}
-                    <button type="submit" class="btn btn-primary">Update</button>
-                </form>
-            </div> -->
             {% endfor %}
             {% else %}
+            <div>
             <p>You have not posted any reviews yet.</p>
             {% endif %}
-            {% else %}
-            <p><a href="{% url 'account_login' %}">Log in</a> to post a review.</p>
+            {% else %}         
             {% endif %}
+            </div>
         </div>
     </div>
 </div>
