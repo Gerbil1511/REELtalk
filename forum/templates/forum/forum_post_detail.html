@@ -33,29 +33,29 @@
         <h3>Previous comments on this post:</h3>
         <div>
             <div>
+                {% if comments %}
                 {% for comment in comments %}
                 <div class="my-1">
                     <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center post-border w-100 p-2">
-                        <div class="col-1 ">
-                            <strong>{{ comment.author.username }}</strong>
-                        </div>
                         <div class="col-2 p-2">
+                            <p><strong>{{ comment.author.username }} </strong>said:</p>
+                            <hr>
+                            <p><small><strong>{{ comment.created_at|timesince_hours }}</strong></small></p>
+                        </div>
+                        <div class="col-7 p-2">
                             {{ comment.comment }}
                         </div>
-                        <div class="col-2 p-2">
-                            <small><strong>{{ comment.created_at|timesince_hours }}</strong></small>
-                        </div>
-                        <div class="col-2 p-2">
+                        <div class="col-2 p-2 text-center">
                             <button type="button" class="btn btn-edit btn-sm btn-warning my-2 mx-2"
                                 data-bs-toggle="collapse" data-bs-target="#editComment{{ comment.id }}"
                                 aria-expanded="false" aria-controls="editComment{{ comment.id }}">Edit</button>
-                                <a href="{% url 'delete_comment' comment.id %}" class="btn btn-danger btn-sm">Delete</a>
+                            <a href="{% url 'delete_comment' comment.id %}" class="btn btn-danger btn-sm">Delete</a>
                         </div>
                     </div>
                 </div>
                 <div class="collapse mt-2" id="editComment{{ comment.id }}">
                     <div colspan="4">
-                        <h4>Edt this comment here:</h4>
+                        <h4>Edit this comment here:</h4>
                         {% if comment.author == user %}
                         <form method="post" class="form" action="{% url 'edit_comment' comment.id %}">
                             {% csrf_token %}
@@ -70,6 +70,9 @@
                     </div>
                 </div>
                 {% endfor %}
+            {% else %}
+                <p><strong>Be the first to leave a comment!</strong></p>
+            {% endif %}
             </div>
         </div>
         <hr>

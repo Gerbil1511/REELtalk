@@ -84,7 +84,7 @@ def comment_detail(request, movie_slug, forum_post_slug, comment_id):
     comment = get_object_or_404(
         PostComment, id=comment_id, forum_post=forum_post, status=1)
 
-    return render(request, 'forum/comment_detail.html', {
+    return render(request, 'forum/forum_post_detail.html', {
         'comment': comment,
     })
 
@@ -122,8 +122,7 @@ def edit_comment(request, comment_id):
     """
     View to edit an existing comment. Only accessible to the comment's author.
     """
-    comment = get_object_or_404(
-        PostComment, id=comment_id, author=request.user)
+    comment = get_object_or_404(PostComment, id=comment_id, author=request.user)
     if request.method == 'POST':
         comment_form = PostCommentForm(data=request.POST, instance=comment)
         if comment_form.is_valid():
@@ -218,7 +217,7 @@ def edit_post(request, post_id):
         if post_form.is_valid():
             post_form.save()
             messages.success(request, 'Your post has been updated and is awaiting approval.')
-            return redirect('forum_post_detail', movie_slug=post.movie.slug, forum_post_slug=post.slug)
+            return redirect('movie_detail', movie_slug=post.movie.slug, forum_post_slug=post.slug)
     else:
         post_form = ForumPostForm(instance=post)
 

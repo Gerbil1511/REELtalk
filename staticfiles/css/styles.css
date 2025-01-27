@@ -205,7 +205,6 @@ footer {
 }
 
 .card:hover {
-
     transform: scale(1.08);
     /* Zoom-in effect */
     transition: transform 0.8s ease;
@@ -225,7 +224,6 @@ footer {
 }
 
 .card-body {
-
     flex-grow: 1;
     overflow: hidden;
     /* Hide any overflowing content within the card body */
@@ -235,12 +233,14 @@ footer {
     text-align: left;
 }
 
+
 .btn.submit.btn-sm {
     font-size: 0.875rem;
     padding: 4px 8px;
 }
 
 /* Movie lists/search page */
+
 /* Ensure carousel-inner images show at full height and are responsive */
 .carousel-inner img {
     width: 100%;
@@ -253,7 +253,6 @@ footer {
 .carousel-caption {
     background-color: rgba(0, 0, 0, 0.8);
     border-radius: 10px;
-
     padding: 40px;
     bottom: 40%;
     display: flex;
@@ -261,7 +260,6 @@ footer {
     /* Center vertically */
     justify-content: center;
     /* Center horizontally */
-
 }
 
 .carousel-indicators button {
@@ -314,7 +312,6 @@ footer {
     /* Lighter orange on hover */
 }
 
-
 img.movie-poster {
     max-width: 100%;
     max-height: 200px;
@@ -355,9 +352,7 @@ img.movie-poster {
 }
 
 .poster-comment {
-
     display: flex;
-
     align-items: center;
 }
 
@@ -408,24 +403,27 @@ img.movie-poster {
             height: 500px;
             /* Adjust this value as needed */
         }
+
+        .card {
+            width: 18rem;
+            margin: 1rem;
+        }
+
+        .card {
+            height: 12rem;
+            object-fit: cover;
+        }
+
+        .card-body {
+            height: 8rem;
+            overflow: hidden;
+        }
+
+        .post-border .col-2,
+        .post-border .col-2,
+        .post-border .col-4 {
+            flex: 0 0 auto;
+            width: auto;
+        }
+
     }
-
-    /* .card {
-    width: 18rem; /* Adjust the width as needed *
-    margin: 1rem;
-}
-.card img {
-    height: 12rem; /* Adjust the height as needed *
-    object-fit: cover;
-}
-.card-body {
-    height: 8rem; /* Adjust the height as needed *
-    overflow: hidden;
-} */
-
-    /* .movie-poster {
-    width: 50%;
-    /* Resize the poster to 25% of its original size */
-    /* margin-right: 10px; */
-    /* Add some space to the right of the image */
-    /* } */

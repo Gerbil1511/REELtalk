@@ -56,6 +56,10 @@ const commentText = document.getElementById("id_body");
 const commentForm = document.getElementById("commentForm");
 const submitButton = document.getElementById("submitButton");
 
+const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
+const deleteButtons = document.getElementsByClassName("btn-delete");
+const deleteConfirm = document.getElementById("deleteConfirm");
+
 /*
  * Initializes edit functionality for the provided edit buttons.
  * 
@@ -94,4 +98,6 @@ for (let button of editButtons) {
         deleteModal.show();
     });
 }
+
+
 
