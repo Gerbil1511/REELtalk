@@ -21,7 +21,7 @@ class ForumPostList(generic.ListView):
     def get_queryset(self):
         search_query = self.request.GET.get('search', '')
         if search_query:
-            forum_post_list = ForumPost.objects.filter(title__icontains=search_query).annotate(comment_count=Count('comments'))
+            forum_post_list = ForumPost.objects.filter(title__icontains=search_query).annotate(comment_count=Count('comments')).order_by('-created_at')
         else:
             forum_post_list = ForumPost.objects.filter(status=1).annotate(comment_count=Count('comments'))
         return forum_post_list
@@ -217,7 +217,7 @@ def edit_post(request, post_id):
         if post_form.is_valid():
             post_form.save()
             messages.success(request, 'Your post has been updated and is awaiting approval.')
-            return redirect('movie_detail', movie_slug=post.movie.slug, forum_post_slug=post.slug)
+            return redirect('forum_post_list')
     else:
         post_form = ForumPostForm(instance=post)
 

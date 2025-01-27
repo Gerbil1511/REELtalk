@@ -21,9 +21,9 @@
         <p>Here are a few things you can do in our forum:</p>
         <div>
             <ul>
-                <li><strong>Start a Discussion:</strong> Have something valuable to say? Start a new thread and get the
-                    conversation
-                    going.</li>
+                <li><strong>Start a Discussion:</strong> Have something valuable to say? Visit <a
+                        href="{% url 'list_movies' %}">the movies page</a> to find your favorite movies and start a new
+                    thread to get the discussion going.</li>
                 <li><strong>Share Reviews:</strong> Watched a movie recently? Share your thoughts and reviews with the
                     community.</li>
                 <li><strong>Comment on Posts:</strong> Join existing discussions by commenting on posts. Your insights
@@ -35,7 +35,7 @@
         </div>
         <br>
         {% if not user.is_authenticated %}
-        <p>If you would like to create a forum post then <a class="link" href="{% url 'account_signup' %}">sign up</a>
+        <p>If you would like to create a forum post, vote on posts or create comments then <a class="link" href="{% url 'account_signup' %}">sign up</a>
             or <a class="link" href="{% url 'account_login' %}">login here</a></p>
         {% endif %}
         <div><strong>Please remember</strong> to be respectful and follow our community guidelines. Let's keep the
@@ -50,7 +50,8 @@
                     <p>By: <strong>{{ post.author.username }}</strong></p>
                     <p><small><strong>{{ post.created_at|timesince_hours }}</strong></small></p>
                     <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}"
-                        alt="{{ post.movie.title }} Poster" class="forum-img-fluid movie-poster">                   </div>
+                        alt="{{ post.movie.title }} Poster" class="forum-img-fluid movie-poster">
+                </div>
                 <!-- <div class="col-2 p-2">
                     <p>By: <strong>{{ post.author.username }}</strong></p>
                     <p><small><strong>{{ post.created_at|timesince_hours }}</strong></small></p>
@@ -60,7 +61,7 @@
                     <hr>
                     <p>{{ post.content|truncatewords:20 }}</p>
                 </div>
-                    <div class="col-1 text-center p-2">
+                <div class="col-1 text-center p-2">
                     <p><i class="fa fa-comments"></i> {{ post.comment_count }}</p>
                     {% if user.is_authenticated %}
                     <a href="{% url 'upvote_post' post.id %}" class="btn upvote">
@@ -79,7 +80,8 @@
                 </div>
                 <div class="col-1 p-2 text-center">
                     <p>
-                    <a href="{% url 'forum_post_detail' post.movie.slug post.slug %}" class="read_more">Read More</a>
+                        <a href="{% url 'forum_post_detail' post.movie.slug post.slug %}" class="read_more">Read
+                            More</a>
                     </p>
                     {% if user == post.author %}
                     <a href="{% url 'edit_post' post.id %}" class="btn btn-warning btn-sm p-1 my-2">Edit</a>
@@ -111,4 +113,4 @@
         </nav>
         {% endif %}
     </div>
-{% endblock %}
+    {% endblock %}

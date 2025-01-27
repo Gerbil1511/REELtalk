@@ -10,7 +10,7 @@
         {% csrf_token %}
         {{ post_form|crispy }}
         <button type="submit" class="btn submit">Update</button>
-        <a href="{% url 'movie_detail' movie_id=post.movie.id %}" class="btn btn-secondary">Cancel</a>
+        <a href="{% url 'forum_post_list' %}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 {% endblock %}

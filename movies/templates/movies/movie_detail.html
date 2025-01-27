@@ -31,63 +31,42 @@
     <div class="row">
         <div class="col-md-12 mt-2">
             {% if not user.is_authenticated %}
-            <p class="text-center">If you would like to write a review or your thoughts about this movie then <a
+            <p class="text-center">If you would like to write a review or share your thoughts about this movie then <a
                     class="link" href="{% url 'account_signup' %}">sign up</a> or <a class="link"
                     href="{% url 'account_login' %}">login here</a></p>
-            {% endif %}
+            {% endif %}           
             {% if user.is_authenticated %}
-            <h2>Your previous posts on this movie:</h2>
+            <h2><strong>Your previous posts on this movie:</strong></h2>
             {% if user_posts %}
             {% for post in user_posts %}
-
-            <div class="my-1">
-                <div class="d-flex justify-content-between align-items-center post-border w-100 p-2">
+            <div class="mb-2">
+                <div class="d-flex justify-content-between align-items-center post-border w-100 p-2 ">
                     <div class="col-3 p-2">
-                        <h5></h5>{{ post.title }} </h5>
-                        <p><small><strong>{{ post.created_at|timesince_hours }}</strong></small></p> 
+                        <h5>{{ post.title }}</h5>
+                        <p><small><strong>{{ post.created_at|timesince_hours }}</strong></small></p>
                     </div>
                     <div class="col-7 p-2">
                         {{ post.content }}
                     </div>
-                    <a href="{% url 'edit_post' post.id %}" class="btn btn-warning">Edit</a>
+                   
                     <a href="{% url 'delete_post' post.id %}" class="btn btn-danger">Delete</a>
                 </div>
             </div>
-<hr>
-       
+           
             {% endfor %}
             {% else %}
-        
+           
+            <p>You have not posted any reviews yet.</p>
             {% endif %}
-            <h4 class="my-2"><strong>Why not write a review or just share some thoughts about this movie and start a
-                    discussion?:</strong></h4>
+            <hr>
+            <h4 class="mt-4"><strong>Why not write a review or just share some thoughts about this movie and start a discussion?:</strong></h4>
             <form id="ForumPostForm" class="mt-3" method="post">
                 {% csrf_token %}
                 {{ post_form|crispy }}
                 <button type="submit" id="submitButton" class="btn submit mb-5">Submit</button>
             </form>
-            <hr>
-            <h2>Your previous posts on this movie:</h2>
-            {% if user_posts %}
-            {% for post in user_posts %}
-            <div class="mb-5">
-                <div class="card-body">
-                    <h5 class="card-title">{{ post.title }} - {{ post.created_at|timesince_hours }}</h5>
-                    <p class="card-text">{{ post.content }}</p>
-                    <a href="{% url 'edit_post' post.id %}" class="btn btn-primary">Edit</a>
-                    <a href="{% url 'delete_post' post.id %}" class="btn btn-danger">Delete</a>
-                </div>
-            </div>
-            {% endfor %}
-            {% else %}
-            <div>
-            <p>You have not posted any reviews yet.</p>
             {% endif %}
-            {% else %}         
-            {% endif %}
-            </div>
         </div>
     </div>
 </div>
 {% endblock %}
-
