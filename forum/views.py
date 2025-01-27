@@ -25,11 +25,6 @@ class ForumPostList(generic.ListView):
         else:
             forum_post_list = ForumPost.objects.filter(status=1).annotate(comment_count=Count('comments'))
         return forum_post_list
-    
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['post_form'] = ForumPostForm()
-    #     return context
 
 
 def forum_post_detail(request, movie_slug, forum_post_slug):

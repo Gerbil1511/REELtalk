@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load custom_filters %}
+{% load static %}
+
+{% block title %}{{ movie.title }}{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <a href="{% url 'list_movies' %}" class="btn submit my-1">
+        Want to search Movies? Click here <i class="fa fa-arrow-right"></i> </a>
+    <hr>
+    <h1 class="display-5 mt-1"><strong>Community Forum:</strong></h1>
+    <hr>
+    <div class="row">
+        <p>Welcome to the REELtalk Community Forum! This is a place where movie enthusiasts can come together to discuss
+            favorite films, share reviews, and engage in meaningful conversations. So, whether you're a casual viewer
+            or a hardcore cinephile, you'll find a welcoming community here.</p>
+        <br>
+        <p>Here are a few things you can do in our forum:</p>
+        <div>
+            <ul>
+            <li><strong>Start a Discussion:</strong> Have something valuable to say? Start a new thread and get the
+                conversation
+                going.</li>
+            <li><strong>Share Reviews:</strong> Watched a movie recently? Share your thoughts and reviews with the
+                community.</li>
+            <li><strong>Comment on Posts:</strong> Join existing discussions by commenting on posts. Your insights and
+                opinions are valuable!</li>
+            <li><strong>Upvote and Downvote:</strong> Show your appreciation for great posts by upvoting them, or
+                downvote posts that you think are not helpful.</li>
+        </ul>
+    </div>
+        <br>
+        {% if not user.is_authenticated %}
+        <p>If you would like to create a forum post then <a class="link" href="{% url 'account_signup' %}">sign up</a> or <a class="link" href="{% url 'account_login' %}">login here</a></p>
+        {% endif %}
+        <div><strong>Please remember</strong> to be respectful and follow our community guidelines. Let's keep the
+            discussions friendly and
+            enjoyable for everyone. Happy posting!</p>
+        <hr>
+    </div>
+   
+
+
+                {% for post in page_obj %}
+                <div class="table-sm-responsive">
+                    <table id="forum-posts-table" class="table table-dark table-striped">
+                      <tbody>
+                <tr>
+                    <td class="col-2">
+                        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}"
+                            alt="{{ post.movie.title }} Poster" class="forum-img-fluid movie-poster">
+                    </td>
+                    <td class="col-1">
+                        <p>By: <strong>{{ post.author.username }}</strong></p>
+                        <p><small><strong>{{ post.created_at|timesince_hours }}</strong></small></p>
+                    </td>
+                    <td class="col-2">
+                        {{ post.title|truncatewords:15 }}
+                    </td>
+                    <td class="col-4">
+                        {{ post.content|truncatewords:15 }}
+                    </td>
+                    
+                    <td class="col-1">
+                        <a href="{% url 'forum_post_detail' post.movie.slug post.slug %}"
+                            class="read_more">Read More</a><i class="fa fa-comments"></i> {{ post.comment_count }}
+                    </td>
+                    <td class="col-1">
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'upvote_post' post.id %}" class="btn upvote">
+                            <i class="fa fa-thumbs-up"></i> {{ post.upvotes.count }}
+                        </a>
+                        {% else %}
+                        <i class="fa fa-thumbs-up upvote"></i> {{ post.upvotes.count }}
+                        {% endif %}
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'downvote_post' post.id %}" class="btn downvote">
+                            <i class="fa fa-thumbs-down"></i> {{ post.downvotes.count }}
+                        </a>
+                        {% else %}
+                        <i class="fa fa-thumbs-down downvote"></i> {{ post.downvotes.count }}
+                        {% endif %}
+                    </td>
+                    <td class="col-1">
+                        {% if user == post.author %}
+                        <a href="{% url 'edit_post' post.id %}" class="btn btn-warning btn-sm my-2 mx-2">Edit</a>
+                        <a href="{% url 'delete_post' post.id %}" class="btn btn-danger btn-sm">Delete</a>
+                        
+                        {% endif %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+                {% endfor %}
+ 
+    
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+            {% endif %}
+            {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+            <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+            {% elif num > page_obj.number|add:'-6' and num < page_obj.number|add:'6' %} <li class="page-item"><a
+                    href="?page={{ num }}" class="page-link">{{ num }}</a></li>
+                {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                <li class="page-item"><a href="?page={{ page_obj.next_page_number }}" class="page-link">NEXT &raquo;</a>
+                </li>
+                {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+{% endblock %}

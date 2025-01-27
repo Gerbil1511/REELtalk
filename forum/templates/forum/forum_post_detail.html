@@ -29,34 +29,32 @@
     <hr>
 
 
-    <div class="table-responsive ">
+    <div>
         <h3>Previous comments on this post:</h3>
-        <table id="forum-comments-table" class="table table-dark table-striped ">
-            <tbody class="">
+        <div>
+            <div>
                 {% for comment in comments %}
-                <tr>
-                    <td class="col-2">
-                        <strong>{{ comment.author.username }}</strong>
-                    </td>
-                    <td class="col-8">
-                        {{ comment.comment }}
-                    </td>
-                    <td class="col-2 text-center">
-                        <small><strong>{{ comment.created_at|timesince_hours }}</strong></small>
-                    </td>
-                    <td>
-                        {% if comment.author == user %}
-                        <div class="comment-actions">
+                <div class="my-1">
+                    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center post-border w-100 p-2">
+                        <div class="col-1 ">
+                            <strong>{{ comment.author.username }}</strong>
+                        </div>
+                        <div class="col-2 p-2">
+                            {{ comment.comment }}
+                        </div>
+                        <div class="col-2 p-2">
+                            <small><strong>{{ comment.created_at|timesince_hours }}</strong></small>
+                        </div>
+                        <div class="col-2 p-2">
                             <button type="button" class="btn btn-edit btn-sm btn-warning my-2 mx-2"
                                 data-bs-toggle="collapse" data-bs-target="#editComment{{ comment.id }}"
                                 aria-expanded="false" aria-controls="editComment{{ comment.id }}">Edit</button>
                                 <a href="{% url 'delete_comment' comment.id %}" class="btn btn-danger btn-sm">Delete</a>
                         </div>
-                        {% endif %}
-                    </td>
-                </tr>
-                <tr class="collapse mt-2" id="editComment{{ comment.id }}">
-                    <td colspan="4">
+                    </div>
+                </div>
+                <div class="collapse mt-2" id="editComment{{ comment.id }}">
+                    <div colspan="4">
                         <h4>Edt this comment here:</h4>
                         {% if comment.author == user %}
                         <form method="post" class="form" action="{% url 'edit_comment' comment.id %}">
@@ -69,11 +67,11 @@
                                 aria-controls="editComment{{ comment.id }}">Close</button>
                         </form>
                         {% endif %}
-                    </td>
-                </tr>
+                    </div>
+                </div>
                 {% endfor %}
-            </tbody>
-        </table>
+            </div>
+        </div>
         <hr>
 
 
