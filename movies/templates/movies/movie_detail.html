@@ -36,8 +36,8 @@
                     href="{% url 'account_login' %}">login here</a></p>
             {% endif %}
             {% if user.is_authenticated %}
-            <p class="my-2"><strong>Why not write a review or just share some thoughts about this movie and start a
-                    discussion?:</strong></p>
+            <h4 class="my-2"><strong>Why not write a review or just share some thoughts about this movie and start a
+                    discussion?:</strong></h4>
             <form id="ForumPostForm" class="mt-3" method="post">
                 {% csrf_token %}
                 {{ post_form|crispy }}
@@ -47,22 +47,21 @@
             <h2>Your Posts</h2>
             {% if user_posts %}
             {% for post in user_posts %}
-            <div class="card mb-5">
+            <div class="mb-5">
                 <div class="card-body">
                     <h5 class="card-title">{{ post.title }} - {{ post.created_at|timesince_hours }}</h5>
                     <p class="card-text">{{ post.content }}</p>
-                    <!-- <a href="{% url 'forum_post_detail' post.movie.slug post.slug %}" class="btn submit">View Post</a> -->
-                    <button class="btn btn-warning" onclick="showEditForm('{{ post.id }}')">Edit</button>
+                    <a href="{% url 'edit_post' post.id %}" class="btn btn-primary">Edit</a>
                     <a href="{% url 'delete_post' post.id %}" class="btn btn-danger">Delete</a>
                 </div>
             </div>
-            <div id="editForm-{{ post.id }}" class="edit-form" style="display: none;">
+            <!-- <div id="editForm-{{ post.id }}" class="edit-form" style="display: none;">
                 <form method="post" action="{% url 'edit_post' post.id %}">
                     {% csrf_token %}
                     {{ post_form|crispy }}
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>
-            </div>
+            </div> -->
             {% endfor %}
             {% else %}
             <p>You have not posted any reviews yet.</p>

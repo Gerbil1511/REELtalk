@@ -322,16 +322,7 @@ footer {
 
 
 /* forum_post_list.html page */
-#forum-posts-table img.movie-poster {
-    width: 100%;
-    max-width: 100px;
-    /* Set a maximum width for the poster image */
-    height: auto;
-    /* Maintain aspect ratio */
 
-    object-fit: cover;
-    /* Ensure the image covers the container */
-}
 
 .table-responsive {
     overflow-x: auto;

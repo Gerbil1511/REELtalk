@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Edit Post{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <h1>Edit your post:</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ post_form|crispy }}
+        <button type="submit" class="btn submit">Update</button>
+        <a href="{% url 'forum_post_detail' movie_slug=post.movie.slug forum_post_slug=post.slug %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

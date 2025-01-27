@@ -133,7 +133,7 @@ def edit_comment(request, comment_id):
         comment_form = PostCommentForm(data=request.POST, instance=comment)
         if comment_form.is_valid():
             comment_form.save()
-            messages.success(request, 'Your comment has been updated.')
+            messages.success(request, 'Your comment has been updated and is awaiting approval.')
             return redirect('forum_post_detail', movie_slug=comment.forum_post.movie.slug, forum_post_slug=comment.forum_post.slug)
     else:
         comment_form = PostCommentForm(instance=comment)
@@ -149,15 +149,13 @@ def delete_comment(request, comment_id):
     """
     View to delete an existing comment. Only accessible to the comment's author.
     """
-    comment = get_object_or_404(
-        PostComment, id=comment_id, author=request.user)
-    forum_post = comment.forum_post
-    movie = forum_post.movie
-
+    comment = get_object_or_404(Comment, id=comment_id, author=request.user)
+    post_slug = comment.post.slug
+    movie_slug = comment.post.movie.slug
     if request.method == 'POST':
         comment.delete()
         messages.success(request, 'Your comment has been deleted.')
-        return redirect('forum_post_detail', movie_slug=movie.slug, forum_post_slug=forum_post.slug)
+        return redirect('forum_post_detail', movie_slug=movie_slug, forum_post_slug=post_slug)
 
     return render(request, 'forum/delete_comment.html', {
         'comment': comment,
@@ -203,7 +201,7 @@ def create_post(request, movie_slug):
             post.movie = movie
             post.author = request.user
             post.save()
-            messages.success(request, 'Your post has been created.')
+            messages.success(request, 'Your post has been created and is awaiting approval.')
             return redirect('forum_post_detail', movie_slug=movie.slug, forum_post_slug=post.slug)
     else:
         post_form = ForumPostForm()
@@ -224,12 +222,12 @@ def edit_post(request, post_id):
         post_form = ForumPostForm(data=request.POST, instance=post)
         if post_form.is_valid():
             post_form.save()
-            messages.success(request, 'Your post has been updated.')
+            messages.success(request, 'Your post has been updated and is awaiting approval.')
             return redirect('forum_post_detail', movie_slug=post.movie.slug, forum_post_slug=post.slug)
     else:
         post_form = ForumPostForm(instance=post)
 
-    return render(request, 'forum/forum_post_list.html', {
+    return render(request, 'forum/edit_post.html', {
         'post_form': post_form,
         'post': post,
     })

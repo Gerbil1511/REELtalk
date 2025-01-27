@@ -26,13 +26,13 @@
     <div class="row mb-4">
         {% for movie in movie_list %}
         <div class="col-lg-4 col-md-6 col-sm-12 mb-4 mb-3">
-            <div class="search-card h-100">
+            <div class="search-card">
                 <a href="{% url 'movie_detail' movie.tmdb_id %}">
                     <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="card-img-top"
                         alt="{{ movie.title }}">
                 </a>
-                <div class="search-card-body">
-                    <h5 class="card-title">{{ movie.title }}</h5>
+                <div class="search-card-body my-2">
+                    <h3 class="search-card-title">{{ movie.title }}</h3>
                 </div>
                 <div class="search-card-footer">
                     <a href="{% url 'movie_detail' movie.tmdb_id %}" class="btn submit">More Details</a>

@@ -112,3 +112,48 @@
 </div>
 </div>
 {% endblock %}
+
+<div class="table-responsive">
+    <table id="forum-posts-table" class="table table-dark table-striped">
+        <tbody>
+            {% for post in page_obj %}
+            <tr>
+                <td class="col-2">
+                    <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}"
+                        alt="{{ post.movie.title }} Poster" class="forum-img-fluid movie-poster">
+                </td>
+                <td class="col-2">By: <strong>{{ post.author.username }}</strong></td>
+                <td class="col-2">{{ post.title|truncatewords:15 }}</td>
+                <td class="col-3">{{ post.content|truncatewords:15 }}</td>
+                <td class="col-1"><i class="fa-solid fa-comments"></i> {{ post.comment_count }}</td>
+                <td class="col-1"><a href="{% url 'forum_post_detail' post.movie.slug post.slug %}"
+                        class="read_more">Read More</a></td>
+                <td class="col-1 text-center">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'upvote_post' post.id %}" class="btn upvote">
+                        <i class="fa fa-thumbs-up"></i> {{ post.upvotes.count }}
+                    </a>
+                    {% else %}
+                    <i class="fa fa-thumbs-up upvote"></i> {{ post.upvotes.count }}
+                    {% endif %}
+                </td>
+                <td class="col-1 text-center">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'downvote_post' post.id %}" class="btn downvote">
+                        <i class="fa fa-thumbs-down"></i> {{ post.downvotes.count }}
+                    </a>
+                    {% else %}
+                    <i class="fa fa-thumbs-down downvote"></i> {{ post.downvotes.count }}
+                    {% endif %}
+                </td>
+                <td class="col-1 text-center">
+                    {% if user == post.author %}
+                    <a href="{% url 'edit_post' post.id %}" class="btn btn-warning btn-sm my-2 mx-2">Edit</a>
+                    <button type="button" class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#deleteModal{{ post.id }}">Delete</button>   
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

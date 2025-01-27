@@ -14,23 +14,25 @@
     <h1 class="display-5 mt-1"><strong>Original Post and Comments:</strong></h1>
     <hr>
     <div class="row">
-        <div class="col-md-4 my-2">
+        <div class="col-md-6 col-lg-4 my-2">
             <img src="https://image.tmdb.org/t/p/w500{{ forum_post.movie.poster_path }}" class="img-fluid"
                 alt="{{ movie.title }}">
         </div>
-        <div class="col-md-8 my-2 post-details">
-            <h5>Posted by: <strong>{{ forum_post.author.username }}</strong> - <small>{{ forum_post.created_at|timesince_hours }}</small></h5>
+        <div class="col-md-6 col-lg-8 my-2 post-details">
+            <h5>Posted by: <strong>{{ forum_post.author.username }}</strong> - <small>
+                    {{ forum_post.created_at|timesince_hours }}</small></h5>
             <hr>
-            <h2>{{ forum_post.title }}</h2>
+            <h4>{{ forum_post.title }}</h4>
             <p>{{ forum_post.content }}</p>
         </div>
     </div>
     <hr>
 
-    <h3>Previous comments on this post:</h3>
-    <div class="table-responsive">
-        <table class="table table-dark table-striped">
-            <tbody>
+
+    <div class="table-responsive ">
+        <h3>Previous comments on this post:</h3>
+        <table id="forum-comments-table" class="table table-dark table-striped ">
+            <tbody class="">
                 {% for comment in comments %}
                 <tr>
                     <td class="col-2">
@@ -48,22 +50,23 @@
                             <button type="button" class="btn btn-edit btn-sm btn-warning my-2 mx-2"
                                 data-bs-toggle="collapse" data-bs-target="#editComment{{ comment.id }}"
                                 aria-expanded="false" aria-controls="editComment{{ comment.id }}">Edit</button>
-                            <button type="button" class="btn btn-delete btn-sm btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#deleteModal{{ comment.id }}">
-                                Delete
-                            </button>
+                                <a href="{% url 'delete_comment' comment.id %}" class="btn btn-danger btn-sm">Delete</a>
                         </div>
                         {% endif %}
                     </td>
                 </tr>
-                <tr class="collapse" id="editComment{{ comment.id }}">
+                <tr class="collapse mt-2" id="editComment{{ comment.id }}">
                     <td colspan="4">
+                        <h4>Edt this comment here:</h4>
                         {% if comment.author == user %}
                         <form method="post" class="form" action="{% url 'edit_comment' comment.id %}">
                             {% csrf_token %}
                             <input type="hidden" name="comment_id" value="{{ comment.id }}">
                             {{ comment_form.as_p }}
-                            <button type="submit" id="submitButton" class="btn submit">Save</button>
+                            <button type="submit" id="submitButton" class="btn submit mb-2">Save</button>
+                            <button type="button" class="btn btn-secondary mb-2" data-bs-toggle="collapse"
+                                data-bs-target="#editComment{{ comment.id }}" aria-expanded="false"
+                                aria-controls="editComment{{ comment.id }}">Close</button>
                         </form>
                         {% endif %}
                     </td>
@@ -71,6 +74,9 @@
                 {% endfor %}
             </tbody>
         </table>
+        <hr>
+
+
     </div>
     <div class="container comment-form mb-5">
         {% if user.is_authenticated %}
@@ -84,5 +90,6 @@
         <p><a href="{% url 'account_login' %}">Log in</a> to add a comment.</p>
         {% endif %}
     </div>
+
 </div>
 {% endblock %}
