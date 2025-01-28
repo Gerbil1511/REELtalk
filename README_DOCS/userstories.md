@@ -87,7 +87,7 @@
 
 
 ## Movie Search and Display
-- **User Story 7:** As a user, I want to search for movies so that I can find information about my favorite movies. 
+- **User Story 7:** As a user, I want to search for movies so that I can find information about my favourite movies. 
   - **Acceptance Criteria:**
     - Users can see the latest popular and top rated movies on the Movie page.
     - Users can search for specific movies.
@@ -95,27 +95,43 @@
     - **Tasks:**
     - Utilise the TMDb API to add records to the Movie model database.
     - Create a view to display the latest popular and top rated movies.
-    - Implement search functionality.
+    - Implement search functionality, and ensure it displays appropriate results.
     - Design movie detail page that displays movie information.
    
 
 ## Forum Functionality
-- **User Story 8:** As a Logged-in user, I want to create, edit, and delete my forum posts and comments so that I can share my thoughts and engage with the community.
+- **User Story 8:** As a Logged-in user, I want to create, edit, and delete my forum posts so that I can share my thoughts and engage with the community.
   - **Acceptance Criteria:**
-    - Users can view all forum posts/comments.
-    - Logged-in Users can create new forum posts/comments.
-    - Logged-in Users can edit their own posts/comments.
-    - Logged-in Users can delete their own posts/comments.
+    - Users can view all forum posts.
+    - Logged-in Users can create new forum posts.
+    - Logged-in Users can edit their own posts.
+    - Logged-in Users can delete their own posts.
   - **Tasks:**
-    - Set up ForumPost and PostComment models for forum posts and comments.
-    - Create views for listing, creating, editing, and deleting posts/comments.
-    - Design forms for creating and editing posts/comments using 'Crispy Forms'.
+    - Set up ForumPost models for forum posts.
+    - Create views for listing, creating, editing, and deleting posts.
+    - Design forms for creating and editing posts using 'Crispy Forms'.
+    - Implement permissions to allow users to edit/delete their own posts only.
+    - Add URL routing for the forum post submission.
+
+
+## Forum Functionality
+- **User Story 9:** I want to comment on an existing movie forum post so that I can share my thoughts and create/engage in discussions.
+  - **Acceptance Criteria:**
+    - Users can see comments associated with each forum post in the forum post detail page.
+    - Logged-in Users can submit a comment using the form. The comment is saved and will be displayed under the forum post detail.
+    - Logged-in Users can edit their own comments in the forum post detail page.
+    - Logged-in Users can delete their own comments from the forum post detail page.
+  - **Tasks:**
+    - Set up PostComment model for forum posts and comments.
+    - Create a view to handle comment submission and save the comment to the database.
+    - Update the forum post detail template to display ist of comments and the comment form using 'Crispy Forms'.
     - Implement permissions to allow users to edit/delete their own posts/comments only.
-    _ Display the number of comments on the forum post in the forum post list page.
+    - Display the number of comments on the forum post in the forum post list page.
+    - Add URL routing for the comment submission.
 
 
 ## Voting System
-- **User Story 9:** As a Logged-in user, I want to upvote or downvote posts so that I can express my opinion on forum posts.
+- **User Story 10:** As a Logged-in user, I want to upvote or downvote posts so that I can express my opinion on forum posts.
   - **Acceptance Criteria**
     - Logged-in Users can upvote a post.
     - Logged-in Users can downvote a post.
@@ -128,7 +144,7 @@
 
 
 ## Success and Error Messages
-- **User Story 10:** As a user, I want to see success and error messages so that I know the result of my actions.
+- **User Story 11:** As a user, I want to see success and error messages so that I know the result of my actions.
   - **Acceptance Criteria:**
     - Success and error messages are displayed for user actions.
   - **Tasks:** 
@@ -137,7 +153,7 @@
     - Display messages in the templates.
 
 ## Latest Entertainment/Movie News
-- **User Story 11:** As a user, I want to view the latest entertainment/movie news so that I can stay informed about current events in the entertainment industry.
+- **User Story 12:** As a user, I want to view the latest entertainment/movie news so that I can stay informed about current events in the entertainment industry.
   - **Acceptance Criteria:**
     - Users can see the latest entertainment/movie news from various worldwide sources.
   - **Tasks:**
@@ -147,7 +163,7 @@
 
 
 ## Testing and Deployment Framework
-- **User Story 12:** As a developer, I want to set up a comprehensive testing environment and deploy the application to a production environment so that I can ensure the application works correctly at various levels and is accessible to users.
+- **User Story 13:** As a developer, I want to set up a comprehensive testing environment and deploy the application to a production environment so that I can ensure the application works correctly at various levels and is accessible to users.
   - **Acceptance Criteria:**
     - A testing environment is set up. 
     - Unit, integration, and end-to-end tests are implemented. 
