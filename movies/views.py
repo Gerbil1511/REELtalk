@@ -7,7 +7,13 @@ from django.contrib import messages
 
 def list_movies(request):
     """
-    View to list movies based on various queries.
+    View to list all movies. Allows searching by movie title.
+
+    Data is obtained from:
+    - Movie model: Filters movies based on the search query.
+
+    Data is returned as:
+    - A rendered template with the list of movies and the search query.
     """
     search_query = request.GET.get('search', '')
     movie_list = None
@@ -25,8 +31,14 @@ def list_movies(request):
 
 def movie_detail(request, tmdb_id):
     """
-    View to display the details of a single movie.
-    Allows logged-in users to submit a post/review.
+    View to display details of a single movie and handle forum post creation.
+
+    Data is obtained from:
+    - Movie model: Retrieves the movie based on the TMDb ID.
+    - ForumPost model: Retrieves forum posts associated with the movie.
+
+    Data is returned as:
+    - A rendered template with the movie details, post form, and user posts.
     """
     movie = get_object_or_404(Movie, tmdb_id=tmdb_id)
     user_posts = ForumPost.objects.filter(movie=movie, author=request.user) if request.user.is_authenticated else None
@@ -51,6 +63,15 @@ def movie_detail(request, tmdb_id):
 
 @login_required
 def edit_post(request, post_id):
+    """
+    View to edit an existing forum post. Only accessible to the post's author.
+
+    Data is obtained from:
+    - ForumPost model: Retrieves the forum post based on the post ID.
+
+    Data is returned as:
+    - A rendered template with the post form and post.
+    """
     post = get_object_or_404(ForumPost, id=post_id, author=request.user)
     if request.method == 'POST':
         post_form = ForumPostForm(data=request.POST, instance=post)
@@ -68,6 +89,15 @@ def edit_post(request, post_id):
 
 @login_required
 def delete_post(request, post_id):
+    """
+    View to delete an existing forum post. Only accessible to the post's author.
+
+    Data is obtained from:
+    - ForumPost model: Retrieves the forum post based on the post ID.
+
+    Data is returned as:
+    - A redirect to the forum post list page.
+    """
     post = get_object_or_404(ForumPost, id=post_id, author=request.user)
     if request.method == 'POST':
         post.delete()

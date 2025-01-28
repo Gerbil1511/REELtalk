@@ -7,6 +7,12 @@ from django.utils.text import slugify
 class Movie(models.Model):
     """
     Model to represent a movie.
+
+    Data is obtained from:
+    - External sources such as TMDb API.
+
+    Data is returned as:
+    - A Movie instance with attributes like title, overview, release date, etc.
     """
     poster_path = models.CharField(max_length=255, default='no_poster_for_movie.webp')  
     title = models.CharField(max_length=255)

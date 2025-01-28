@@ -2,10 +2,10 @@
 
 # REELTalk
 
-<img src="readmedocs/" alt="live site image" width="40%" height="40%">
+<img src="readme_docs/images/responsive_image.png" alt="live site image" >
 
 <p>
-| <a href="https://gerbil1511.github.io/ReelTalk/" target="_blank">Live Project</a> |
+| <a href="https://reel-talk-app-9059e75acb3d.herokuapp.com/" target="_blank">Live Project</a> |
 </p>
 
 
@@ -13,16 +13,11 @@
 
 ReelTalk is a movie-centric full-stack platform that combines the excitement of discovering new films with the interactive experience of a community forum. It aims to provide users with an engaging comprehensive resource for movie information, discussions, and the latest industry news. This project was developed as part of the High Performance Code Institute Full-Stack Software Development For The AI Augmented Developer Bootcamp and was developed as my final individual Full-Stack Project submission.
 
-## Author
-
-- [Geraldine Edwards](https://www.github.com/Gerbil1511)
-
 
 ## Table Of Contents
 
 * [REELTalk](#ReelTalk)
   - [Introduction](#introduction)
-  - [Authors](#author)
   - [Table of Contents](#table-of-contents)
 * [UX Design Process](#ux-design-process)
   - [Strategy](#strategy)
@@ -432,27 +427,28 @@ The scope of the REEltalk app includes:
 
 ## Agile Methodology
 
-Throughout the development of ReelTalk, I implemented Agile methodology to ensure a flexible and iterative approach to project management. This methodology allowed me to adapt to changes quickly, prioritize tasks effectively, and deliver a high-quality product.
-
-**GitHub Project Boards**
-I utilized GitHub Project Boards so that I could visually manage and track the progress of my tasks. The board was divided into columns representing different stages of the workflow, such as "Backlog", "To Do," "In Progress," and "Done." This setup provided a clear overview of the project's status and helped me to stay organized and to manage the development of REELtalk effectively.
-
-(insert image here)
+Throughout the development of ReelTalk, I implemented Agile methodology to ensure a flexible and iterative approach to project management. This methodology suits me well as a "planner" and allowed me to adapt to changes quickly, prioritize tasks effectively, and deliver a high-quality product.
 
 **GitHub Issue and User Stories**
 I used the MoSCoW prioritization technique to prioritize user stories. This technique categorizes tasks into four groups:
 
-Must Have: Essential features that are critical to the project's success.
-Should Have: Important features that add significant value but are not critical.
-Could Have: Desirable features that enhance the user experience but are not essential.
-Won't Have: Features that are not planned for this release but may be considered in the future.
-Example of User Stories with MoSCoW Prioritization:
+- Must Have: Essential features that are critical to the project's success.
+- Should Have: Important features that add significant value but are not critical.
+- Could Have: Desirable features that enhance the user experience but are not essential.
+- Won't Have: Features that are not planned for this release but may be considered in the future.
 
-User Stories: 
+I used GitHub issue templates to systematically develop and manage my user stories, ensuring consistency and clarity in task descriptions and acceptance criteria.
+
+<u>Issues Template</u>
+
+![GitHub Issues Template](readme_docs/images/issues_template.png)
+
+<u>User Stories</u>
+
 <details>
   <summary>Click to expand</summary>
   
-  # User Stories
+# User Stories
 
 ## Admin Management
 - **User Story 1:** As an admin, I want to access an admin dashboard through Django’s built-in admin interface so that I can manage the app efficiently. 
@@ -475,7 +471,7 @@ User Stories:
     - Configure the Django admin site. 
     - Register the User model with the Django admin. 
     - Customize the admin interface for user management.
-    
+
 - **User Story 3:** : As an admin, I want to moderate forum posts and comments using the Django admin dashboard so that I can ensure content quality and adherence to community guidelines. 
   - **Acceptance Criteria**: 
     - Admins can view all forum posts and comments in the Django admin dashboard. 
@@ -541,7 +537,7 @@ User Stories:
 
 
 ## Movie Search and Display
-- **User Story 7:** As a user, I want to search for movies so that I can find information about my favorite movies. 
+- **User Story 7:** As a user, I want to search for movies so that I can find information about my favourite movies. 
   - **Acceptance Criteria:**
     - Users can see the latest popular and top rated movies on the Movie page.
     - Users can search for specific movies.
@@ -549,27 +545,43 @@ User Stories:
     - **Tasks:**
     - Utilise the TMDb API to add records to the Movie model database.
     - Create a view to display the latest popular and top rated movies.
-    - Implement search functionality.
+    - Implement search functionality, and ensure it displays appropriate results.
     - Design movie detail page that displays movie information.
    
 
-## Forum Functionality
-- **User Story 8:** As a Logged-in user, I want to create, edit, and delete my forum posts and comments so that I can share my thoughts and engage with the community.
+## Forum Functionality - Forum Posts
+- **User Story 8:** As a Logged-in user, I want to create, edit, and delete my forum posts so that I can share my thoughts and engage with the community.
   - **Acceptance Criteria:**
-    - Users can view all forum posts/comments.
-    - Logged-in Users can create new forum posts/comments.
-    - Logged-in Users can edit their own posts/comments.
-    - Logged-in Users can delete their own posts/comments.
+    - Users can view all forum posts.
+    - Logged-in Users can create new forum posts.
+    - Logged-in Users can edit their own posts.
+    - Logged-in Users can delete their own posts.
   - **Tasks:**
-    - Set up ForumPost and PostComment models for forum posts and comments.
-    - Create views for listing, creating, editing, and deleting posts/comments.
-    - Design forms for creating and editing posts/comments using 'Crispy Forms'.
+    - Set up ForumPost models for forum posts.
+    - Create views for listing, creating, editing, and deleting posts.
+    - Design forms for creating and editing posts using 'Crispy Forms'.
+    - Implement permissions to allow users to edit/delete their own posts only.
+    - Add URL routing for the forum post submission.
+
+
+## Forum Functionality - Comments
+- **User Story 9:** I want to comment on an existing movie forum post so that I can share my thoughts and create/engage in discussions.
+  - **Acceptance Criteria:**
+    - Users can see comments associated with each forum post in the forum post detail page.
+    - Logged-in Users can submit a comment using the form. The comment is saved and will be displayed under the forum post detail.
+    - Logged-in Users can edit their own comments in the forum post detail page.
+    - Logged-in Users can delete their own comments from the forum post detail page.
+  - **Tasks:**
+    - Set up PostComment model for forum posts and comments.
+    - Create a view to handle comment submission and save the comment to the database.
+    - Update the forum post detail template to display ist of comments and the comment form using 'Crispy Forms'.
     - Implement permissions to allow users to edit/delete their own posts/comments only.
-    _ Display the number of comments on the forum post in the forum post list page.
+    - Display the number of comments on the forum post in the forum post list page.
+    - Add URL routing for the comment submission.
 
 
 ## Voting System
-- **User Story 9:** As a Logged-in user, I want to upvote or downvote posts so that I can express my opinion on forum posts.
+- **User Story 10:** As a Logged-in user, I want to upvote or downvote posts so that I can express my opinion on forum posts.
   - **Acceptance Criteria**
     - Logged-in Users can upvote a post.
     - Logged-in Users can downvote a post.
@@ -582,7 +594,7 @@ User Stories:
 
 
 ## Success and Error Messages
-- **User Story 10:** As a user, I want to see success and error messages so that I know the result of my actions.
+- **User Story 11:** As a user, I want to see success and error messages so that I know the result of my actions.
   - **Acceptance Criteria:**
     - Success and error messages are displayed for user actions.
   - **Tasks:** 
@@ -590,8 +602,9 @@ User Stories:
     - Add success and error messages to views for creating, editing, and deleting posts/comments, editing/deleting user profile or sign up/login/logout.s and for upvoting/downvoting.
     - Display messages in the templates.
 
+
 ## Latest Entertainment/Movie News
-- **User Story 11:** As a user, I want to view the latest entertainment/movie news so that I can stay informed about current events in the entertainment industry.
+- **User Story 12:** As a user, I want to view the latest entertainment/movie news so that I can stay informed about current events in the entertainment industry.
   - **Acceptance Criteria:**
     - Users can see the latest entertainment/movie news from various worldwide sources.
   - **Tasks:**
@@ -601,7 +614,7 @@ User Stories:
 
 
 ## Testing and Deployment Framework
-- **User Story 12:** As a developer, I want to set up a comprehensive testing environment and deploy the application to a production environment so that I can ensure the application works correctly at various levels and is accessible to users.
+- **User Story 13:** As a developer, I want to set up a comprehensive testing environment and deploy the application to a production environment so that I can ensure the application works correctly at various levels and is accessible to users.
   - **Acceptance Criteria:**
     - A testing environment is set up. 
     - Unit, integration, and end-to-end tests are implemented. 
@@ -618,6 +631,23 @@ User Stories:
     - Deploy the application to the production environment and verify deployment.
 
 </details>
+<br>
+<br>
+
+<u>MoSCoW Prioritization</u>
+
+![MoSCoW prioritization](readme_docs/images/moscow.png)
+![MoSCoW prioritization](readme_docs/images/wont_have.png)
+
+
+**GitHub Project Boards**
+I utilized GitHub Project Boards so that I could visually manage and track the progress of my tasks. The board was divided into columns representing different stages of the workflow, such as "Backlog", "To Do," "In Progress," and "Done." This setup provided a clear overview of the project's status and helped me to stay organized and to manage the development of REELtalk effectively.
+
+![GitHub Project Board](readme_docs/images/project_board.png)
+
+**Sprints**
+Although I did not officially utilize sprints, I followed the concept of breaking my project into blocks over the three week schedule. This included developing the ERD, initializing the project, getting the MVP done by the first week and a half, then focusing on back-end functionality such as API development and AllAuth setup. Following this, I moved on to front-end development, and finally, testing and documentation.
+
 
 <p align="right"><a href="#REELtalk">Back To Top</a></p>
 
@@ -733,7 +763,52 @@ The use of AI tools in the testing process has significantly boosted my efficien
 
 
 ### Validation
-Document the validation process and results.
+To ensure the highest quality and accessibility of ReelTalk, I used the following validation tools throughout the development process.
+
+ **Lighthouse**
+ I used Lighthouse to audit the performance, accessibility, best practices, and SEO of the web application. Some of the issues identified related to optimizing images to improving load times however as the images were being pulled in from an API , I had not control over this aspect.
+
+ <u>Mobile Score</u>
+
+ ![Lighthouse validation score - mobile](readme_docs/images/lighthouse_mobile.png)
+
+ <u>Desktop Score</u>
+
+  ![Lighthouse validation score - mobile](readme_docs/images/lighthouse_desktop.png)
+ 
+ <br>
+
+ **WAVE Accessibility**
+ I used this tool to identify and fix accessibility issues, ensuring that the application is usable by individuals with disabilities. Although the score indicated no errors, there were some areas of concern in low contrast errors relating to the buttons used throughout the site and alerts related to text and suspicious links, however these were related to the News API content which I have no control over.
+
+ ![WAVE Accessibility score - mobile](readme_docs/images/wave_score.png)
+ 
+ <br>
+ 
+ **The WebAIM and WCAG Contrast Checkers**
+ I used these tools to verify that the color contrast between text and background met the WCAG guidelines, ensuring readability for users with visual impairments. Although there was some issues with colour contrast for small text, the two main colours used throughout the application passed.
+
+![WebAIM contrast score](readme_docs/images/web_aim_score.png)![WCAG contrast score](readme_docs/images/wcag_contrast-check.png)
+
+<br>
+  
+ **W3C HTML and CSS validators**
+ These were used to check for any markup and styling errors, ensuring that the code adhered to web standards. 
+
+ <u>HTML</u>
+ I utilised the text input format initially however it was not accepting the Django Template Language and returned them as errors, however on validating via the application address, the result was that no errors were found.
+
+ ![W3C HTML validation](readme_docs/images/html1_validation.png)
+ ![W3C HTML validation](readme_docs/images/html2_validation.png)
+
+ <u>CSS</u>
+ No errors were found.
+
+![W3C CSS validation](readme_docs/images/css_test_validation.png)
+ 
+ <br>
+ 
+I would like to address these issues during further development to ensure that ReelTalk is not only performant and visually appealing but also as fully accessible and standards-compliant as possible.
 
 <p align="right"><a href="#REELtalk">Back To Top</a></p>
 

@@ -48,18 +48,18 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a href="{% url 'home'%}" class="nav-link text-white">
+                        <a href="{% url 'home'%}" class="nav-link {% if request.path == home_url %}active text-white" aria-current="page{% endif %}">
                             <i class="fa-solid fa-home"></i>
                             <span class="nav-text">Home</span>
                         </a>
                     <li class="nav-item">
-                        <a href="{% url 'list_movies' %}" class="nav-link text-white">
+                        <a href="{% url 'list_movies' %}" class="nav-link {% if request.path == movies_url %}active text-white" aria-current="page{% endif %}">
                             <i class="fa-solid fa-film"></i>
                             <span class="nav-text">Movies</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{% url 'forum_post_list'%}" class="nav-link text-white">
+                        <a href="{% url 'forum_post_list'%}" class="nav-link {% if request.path == community_url %}active text-white" aria-current="page{% endif %}">
                             <i class="fa-solid fa-comments"></i>
                             <span class="nav-text">Community</span>
                         </a>
@@ -71,20 +71,20 @@
                         <a class="nav-link" id="message" href="#">You are logged in as {{ user.username }}</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ logout_url }}" class="nav-link text-white">
+                        <a href="{{ logout_url }}" class="nav-link {% if request.path == logout_url %}active text-white" aria-current="page{% endif %}">
                             <i class="fa-solid fa-arrow-right-from-bracket"></i>
                             <span class="nav-text">Logout</span>
                         </a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a href="{{ login_url }}" class="nav-link text-white">
+                        <a href="{{ login_url }}" class="nav-link {% if request.path == login_url %}active text-white" aria-current="page{% endif %}">
                             <i class="fa-solid fa-arrow-right-to-bracket"></i>
                             <span class="nav-text">Login</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ signup_url }}" class="nav-link text-white">
+                        <a href="{{ signup_url }}" class="nav-link {% if request.path == signup_url %}active text-white" aria-current="page{% endif %}">
                             <i class="fa-solid fa-user-plus"></i>
                             <span class="nav-text">Sign Up</span>
                         </a>
