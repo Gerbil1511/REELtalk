@@ -144,15 +144,17 @@ def delete_comment(request, comment_id):
     View to delete an existing comment. Only accessible to the comment's author.
     """
     comment = get_object_or_404(PostComment, id=comment_id, author=request.user)
-    post_slug = comment.forum_post.slug
+    forum_post_slug = comment.forum_post.slug
     movie_slug = comment.forum_post.movie.slug
     if request.method == 'POST':
         comment.delete()
         messages.success(request, 'Your comment has been deleted.')
-        return redirect('forum_post_detail', movie_slug=movie_slug, forum_post_slug=post_slug)
+        return redirect('forum_post_detail', movie_slug=movie_slug, forum_post_slug=forum_post_slug)
 
     return render(request, 'forum/delete_comment.html', {
         'comment': comment,
+        'forum_post_slug': forum_post_slug,
+        'movie_slug': movie_slug,
     })
 
 
