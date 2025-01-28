@@ -45,8 +45,8 @@ def movie_detail(request, tmdb_id):
     - A rendered template with the movie details, post form, and user posts.
     """
     movie = get_object_or_404(Movie, tmdb_id=tmdb_id)
-    user_posts = ForumPost.objects.filter(movie=movie, author=request.user)
-    if request.user.is_authenticated else None
+    user_posts = ForumPost.objects.filter(movie=movie, author=request.user) if request.user.is_authenticated else None
+
     if request.method == 'POST' and request.user.is_authenticated:
         post_form = ForumPostForm(request.POST)
         if post_form.is_valid():

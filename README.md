@@ -2,7 +2,7 @@
 
 # REELTalk
 
-<img src="readme_docs/images/responsive_image.png" alt="live site image" >
+[responsive image]()
 
 <p>
 | <a href="https://reel-talk-app-9059e75acb3d.herokuapp.com/" target="_blank">Live Project</a> |
