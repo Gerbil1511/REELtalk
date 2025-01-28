@@ -9,7 +9,6 @@ from movies.models import Movie
 from .forms import PostCommentForm, ForumPostForm
 import requests
 
-
 class ForumPostList(generic.ListView):
     """
     View to list all forum posts. Allows searching by movie title.
@@ -19,30 +18,43 @@ class ForumPostList(generic.ListView):
     paginate_by = 10
 
     def get_queryset(self):
+        # Get the search query from the request
         search_query = self.request.GET.get('search', '')
-        if search_query:
-            forum_post_list = ForumPost.objects.filter(title__icontains=search_query).annotate(comment_count=Count('comments')).order_by('-created_at')
-        else:
-            forum_post_list = ForumPost.objects.filter(status=1).annotate(comment_count=Count('comments')).order_by('-created_at')
-        return forum_post_list
 
+        if search_query:
+            # If there is a search query, filter forum posts by title containing the search query
+            forum_post_list = ForumPost.objects.filter(
+                title__icontains=search_query
+            ).annotate(
+                # Annotate each forum post with the count of comments that have status=1 (published)
+                comment_count=Count('comments', filter=Q(comments__status=1))
+            ).order_by('-created_at')  # Order the results by creation date in descending order
+        else:
+            # If there is no search query, filter forum posts by status=1 (published)
+            forum_post_list = ForumPost.objects.filter(
+                status=1
+            ).annotate(
+                # Annotate each forum post with the count of comments that have status=1 (published)
+                comment_count=Count('comments', filter=Q(comments__status=1))
+            ).order_by('-created_at')  # Order the results by creation date in descending order
+
+        return forum_post_list  # Return the filtered and annotated queryset
 
 def forum_post_detail(request, movie_slug, forum_post_slug):
     """
     View to display a single forum post and handle comment creation and editing.
     """
     movie = get_object_or_404(Movie, slug=movie_slug)
-    forum_post = get_object_or_404(
-        ForumPost, slug=forum_post_slug, movie=movie)
+    forum_post = get_object_or_404(ForumPost, slug=forum_post_slug, movie=movie)
 
+    # Count published comments
+    comment_count = forum_post.comments.filter(status=1).count()
+
+    # Fetch comments for display
     if request.user.is_authenticated:
-        comments = forum_post.comments.filter(Q(status=1) | Q(
-            author=request.user)).order_by('-created_at')
-        comment_count = forum_post.comments.filter(
-            Q(status=1) | Q(author=request.user)).count()
+        comments = forum_post.comments.filter(Q(status=1) | Q(author=request.user)).order_by('-created_at')
     else:
         comments = forum_post.comments.filter(status=1).order_by('-created_at')
-        comment_count = forum_post.comments.filter(status=1).count()
 
     if request.method == 'POST' and request.user.is_authenticated:
         if 'comment_id' in request.POST:
