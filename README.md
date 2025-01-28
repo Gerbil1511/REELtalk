@@ -404,24 +404,59 @@ The scope of the REEltalk app includes:
 - Forum Post Detail Page: Movie poster, post author, title, content, timestamp, and user reviews/comments.
 - User Profile: User information, list of user's posts and comments, and options to edit/delete posts.
 
+*Mobile Wireframe*
+![Mobile Wireframe](readme_docs/images/mobile_wireframe.png)
+<br>
+
+*Tablet Wireframe*
+![Tablet Wireframe](readme_docs/images/tablet_wireframe.png)
+<br>
+
+*Desktop Wireframe*
+![Desktop Wireframe](readme_docs/images/desktop_wireframe.png)
+<br>
+
 **Layout**
 - Header: Logo, navigation menu, and user authentication links (login/logout).
 - Main Content: Dynamic content based on the selected page (e.g., movie list, movie details, forum posts, etc).
 - Footer: Links to social media, contact information, and copyright notice.
+
+![Mobile navigation](readme_docs/images/mob_nav.png) ![Desktop Navigation](readme_docs/images/desktop_nav.png) ![Footer section](readme_docs/images/Footer.png)
 <br>
 
 ### *Surface Plane*
 
 **Visual Design:**
 - Color Scheme: A cohesive color palette that aligns with the theme of movies and entertainment.
+![Colour scheme](readme_docs/images/colour_chart.png)
+<br>
+
 - Typography: Readable and aesthetically pleasing fonts for headings, body text, and buttons.
+
+![Typography](readme_docs/images/font_details.png)
+![Typography](readme_docs/images/example_font.png)
+<br>
+
 - Imagery: High-quality movie posters, icons, and graphics to enhance the visual appeal.
+
+![Hero image](readme_docs/images/hero.jpg)
+![No photo image](readme_docs/images/no_image.webp)
+![Reeltalk Logo](static/images/reeltalk_logo.png)
+![Favicon](static/images/apple-touch-icon.png)
+<br>
+
 - Buttons and Forms: Consistent Bootstrap styling for buttons and forms to ensure a unified look and feel.
+
+![Site Navigation Buttons](readme_docs/images/site_nav_btn.png) ![Search Buttons](readme_docs/images/searchbtn.png) ![Pagination Buttons](readme_docs/images/pagination_buttons.png) ![More Details Buttons](readme_docs/images/movie_detail_btn.png) ![Movie List Carousel Controls](readme_docs/images/carousel_controls.png)
+<br>
 
 **Responsive Design:**
 - Mobile: Optimized layout for smaller screens with collapsible navigation and touch-friendly elements.
 - Tablet: Adaptive design that adjusts the layout for medium-sized screens.
 - Desktop: Full-featured layout with ample space for displaying content and navigation.
+
+![Responsive images](readme_docs/images/responsive_image.png) 
+<br>
 
 <p align="right"><a href="#REELtalk">Back To Top</a></p>
 
