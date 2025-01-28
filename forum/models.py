@@ -29,6 +29,11 @@ class ForumPost(models.Model):
                 counter += 1
                 queryset = ForumPost.objects.filter(slug=self.slug).exists()
         super().save(*args, **kwargs)
+    
+    @property
+    def published_comment_count(self):
+        return self.comments.filter(approved_comment=True).count()
+
 
     class Meta:
         ordering = ['-created_at']

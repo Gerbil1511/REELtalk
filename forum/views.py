@@ -23,7 +23,7 @@ class ForumPostList(generic.ListView):
         if search_query:
             forum_post_list = ForumPost.objects.filter(title__icontains=search_query).annotate(comment_count=Count('comments')).order_by('-created_at')
         else:
-            forum_post_list = ForumPost.objects.filter(status=1).annotate(comment_count=Count('comments'))
+            forum_post_list = ForumPost.objects.filter(status=1).annotate(comment_count=Count('comments')).order_by('-created_at')
         return forum_post_list
 
 
@@ -143,9 +143,9 @@ def delete_comment(request, comment_id):
     """
     View to delete an existing comment. Only accessible to the comment's author.
     """
-    comment = get_object_or_404(Comment, id=comment_id, author=request.user)
-    post_slug = comment.post.slug
-    movie_slug = comment.post.movie.slug
+    comment = get_object_or_404(PostComment, id=comment_id, author=request.user)
+    post_slug = comment.forum_post.slug
+    movie_slug = comment.forum_post.movie.slug
     if request.method == 'POST':
         comment.delete()
         messages.success(request, 'Your comment has been deleted.')

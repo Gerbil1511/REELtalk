@@ -32,7 +32,7 @@ TMDB_API_KEY = os.environ.get('TMDB_API_KEY')
 NEWS_API_KEY = os.environ.get('NEWS_API_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = [
@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cloudinary_storage',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -61,7 +60,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'django_summernote',
-    'cloudinary',
     'movies',
     'forum',
     

@@ -16,18 +16,18 @@
     <div class="row">
         <div class="col-md-6 col-lg-4 my-2">
             <img src="https://image.tmdb.org/t/p/w500{{ forum_post.movie.poster_path }}" class="img-fluid"
-                alt="{{ movie.title }}">
+                alt="{{ forum_post.movie.title }}">
         </div>
         <div class="col-md-6 col-lg-8 my-2 post-details">
             <h5>Posted by: <strong>{{ forum_post.author.username }}</strong> - <small>
                     {{ forum_post.created_at|timesince_hours }}</small></h5>
             <hr>
+
             <h4>{{ forum_post.title }}</h4>
             <p>{{ forum_post.content }}</p>
         </div>
     </div>
     <hr>
-
 
     <div>
         <h3>Previous comments on this post:</h3>
@@ -36,22 +36,22 @@
                 {% if comments %}
                 {% for comment in comments %}
                 <div class="my-1">
-                    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center post-border w-100 p-2">
-                        <div class="col-2 p-2">
+                    <div class="row post-border w-100 p-2">
+                        <div class="col-12 col-sm-2 p-2">
                             <p><strong>{{ comment.author.username }} </strong>said:</p>
                             <hr>
                             <p><small><strong>{{ comment.created_at|timesince_hours }}</strong></small></p>
                         </div>
-                        <div class="col-7 p-2">
+                        <div class="col-12 col-sm-7 p-2">
                             {{ comment.comment }}
                         </div>
-                        <div class="col-2 p-2 text-center">
+                        <div class="col-12 col-sm-3 p-2 text-center">
                             {% if user.is_authenticated and comment.author == user %}
                             <button type="button" class="btn btn-edit btn-sm btn-warning my-2 mx-2"
                                 data-bs-toggle="collapse" data-bs-target="#editComment{{ comment.id }}"
                                 aria-expanded="false" aria-controls="editComment{{ comment.id }}">Edit</button>
                             <a href="{% url 'delete_comment' comment.id %}" class="btn btn-danger btn-sm">Delete</a>
-                        {% endif %}    
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                     <div colspan="4">
                         {% if user.is_authenticated and comment.author == user %}
                         <h4>Edit this comment here:</h4>
-                            <form method="post" class="form" action="{% url 'edit_comment' comment.id %}">
+                        <form method="post" class="form" action="{% url 'edit_comment' comment.id %}">
                             {% csrf_token %}
                             <input type="hidden" name="comment_id" value="{{ comment.id }}">
                             {{ comment_form.as_p }}
@@ -72,14 +72,12 @@
                     </div>
                 </div>
                 {% endfor %}
-            {% else %}
+                {% else %}
                 <p><strong>Be the first to leave a comment!</strong></p>
-            {% endif %}
+                {% endif %}
             </div>
         </div>
         <hr>
-
-
     </div>
     <div class="container comment-form mb-5">
         {% if user.is_authenticated %}
@@ -93,6 +91,5 @@
         <p><a href="{% url 'account_login' %}">Log in</a> to add a comment.</p>
         {% endif %}
     </div>
-
 </div>
 {% endblock %}
