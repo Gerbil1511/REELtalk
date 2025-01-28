@@ -34,13 +34,7 @@ ReelTalk is a movie-centric full-stack platform that combines the excitement of 
   - [Frameworks and Libraries](#libraries-and-frameworks)
   - [Software and Tools](#software-and-tools)
 * [Testing](#testing)
-  - [Bug Log](#bug-log)
   - [Testing](#testing)
-    - [Unit Tests](#unit-tests)
-     - Full test suite testing - Generate unit tests for all methods in the task model.
-     - [Test Skeleton](#test-skeleton) - Create an empty test skeleton for the Task model without the asserts.
-     - ghost text - rapidly create tests by just accepting the ghost text suggestions.
-     - edge case testing - prompt like “Generate edge case tests for invalid inputs in the Task model”,
   - [Validation](#validation)
 * [Deployment](#deployment)
 * [AI Reflection](#ai-reflection)
@@ -371,6 +365,10 @@ The scope of the REEltalk app includes:
 - Voting System: Users can upvote or downvote forum posts.
 - Latest Movie News: Integration with a News API to display the latest movie news.
 
+**Future Features**
+- Ensuring users are able to fully manage their profile including username, password, email, profile image, see a full list of their posts and comments with functionality to edit and delete them.
+
+
 **Functional Requirements:**
 - Secure user authentication and session management.
 - Integration with external News API for entertainment news.
@@ -389,10 +387,13 @@ The scope of the REEltalk app includes:
 - User Profile: User-specific information, including their posts and comments.
 
 **Interaction Design:**
-- Navigation: Clear and intuitive navigation menu with links to Home, Movies, Community Forum, and User Autthentication. Clearly defined and labeled buttons for navigation around the site.
+- Navigation: Clear and intuitive navigation menu with links to Home, Movies, Community Forum, and User Authentication. Clearly defined and labeled buttons for navigation around the site.
 - Forms: User-friendly forms for registration, login, creating/editing posts, and commenting.
 - Feedback: Success and error messages for user actions (e.g., post creation, comment submission).
 <br>
+
+ERD DIangram to show relationships between Users, Movie, Community Forum (Posts and Comments)
+![Reeltalk App ERD diagram](readme_docs/images/reeltalk_erd.png)
 
 ### *Skeleton Plane*
 
@@ -427,7 +428,8 @@ The scope of the REEltalk app includes:
 ### *Surface Plane*
 
 **Visual Design:**
-- Color Scheme: A cohesive color palette that aligns with the theme of movies and entertainment.
+- Color Scheme: A cohesive color palette that aligns with the theme of movies and entertainment. Influenced by using applications such as GitPod regularly, I believe I have been subliminally influenced to select the colurs that I did. Apps like Netflix and Letterbod'd use the dark theme to great effect and therefore as an homage to that I opted for the following colour scheme
+
 ![Colour scheme](readme_docs/images/colour_chart.png)
 <br>
 
@@ -723,78 +725,82 @@ Throughout the development of REELtalk I utilised the following:
 
 <p align="right"><a href="#REELtalk">Back To Top</a></p>
 
-## Testing
-### Bug Log
-Document the bugs found during testing and their resolution.
-
 ### Testing
-#### Unit Tests
-- Full test suite testing
-- Test Skeleton
-- ghost text
-- edge case testing
-- Unit testing was a crucial part of the development process for ReelTalk. I used a combination of manual and AI-assisted methods to create a comprehensive test suite that ensures the functionality and reliability of my application.
+I tested the app using the following test cases:
 
-Full Test Suite Testing
-I generated unit tests for all methods in the Task model to ensure that each method performs as expected. By leveraging AI tools like GitHub Copilot, I was able to quickly generate test cases that cover a wide range of scenarios.
+### Forum App Test Cases
 
-Example:
-```python
-from django.test import TestCase
-from .models import Task
+#### Forms
 
-class TaskModelTests(TestCase):
+- **TestForumPostForm**: Tests for the `ForumPostForm`.
+  - `test_form_is_valid`: Ensures the form is valid with correct data.
+  - `test_form_is_invalid_without_title`: Ensures the form is invalid without a title.
+  - `test_form_is_invalid_without_content`: Ensures the form is invalid without content.
 
-    def test_task_creation(self):
-        task = Task.objects.create(title="Test Task", description="Test Description")
-        self.assertEqual(task.title, "Test Task")
-        self.assertEqual(task.description, "Test Description")
-        self.assertFalse(task.completed)
-```
+- **TestPostCommentForm**: Tests for the `PostCommentForm`.
+  - `test_form_is_valid`: Ensures the form is valid with correct data.
+  - `test_form_is_invalid_without_comment`: Ensures the form is invalid without a comment.
 
-Test Skeleton
-To streamline the testing process, I created an empty test skeleton for the Task model without the asserts. This allowed us to rapidly fill in the necessary assertions and test logic.
+#### Views
 
-Example:
-```python
-from django.test import TestCase
-from .models import Task
+The `forum/tests/test_views.py` file contains test cases for the views in the `forum` app. It ensures that the views render the correct templates and handle data correctly.
 
-class TaskModelTests(TestCase):
+- **TestForumViews**: Tests for the forum views.
+  - `test_forum_post_list_view`: Ensures the `forum_post_list` view renders correctly.
+  - `test_forum_post_detail_view`: Ensures the `forum_post_detail` view renders correctly.
+  - `test_create_post_view`: Ensures the `create_post` view handles post creation correctly.
+  - `test_edit_post_view`: Ensures the `edit_post` view handles post editing correctly.
+  - `test_delete_post_view`: Ensures the `delete_post` view handles post deletion correctly.
 
-    def test_task_creation(self):
-        task = Task.objects.create(title="Test Task", description="Test Description")
-        # Add assertions here
-```
+### Movies App Test Cases
 
+#### Forms
 
-Ghost Text
-Using AI tools, I was able to rapidly create tests by just accepting the ghost text suggestions. This feature provided intelligent code completions that significantly sped up the test creation process.
+The `movies/tests/test_forms.py` file contains test cases for the forms in the `movies` app. It ensures that the forms are validated correctly with both valid and invalid data.
+
+- **TestMovieForm**: Tests for the `MovieForm`.
+  - `test_form_is_valid`: Ensures the form is valid with correct data.
+  - `test_form_is_invalid`: Ensures the form is invalid with missing required fields.
+  - `test_form_is_invalid_without_title`: Ensures the form is invalid without a title.
+  - `test_form_is_invalid_without_content`: Ensures the form is invalid without content.
 
 
-Edge Case Testing
-To ensure robustness, I prompted AI tools to generate edge case tests for invalid inputs in the Task model. This helped us identify and handle potential issues that could arise from unexpected or invalid data.
+#### Views
 
-Example:
-```python
-from django.test import TestCase
-from .models import Task
+The `movies/tests/test_views.py` file contains test cases for the views in the `movies` app. It ensures that the views render the correct templates and handle data correctly.
 
-class TaskModelTests(TestCase):
+- **TestMovieViews**: Tests for the movie views.
+  - `test_list_movies_view`: Ensures the `list_movies` view renders correctly.
+  - `test_movie_detail_view`: Ensures the `movie_detail` view renders correctly.
+  - `test_movie_detail_view_post`: Ensures the `movie_detail` view handles post creation correctly.
 
-    def test_invalid_task_creation(self):
-        with self.assertRaises(ValueError):
-            Task.objects.create(title="", description="Test Description")
 
-    def test_task_creation_with_long_title(self):
-        long_title = "T" * 256
-        with self.assertRaises(ValueError):
-            Task.objects.create(title=long_title, description="Test Description")
-```
+  ### Test Results
 
-Reflections on AI
-The use of AI tools in the testing process has significantly boosted my efficiency and effectiveness. By leveraging AI to generate test cases, create test skeletons, and identify edge cases, I ensured comprehensive test coverage and robust functionality. This AI-driven approach allowed me to focus on refining my application and delivering a high-quality product.
+| Test Case                         | Test Method                          | Description                                           | Result  |
+|-----------------------------------|--------------------------------------|-------------------------------------------------------|---------|
+| **TestForumPostForm**             | `test_form_is_valid`                 | Ensures the form is valid with correct data.          | Passed  |
+|                                   | `test_form_is_invalid_without_title` | Ensures the form is invalid without a title.          | Passed  |
+|                                   | `test_form_is_invalid_without_content`| Ensures the form is invalid without content.          | Passed  |
+| **TestPostCommentForm**           | `test_form_is_valid`                 | Ensures the form is valid with correct data.          | Passed  |
+|                                   | `test_form_is_invalid_without_comment`| Ensures the form is invalid without a comment.        | Passed  |
+| **TestForumViews**                | `test_forum_post_list_view`          | Ensures the `forum_post_list` view renders correctly. | Passed  |
+|                                   | `test_forum_post_detail_view`        | Ensures the `forum_post_detail` view renders correctly.| Passed  |
+|                                   | `test_create_post_view`              | Ensures the `create_post` view handles post creation correctly.| Passed  |
+|                                   | `test_edit_post_view`                | Ensures the `edit_post` view handles post editing correctly.| Passed  |
+|                                   | `test_delete_post_view`              | Ensures the `delete_post` view handles post deletion correctly.| Passed  |
+| **TestMovieForm**                 | `test_form_is_valid`                 | Ensures the form is valid with correct data.          | Passed  |
+|                                   | `test_form_is_invalid`               | Ensures the form is invalid with missing required fields.| Passed  |
+|                                   | `test_form_is_invalid_without_title` | Ensures the form is invalid without a title.          | Passed  |
+|                                   | `test_form_is_invalid_without_content`| Ensures the form is invalid without content.          | Passed  |
+| **TestMovieViews**                | `test_list_movies_view`              | Ensures the `list_movies` view renders correctly.     | Passed  |
+|                                   | `test_movie_detail_view`             | Ensures the `movie_detail` view renders correctly.    | Passed  |
+|                                   | `test_movie_detail_view_post`        | Ensures the `movie_detail` view handles post creation correctly.| Passed  |
 
+
+**Reflections on AI**
+The use of AI tools in the testing process has significantly boosted my efficiency and effectiveness. As a newcomer to testing applications I made use of AI to generate test cases, create test skeletons, and identify edge cases, I ensured comprehensive test coverage and robust functionality. This AI-driven approach allowed me to focus on refining my application and delivering a high-quality product.
+<br>
 
 
 ### Validation
@@ -842,6 +848,14 @@ To ensure the highest quality and accessibility of ReelTalk, I used the followin
 ![W3C CSS validation](readme_docs/images/css_test_validation.png)
  
  <br>
+
+ **JSHint**
+ JSHint showed one warning and one undefined variable but no other errors.
+
+![JSHint validation](readme_docs/images/JSHint.png)
+
+**Python Linter from Code Institute**
+- (https://pep8ci.herokuapp.com/) Used the linter to ensure that all codes meet PEP8 guidelines.
  
 I would like to address these issues during further development to ensure that ReelTalk is not only performant and visually appealing but also as fully accessible and standards-compliant as possible.
 
@@ -981,267 +995,32 @@ Thanks to the combination of AI tools and expert guidance, I could focus on deli
 <br>
 
 ### Debugging Code
-AI tools was also invaluable in debugging my code. Throughout the development process, I utilized AI to continuously analyze various aspects of my code, identify potential issues, and provide suggestions for resolving them. This included detecting syntax errors, reference errors, and type errors, as well as optimizing code performance. For example, AI-driven insights helped us fine-tune my Django views and models, resulting in a more efficient and error-free application.
+AI tools was also invaluable in debugging my code. Throughout the development process, I utilized AI to continuously analyze various aspects of my code, identify potential issues, and provide suggestions for resolving them. This included detecting syntax errors, reference errors, and type errors, as well as optimizing code performance. For example, AI-driven insights helped me fine-tune my Django views and models, resulting in a more efficient and error-free application.
 
-*AI tools was also instrumental in debugging my code. Throughout development, I utilized AI to continuously analyze various aspects of my code which enabled us to identify and correct code issues promptly through providing suggestions for resolving them. This included detecting syntax errors, reference errors, type errors, etc, and optimizing code performance. For instance, AI-driven optimizations helped us fine-tune the HTML, CSS and JavaScript, resulting in a smooth,  more error-free, engaging gameplay experience for my target audience.*
 <br>
 
 ### Optimizing Code
 The role of AI in optimizing my code cannot be overstated. AI tools provided recommendations for improving code performance and enhancing the user experience. By analyzing my codebase, AI identified areas where optimizations could be made, such as reducing redundant operations, improving database queries, and enhancing the responsiveness of the user interface. These optimizations contributed to a smoother and more efficient application.
 
-*
+
 <br>
 
 ### Testing Code
-As stated previouslyAI tools also played a crucial role in testing my code. I used AI to generate automated unit tests for key functionalities, ensuring comprehensive test coverage. By leveraging AI, I was able to quickly create test cases for various components, such as user authentication, movie search, and forum post creation. This automated testing approach allowed us to identify and address issues early in the development process, resulting in a more robust and reliable application.
+As stated previouslyAI tools also played a crucial role in testing my code. I used AI to generate automated unit tests for key functionalities, ensuring comprehensive test coverage. By leveraging AI, I was able to quickly create test cases for various components. This automated testing approach allowed me to identify and address issues early in the development process, resulting in a more robust and reliable application.
 
-*
+
 <br>
 
 ### Reflections on AI
-On reflection, the integration of AI into my project development process has brought about a paradigm shift. AI tools enabled us to speed up my workflow, work smarter, and more efficiently by automating mundane tasks, providing intelligent code suggestions, and offering real-time debugging and optimization. The strategic use of AI allowed us to deliver a polished and high-quality application that meets the needs of my users. Overall, AI tools have significantly impacted my development process, enhancing my productivity and ensuring the success of the ReelTalk project.
-
-*
+On reflection, the integration of AI into my project development process has brought about a paradigm shift. AI tools has enabled me to speed up my workflow, work smarter, and more efficiently by automating mundane tasks, providing intelligent code suggestions, and offering real-time debugging and optimization. The strategic use of AI allowed me to deliver a polished and high-quality application that meets the needs of my users. Overall, AI tools have significantly impacted my development process, enhancing my productivity and ensuring the success of the ReelTalk project.
 <br>
 
 <p align="right"><a href="#REELtalk">Back To Top</a></p>
 
 ## Credits and Acknowledgements
-### Credits
-Acknowledge the contributions of team members and external resources.
 
-### Acknowledgements
-Express gratitude to mentors and supporters.
-
-**Add specific credits and acknowledgements here**
-
-[Back to top](
-
-<p align="right"><a href="#REELtalk">Back To Top</a></p>
-
-
-
-
-
-
-
-### User Stories
-
-User stories are short, simple descriptions of a feature from the perspective of the end-user or stakeholder. They help to define the desired outcomes and provide a clear understanding of the user's needs and goals. In my project, user stories guided the development process, ensuring that each feature was designed with the user in mind.
-
-
-| User Role  | User Story |
-|------------|------------|
-| As a player | I want a  so that I can   . |
-
-
-<br>
-
-### Fonts
-
-
-<br>
-
-<img src="readmedocs/g" alt="font use" width="40%" height="40%">
-<br>
-
-
-
-
-<br>
-
-<img src="readmedocs/jost-font.png" alt="font use" width="60%" height="60%">
-<br>
-
-### Images
-
-
-<br>
-
-<img src="readmedocs/" alt="Lab background image" width="50%" height="50%">
-
-<br>
-
-
-<br>
-
-<img src="assets/images/FAVICONS.png" alt="favicon image" width="20%" height="20%">
-
-<br>
-
-
-<br>
-
-<img src="readmedocs/" alt="corrosive a" width="50%" height="50%">
-
-
-<br>
-
-### Colours
-
-
-
-<img src="readmedocs/dark-cyan.png" alt="dark cyan colours" width="50%" height="50%"><img src="readmedocs/orange.png" alt="orange colours" width="50%" height="50%">
-<br>
-
-### Wireframes
-
-- Mobile
-
-<img src="readmedocs/.png" alt="Mobile wireframe" width="25%" height="25%">
-<br>
-
-- Tablet
-
-<img src="readmedocs/.png" alt="Tablet wireframe" width="30%" height="30%">
-<br>
-
-- Desktop
-
-<img src="readmedocs/.png" alt="Desktop wireframe" width="60%" height="60%">
-<br>
-<br>
-<p align="right"><a href="#REELtalk">Back To Top</a></p>
-
-## Features
-
-### Register/Login/Logout
-
-### Movie List
-
-
-<img src="readmedocs/.png" alt="" width="30%" height="30%">
-
-### Forum
-
-
-
-<img src="readmedocs/.png" alt="" width="30%" height="30%">
-
-### Forum Post Detail
-
-
-<br>
-
-
-<br>
-<img src="readmedocs/.png" alt="r" width="40%" height="40%">
-
-<br>
-
-### Buttons
-
-
-
-<img src="readmedocs/s.png" alt="" width="30%" height="30%">
-
-<br>
-
-
-### Upvotes/DownVotes
-
-
-
-<img src="readmedocs/.png" alt="Congratulations alert" width="40%" height="40%">
-<br>
-
-
-### Responsive Design
-
-
-<br>
-
-<img src="readmedocs/.png" alt="responsive design" width="70%" height="70%">
-
-
-### Future Features
-
-Looking ahead, I have identified several potential features 
-
-
-<p align="right"><a href="#REELtalk">Back To Top</a></p>
-
-
-
-
-
-
-## AI Tools
-
-
-
-
-### Reflections on AI
-
-On reflection, the integration of AI into my project development process has essentially brought about a paradigm shift. It enabled us to speed up my workflow, work smarter and more efficiently by automating mundane tasks, providing intelligent code suggestions, and offering real-time debugging and optimization; In summary, AI tools have supported us in delivering a polished, educational web app game aimed at Science Key Stage ???? students. 
-<br>
-
-
-<p align="right"><a href="#REELtalk">Back To Top</a></p>
-
-
-
-## Testing
-
-During the testing phase of my project, I encountered several bugs that needed to be addressed to ensure the app's functionality and user experience was top-notch. Identifying these issues early allowed us to implement targeted solutions and refine my code, ultimately leading to a more polished and reliable product.
-
-### Bug Log
-
-| Bug Discovered | Solution/Potential Solution |
-| -------------- | --------------------------- |
-| Bug 1:  | Fixed by  |
-
-
-
-
-
-<br>
-
-
-### Validation
-
-Validation is a crucial aspect of the software development process, as it ensures that the product meets the specified requirements and functions as intended. To enhance my validation efforts, I leveraged online validation tools extensively. These tools allowed us to automate testing and quickly identify any discrepancies or errors in my code. By utilizing these tools, I was able to perform rigorous testing and verification, ensuring that each component and feature functioned correctly and met my quality standards. Online validation tools provided real-time feedback and detailed reports, enabling us to address issues promptly and refine my code efficiently.
-<br>
-
-#### Lighthouse
-The Lighthouse validation results 
-
-<img src="readmedocs/.png" alt="Lighthouse scores" width="70%" height="70%">
-<img src="readmedocs/.png" alt="Lighthouse scores" width="70%" height="70%">
-
-
-#### WAVE
-
-
-<img src="readmedocs/.png" alt="WAVE validation results" width="40%" height="40%">
-
-#### W3C - HTML
-
-
-<img src="readmedocs/.png" alt="validation" width="70%" height="70%">
-
-#### W3C- CSS
-W3C CSS Validator identified no warnings or errors.
-
-<img src="readmedocs/.png" alt="validation" width="70%" height="70%">
-
-#### JS Hint
-
-#### Python Linter
-
-
-<img src="readmedocs/.png" alt="responsive design" width="100%" height="100%">
-
-<br>
-<p align="right"><a href="#REELtalk">Back To Top</a></p>
-
-## Credits and Acknowledgements
-
-
-### Credits
 
 ### README
-<br>
 
 - [Awesome README](https://github.com/matiassingers/awesome-readme)
 - [README file generator/editor](https://www.readme.so)
@@ -1251,38 +1030,34 @@ W3C CSS Validator identified no warnings or errors.
 <br>
 
 ### FONTS
+
+- CDN Fonts 
+[Inclusive Sans 2 font](https://www.cdnfonts.com/inclusive-sans-2.font) 
+[Olivia King Designer](https://www.oliviaking.com/)
 <br>
-
-
-<br>
-
-### COLOURS
-
-Influenced by using applications such as GitPod regularlt I believe i have been subliminally influenced to select the colurs that I did. Apps like Netflic and Letterbod'd use the dark theme to great effect and therefore as an homage to that i opted for the following colour scheme
-<br>
-
 
 ### IMAGERY
 
-Hero image - https://wallpapercave.com/w/wp10615935 by [Tramon1](https://wallpapercave.com/u/tramon1)
-REELtalk logo and Favicon - [Luke Beck](https://lukebeck.substack.com))
-No poster image - [Image by Gerd Altmann/geralt from Pixabay](https://pixabay.com/users/geralt-9301/) 
-
+- Hero image - (https://wallpapercave.com/w/wp10615935) by [Tramon1](https://wallpapercave.com/u/tramon1)
+- REELtalk logo and Favicon - [Luke Beck](https://lukebeck.substack.com) - My wonderful son!
+- No poster image - [Image by Gerd Altmann/geralt from Pixabay](https://pixabay.com/users/geralt-9301/)
+- Movie Posters/News article Images - Supplied through the TMDB API and NEWS API
 <br>
-
-
 
 ### RESPONSIVE DEVICE IMAGES
 
-- https://ui.dev/amiresponsive
-- https://websitemockupgenerator.com
-
+- [Am I Responsive](https://ui.dev/amiresponsive)
+<br>
 
 ### Acknowledgements
 
- A huge thank you to Dillon, Mark, Roo, and John at Code Institute for their support and help, I truly appreciate it!
- Special thanks go out to all my cohort on the Bootcamp as, you are all amazing and talented and supportive and I definitely am grateful i met you all!
- And to my family and friends who tested my deployments and gave great feeback, love you all, thank you so much!
+ - A huge thank you to Dillon, Mark, Roo, and John and everyone at Code Institute for their support and help, I truly appreciate it!
+
+ - Special thanks go out to all my cohort on the Bootcamp as, you are all amazing and talented and supportive and I definitely am grateful I met you all!
+ 
+ - Super special thanks go to Joanna, Amanda, Maebh and Maja - you are all absolute legends!
+
+ - And to my family and friends who tested my deployments and gave great feeback, love you all, thank you so much!
 
 
 <p align="right"><a href="#REELtalk">Back To Top</a></p>

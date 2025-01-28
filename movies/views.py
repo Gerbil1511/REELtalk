@@ -5,6 +5,7 @@ from forum.models import ForumPost
 from forum.forms import ForumPostForm
 from django.contrib import messages
 
+
 def list_movies(request):
     """
     View to list all movies. Allows searching by movie title.
@@ -17,17 +18,20 @@ def list_movies(request):
     """
     search_query = request.GET.get('search', '')
     movie_list = None
-    if search_query:  # If search query has data and is not empty, filter the movies based on the query
-        movie_list = Movie.objects.filter(title__icontains=search_query)  #icontains is case-insensitive
-    
+    # If search query has data and is not empty, filter the
+    # movies based on the query
+    if search_query:
+        # icontains is case-insensitive
+        movie_list = Movie.objects.filter(title__icontains=search_query)
     context = {
         'movie_list': movie_list,
         'search_query': search_query,
-        'latest_movies': Movie.objects.order_by('-release_date')[:10],  
+        'latest_movies': Movie.objects.order_by('-release_date')[:10],
         'top_rated_movies': Movie.objects.order_by('-vote_average')[:10],
     }
+    # Render the list_movies.html template with the context data
+    return render(request, 'movies/list_movies.html', context)
 
-    return render(request, 'movies/list_movies.html', context)  # Render the list_movies.html template with the context data
 
 def movie_detail(request, tmdb_id):
     """
@@ -41,8 +45,8 @@ def movie_detail(request, tmdb_id):
     - A rendered template with the movie details, post form, and user posts.
     """
     movie = get_object_or_404(Movie, tmdb_id=tmdb_id)
-    user_posts = ForumPost.objects.filter(movie=movie, author=request.user) if request.user.is_authenticated else None
-    
+    user_posts = ForumPost.objects.filter(movie=movie, author=request.user)
+    if request.user.is_authenticated else None
     if request.method == 'POST' and request.user.is_authenticated:
         post_form = ForumPostForm(request.POST)
         if post_form.is_valid():
@@ -60,6 +64,7 @@ def movie_detail(request, tmdb_id):
         'post_form': post_form,
         'user_posts': user_posts,
     })
+
 
 @login_required
 def edit_post(request, post_id):
@@ -87,10 +92,11 @@ def edit_post(request, post_id):
         'post': post,
     })
 
+
 @login_required
 def delete_post(request, post_id):
     """
-    View to delete an existing forum post. Only accessible to the post's author.
+    View to delete an existing forum post. Only accessible to post's author.
 
     Data is obtained from:
     - ForumPost model: Retrieves the forum post based on the post ID.
