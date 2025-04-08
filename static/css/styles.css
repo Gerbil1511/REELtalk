@@ -311,6 +311,12 @@ footer {
     z-index: 10;
 }
 
+.fa-comments,
+.fa-thumbs-up,
+.fa-thumbs-down {
+    color: #e26f11
+}
+
 .upvote,
 .downvote {
     color: #fff;

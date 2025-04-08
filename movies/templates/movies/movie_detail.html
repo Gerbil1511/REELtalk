@@ -25,6 +25,8 @@
             <p><strong>Popularity:</strong> {{ movie.popularity }}</p>
             <p><strong>Vote Count:</strong> {{ movie.vote_count }}</p>
             <p><strong>Vote Average:</strong> {{ movie.vote_average }}</p>
+
+            <p><small>Head to the <a href="{% url 'forum_post_list' %}">Community</a> page to view others' posts about this movie!</small></p>
             <hr>
         </div>
     </div>

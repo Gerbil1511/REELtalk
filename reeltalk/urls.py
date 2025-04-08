@@ -24,6 +24,5 @@ urlpatterns = [
     path('', home, name='home'),  # Home page view
     path('movies/', include('movies.urls')),  # Movies page view
     path('community/', include('forum.urls')),  # Include forum app URLs
-    path('accounts/', include('allauth.urls')),  # Assuming you are using django-allauth for authentication
-    path('summernote/', include('django_summernote.urls')),  # Include Summernote URLs
+    path('accounts/', include('allauth.urls')),  # Django-allauth for authentication   
 ]

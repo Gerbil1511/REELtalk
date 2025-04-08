@@ -311,6 +311,12 @@ footer {
     z-index: 10;
 }
 
+.fa-comments,
+.fa-thumbs-up,
+.fa-thumbs-down {
+    color: #e26f11
+}
+
 .upvote,
 .downvote {
     color: #fff;
@@ -350,7 +356,7 @@ img.movie-poster {
 .pagination .page-item.active .page-link {
     background-color: #e26f11;
     /* Orange background for active page */
-    border-color: #e26f11;
+    border-color: #141414;
     /* Orange border for active page */
     color: #fff;
     /* White text for active page */
@@ -390,13 +396,13 @@ img.movie-poster {
 
 .submit {
     background-color: #e26f11;
-    border-color: #e26f11;
+    border-color: #141414;
     color: #fff;
 }
 
 .submit:hover {
     background-color: #fff;
-    border-color: #fff;
+    border-color: #141414;
     color: #e26f11;
 }
 
@@ -438,3 +444,4 @@ img.movie-poster {
         }
 
     }
+}

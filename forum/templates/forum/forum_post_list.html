@@ -35,7 +35,8 @@
         </div>
         <br>
         {% if not user.is_authenticated %}
-        <p>If you would like to create a forum post, vote on posts or create comments then <a class="link" href="{% url 'account_signup' %}">sign up</a>
+        <p>If you would like to create a forum post, vote on posts or create comments then <a class="link"
+                href="{% url 'account_signup' %}">sign up</a>
             or <a class="link" href="{% url 'account_login' %}">login here</a></p>
         {% endif %}
         <div><strong>Please remember</strong> to be respectful and follow our community guidelines. Let's keep the
@@ -44,21 +45,38 @@
             <hr>
         </div>
         {% for post in page_obj %}
-        <div class="my-1 scroll-text">
-            <div class="d-flex flex-row justify-content-between align-items-center w-100 post-border p-2">
-                <div class="col-2 p-2">
+        <div class="my-1">
+            <div class="align-items-center w-100 post-border p-2">
+                <div class="p-2">
                     <p>By: <strong>{{ post.author.username }}</strong></p>
                     <p><small><strong>{{ post.created_at|timesince_hours }}</strong></small></p>
-                    <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}"
-                        alt="{{ post.movie.title }} Poster" class="forum-img-fluid movie-poster">
                 </div>
-                <div class="col-4 col-md-7 p-2">
-                    <h5>{{ post.title|truncatewords:15 }}</h5>
+                <div class="d-flex flex-row justify-content-between p-2" >
+                    <div class="col-3 col-md-3 p-2 img-fluid" >
+                        <img src="https://image.tmdb.org/t/p/w500{{ post.movie.poster_path }}"
+                            alt="{{ post.movie.title }} Poster" class="movie-poster">
+                    </div>
+                    <div class="col-9 col-md-9 p-2">
+                        <h5>{{ post.title|truncatewords:15 }}</h5>
+                        <hr>
+                        <p>{{ post.content|truncatewords:13 }}</p>
+                        <p>
+                            {% if post.content|truncatewords:13 != post.content or post.comment_count > 0 %}
+                            <a href="{% url 'forum_post_detail' post.movie.slug post.slug %}" class="read_more">Read
+                                More</a>
+                            {% endif %}
+                        </p>
+                        {% if user == post.author %}
+                    <a href="{% url 'edit_post' post.id %}" class="btn btn-warning btn-sm p-1 my-2">Edit</a>
+                    <a href="{% url 'delete_post' post.id %}" class="btn btn-danger p-1 my-2btn-sm">Delete</a>
+                    {% endif %}
+                    
+                    </div>
+                    
+                </div>
+                <div class=" text-center p-2">
                     <hr>
-                    <p>{{ post.content|truncatewords:20 }}</p>
-                </div>
-                <div class="col-1 text-center p-2">
-                    <p><i class="fa fa-comments"></i> {{ post.comment_count }}</p>
+                    <p><i class="fa fa-comments"></i> {{ post.comment_count }} Comments</p>
                     {% if user.is_authenticated %}
                     <a href="{% url 'upvote_post' post.id %}" class="btn upvote">
                         <i class="fa fa-thumbs-up"></i> {{ post.upvotes.count }}
@@ -73,16 +91,7 @@
                     {% else %}
                     <i class="fa fa-thumbs-down downvote"></i> {{ post.downvotes.count }}
                     {% endif %}
-                </div>
-                <div class="col-1 p-2 text-center">
-                    <p>
-                        <a href="{% url 'forum_post_detail' post.movie.slug post.slug %}" class="read_more">Read
-                            More</a>
-                    </p>
-                    {% if user == post.author %}
-                    <a href="{% url 'edit_post' post.id %}" class="btn btn-warning btn-sm p-1 my-2">Edit</a>
-                    <a href="{% url 'delete_post' post.id %}" class="btn btn-danger p-1 my-2btn-sm">Delete</a>
-                    {% endif %}
+                    <p><small>(Click a thumb to vote!)</small></p>
                 </div>
             </div>
         </div>
